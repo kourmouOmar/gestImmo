@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class User {
+public class User2 {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -9,9 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.softfactory.sigai.dao.UserRepository;
-import com.softfactory.sigai.entities.User;
 import com.softfactory.sigai.entities.UserEntity;
+import com.softfactory.sigai.repository.UserRepository;
 
 
 
@@ -56,7 +55,7 @@ public class JwtUserDetailsServices implements UserDetailsService{
 	}
 	
 
-	public UserEntity save(User user) {
+	public UserEntity save(UserEntity user) {
 		
 		UserEntity newUser = new UserEntity();
 		newUser.setUsername(user.getUsername());

@@ -1,5 +1,7 @@
 package com.softfactory.sigai.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,23 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Entity
-@NoArgsConstructor
 @RequiredArgsConstructor
 @Data
-@Table(name = "user")
-public class UserEntity {
-	
+@Table(name = "utilisateur")
+public class UserEntity implements Serializable{
+	private static final long serialVersionUID = -354054054054L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@NonNull @Column private String username;
-	@NonNull @Column private String password;
-	@NonNull @Column private String role;
+
+	@Column(name="username")
+	private String username;
+	
+	@Column(name="password")
+	private String password;
+	@Column(name="role") 
+	private String role;
 
 }
