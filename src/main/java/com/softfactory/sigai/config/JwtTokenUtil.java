@@ -66,12 +66,18 @@ public class JwtTokenUtil implements Serializable {
 		Map<String, Object> claims = new HashMap<>();
 		return doGenerateToken(claims, userDetails.getUsername());
 	}
-	private String doGenerateToken(Map<String, Object> claims, String subject) {		
+	
+	private String doGenerateToken(Map<String, Object> claims, String subject) {
+		
 		String encodedString = Base64.getEncoder().encodeToString(secret.getBytes());
-        return Jwts.builder().setClaims(claims).setSubject(subject).
-        		setIssuedAt(new Date(System.currentTimeMillis()))
+        
+		return Jwts.builder()
+				.setClaims(claims)
+				.setSubject(subject)
+				.setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
-                .signWith(SignatureAlgorithm.HS512, encodedString ).compact();
+                .signWith(SignatureAlgorithm.HS512, encodedString )
+                .compact();
 	}	
 	
 	//validate token
