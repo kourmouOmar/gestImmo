@@ -1,5 +1,8 @@
 package com.softfactory.sigai.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,9 +37,9 @@ public class RoleEntity {
 	private String description;
 	
 	
-	@OneToMany(targetEntity = UserEntity.class , cascade = CascadeType.ALL,mappedBy = "utilisateur")
+	@OneToMany(targetEntity = UserEntity.class , cascade = CascadeType.ALL,mappedBy = "role")
 	@JsonIgnore
-	private UserEntity userEntity;
+	private List<UserEntity> userEntity;
 	
 
 }
