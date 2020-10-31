@@ -42,16 +42,16 @@ public class AdresseEntity {
 	@OneToOne(targetEntity = BienEntity.class , cascade = CascadeType.ALL,mappedBy = "adresse")
     private BienEntity bien;
 	
-	
-	/*
-	@ManyToOne @JoinColumn(name="id_ville", nullable=false)
+	@OneToOne @JoinColumn(name="id_ville", nullable=false)
     private VilleEntity ville;
 	
-	@ManyToOne @JoinColumn(name="id_pays", nullable=false)
+	@OneToOne @JoinColumn(name="id_region", nullable=false)
+    private RegionEntity region;
+	
+	@OneToOne @JoinColumn(name="id_pays", nullable=false)
     private PaysEntity pays;
 	
-	@ManyToOne @JoinColumn(name="id_region", nullable=false)
-    private RegionEntity region;
-	*/
+	
+	
 	
 }
