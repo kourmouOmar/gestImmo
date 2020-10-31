@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.softfactory.sigai.config.JwtTokenUtil;
 import com.softfactory.sigai.config.SigaiResponse;
+import com.softfactory.sigai.controllers.dto.UserDto;
 import com.softfactory.sigai.entities.JwtRequest;
 import com.softfactory.sigai.entities.JwtResponse;
+import com.softfactory.sigai.entities.RoleEntity;
 import com.softfactory.sigai.entities.UserEntity;
 import com.softfactory.sigai.repository.UserRepository;
 import com.softfactory.sigai.services.JwtUserDetailsServices;
@@ -58,9 +60,9 @@ public class JwtAuthenticationController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<?> saveUser(@RequestBody UserEntity user) throws Exception 
-	{
-		return ResponseEntity.ok(userDetailsService.save(user));
+	public SigaiResponse saveUser(@RequestBody UserDto user) throws Exception 
+	{			
+		return new SigaiResponse(userDetailsService.save(user),HttpStatus.OK);
 	}
 	
 	/*@GetMapping(value = "/users")
@@ -69,8 +71,8 @@ public class JwtAuthenticationController {
 	}*/
 	
 	
-	@GetMapping(value = "/users")
+	/*@GetMapping(value = "/users")
 	public SigaiResponse getAllUsers() {
 		return new SigaiResponse(userRepository.findAll(),HttpStatus.OK);
-	}
+	}*/
 }

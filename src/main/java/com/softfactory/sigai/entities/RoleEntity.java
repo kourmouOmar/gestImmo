@@ -28,10 +28,10 @@ public class RoleEntity {
 	private long id;
 	
 
-	@Column(name="libelle")
+	@Column(name="libelle",length = 50)
 	private String libelle;
 	
-	@Column(name="description")
+	@Column(name="description",length = 50)
 	private String description;
 	
 	

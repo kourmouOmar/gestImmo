@@ -1,6 +1,7 @@
 package com.softfactory.sigai.entities;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.sun.istack.Nullable;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +34,8 @@ public class UserEntity implements Serializable{
 	@Column(name="password")
 	private String password;
 	
-	@ManyToOne @JoinColumn(name="id_role", nullable=false)
+	@ManyToOne @JoinColumn(name="id_role",nullable = true)
+	@Nullable
     private RoleEntity role;
 	
 

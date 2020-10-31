@@ -9,8 +9,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.softfactory.sigai.controllers.dto.UserDto;
 import com.softfactory.sigai.entities.UserEntity;
+import com.softfactory.sigai.repository.RoleRepository;
 import com.softfactory.sigai.repository.UserRepository;
+import com.softfactory.sigai.services.impl.RoleService;
 
 
 
@@ -29,7 +32,10 @@ public class JwtUserDetailsServices implements UserDetailsService{
 	}*/
 	@Autowired(required=true)
 	private UserRepository userRepository;
-
+	
+	@Autowired(required=true)
+	private RoleService roleService;
+	
 	@Autowired(required=true)
 	private PasswordEncoder bcryptEncoder;
 	
@@ -55,12 +61,12 @@ public class JwtUserDetailsServices implements UserDetailsService{
 	}
 	
 
-	public UserEntity save(UserEntity user) {
+	public UserEntity save(UserDto user) {
 		
 		UserEntity newUser = new UserEntity();
 		newUser.setUsername(user.getUsername());
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-		//newUser.setRole(user.getRole());
+		newUser.setRole(roleService.getRoleEntityById(user.getIdRole()));
 		
 		return userRepository.save(newUser);
 	}
