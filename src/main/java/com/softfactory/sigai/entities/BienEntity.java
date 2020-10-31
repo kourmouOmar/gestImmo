@@ -51,7 +51,7 @@ public class BienEntity {
 	
 	/*
 	@ManyToOne @JoinColumn(name="id_proprietaire", nullable=false)
-    private RoleEntity proprietaire;
+    private ProprietaireEntity proprietaire;
     */
 	
 }
