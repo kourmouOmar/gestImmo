@@ -1,27 +1,20 @@
 package com.softfactory.sigai.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softfactory.sigai.config.JwtTokenUtil;
-import com.softfactory.sigai.config.SigaiResponse;
-import com.softfactory.sigai.controllers.dto.UserDto;
 import com.softfactory.sigai.entities.JwtRequest;
 import com.softfactory.sigai.entities.JwtResponse;
-import com.softfactory.sigai.entities.RoleEntity;
-import com.softfactory.sigai.entities.UserEntity;
-import com.softfactory.sigai.repository.UserRepository;
 import com.softfactory.sigai.services.JwtUserDetailsServices;
 
 @RestController
@@ -34,8 +27,7 @@ public class JwtAuthenticationController {
 
 	@Autowired
 	private JwtUserDetailsServices userDetailsService;
-	@Autowired
-	private UserRepository userRepository;
+
 
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
@@ -58,21 +50,4 @@ public class JwtAuthenticationController {
 			throw new Exception("INVALID_CREDENTIALS", e);
 		}
 	}
-	
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public SigaiResponse saveUser(@RequestBody UserDto user) throws Exception 
-	{			
-		return new SigaiResponse(userDetailsService.save(user),HttpStatus.OK);
-	}
-	
-	/*@GetMapping(value = "/users")
-	public Iterable<?> getAllUsers(){
-		return userRepository.findAll();
-	}*/
-	
-	
-	/*@GetMapping(value = "/users")
-	public SigaiResponse getAllUsers() {
-		return new SigaiResponse(userRepository.findAll(),HttpStatus.OK);
-	}*/
 }

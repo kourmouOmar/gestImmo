@@ -1,51 +1,60 @@
 package com.softfactory.sigai.controllers;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.softfactory.sigai.entities.RoleEntity;
-import com.softfactory.sigai.repository.RoleRepository;
-
+import com.softfactory.sigai.config.SigaiResponse;
+import com.softfactory.sigai.controllers.dto.RoleDto;
+import com.softfactory.sigai.services.impl.RoleService;
+/**
+ * Spring controller "Role"
+ * 
+ * @author : illass elbarhoumi
+ * @creation : 31/10/20
+ * @version : 1.0
+ */
 @RestController
 public class RoleController {
-	
+
 	@Autowired
-	private RoleRepository roleRepo;
-	
+	private RoleService roleService;
+
 	@RequestMapping("/roles")
-	public Iterable<RoleEntity> getRoles() 
-	{
-		return roleRepo.findAll();
+	public SigaiResponse getAllRoles() {
+		/* get all role */
+		return new SigaiResponse(roleService.getAllRoles(), HttpStatus.OK);
 	}
-	
+
 	@RequestMapping("/roles/{id}")
-	public Optional<RoleEntity> getRole(@PathVariable Long id) 
-	{
-		return roleRepo.findById(id);
+	public SigaiResponse getRoleById(@PathVariable Long id) {
+		/* return role by id */
+		return new SigaiResponse(roleService.getRoleById(id), HttpStatus.OK);
 	}
-	
-	@RequestMapping( method = RequestMethod.POST, value = "/roles")
-	public void addRole(@RequestBody RoleEntity role) 
-	{
-		roleRepo.save(role);
+
+	@PostMapping("/roles/{id}")
+	public SigaiResponse addRole(@RequestBody RoleDto roleDto) {
+		/* add role */
+		return new SigaiResponse(roleService.addRole(roleDto), HttpStatus.OK);
 	}
-	
-	@RequestMapping( method = RequestMethod.PUT, value = "/roles/{id}")
-	public void modifyRole(@RequestBody RoleEntity role,@PathVariable Long id) 
-	{
-		roleRepo.save(role);
+
+	@PutMapping("/roles/{id}")
+	public SigaiResponse updateRole(@RequestBody RoleDto roleDto) {
+		/* update role */
+		return new SigaiResponse(roleService.updateRole(roleDto), HttpStatus.OK);
 	}
-	
-	@RequestMapping( method = RequestMethod.DELETE, value = "/roles/{id}")
-	public void deleteRole(@PathVariable Long id) 
-	{
-		roleRepo.deleteById(id);
+
+	@DeleteMapping("/delete/{id}")
+	public SigaiResponse deleteRole(@PathVariable Long id) {
+		/* delete role */
+		roleService.deleteRole(id);
+		return new SigaiResponse(HttpStatus.OK);
 	}
 
 }
