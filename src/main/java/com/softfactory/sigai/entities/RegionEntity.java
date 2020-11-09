@@ -27,7 +27,7 @@ private static final long serialVersionUID = -354054054054L;
 	private long id;
 	
 	@Column(name="libelle")
-	private String annee_construction;
+	private String libelle;
 	
 	@OneToMany(targetEntity = AdresseEntity.class , cascade = CascadeType.ALL,mappedBy = "region")
 	private List<AdresseEntity> adresse;
