@@ -3,11 +3,11 @@ package com.softfactory.sigai.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softfactory.sigai.config.SigaiResponse;
@@ -26,13 +26,13 @@ public class ViewController {
 	@Autowired
 	private IViewService ViewService;
 
-	@RequestMapping("/views")
+	@GetMapping("/views")
 	public SigaiResponse getAllViews() {
 		/* get all View */
 		return new SigaiResponse(ViewService.getAllViews(), HttpStatus.OK);
 	}
 
-	@RequestMapping("/views/{id}")
+	@GetMapping("/views/{id}")
 	public SigaiResponse getViewById(@PathVariable Long id) {
 		/* return View by id */
 		return new SigaiResponse(ViewService.getViewById(id), HttpStatus.OK);

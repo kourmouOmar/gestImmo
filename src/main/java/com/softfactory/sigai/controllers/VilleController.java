@@ -3,11 +3,11 @@ package com.softfactory.sigai.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softfactory.sigai.config.SigaiResponse;
@@ -27,13 +27,13 @@ public class VilleController {
 	@Autowired
 	private IVilleService VilleService;
 
-	@RequestMapping("/villes")
+	@GetMapping("/villes")
 	public SigaiResponse getAllVilles() {
 		/* get all Ville */
 		return new SigaiResponse(VilleService.getAllVilles(), HttpStatus.OK);
 	}
 
-	@RequestMapping("/villes/{id}")
+	@GetMapping("/villes/{id}")
 	public SigaiResponse getVilleById(@PathVariable Long id) {
 		/* return Ville by id */
 		return new SigaiResponse(VilleService.getVilleById(id), HttpStatus.OK);

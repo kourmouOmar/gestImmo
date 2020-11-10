@@ -3,11 +3,11 @@ package com.softfactory.sigai.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softfactory.sigai.config.SigaiResponse;
@@ -26,13 +26,13 @@ public class RoleController {
 	@Autowired
 	private RoleService roleService;
 
-	@RequestMapping("/roles")
+	@GetMapping("/roles")
 	public SigaiResponse getAllRoles() {
 		/* get all role */
 		return new SigaiResponse(roleService.getAllRoles(), HttpStatus.OK);
 	}
 
-	@RequestMapping("/roles/{id}")
+	@GetMapping("/roles/{id}")
 	public SigaiResponse getRoleById(@PathVariable Long id) {
 		/* return role by id */
 		return new SigaiResponse(roleService.getRoleById(id), HttpStatus.OK);

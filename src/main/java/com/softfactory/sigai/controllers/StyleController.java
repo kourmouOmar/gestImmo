@@ -3,11 +3,11 @@ package com.softfactory.sigai.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softfactory.sigai.config.SigaiResponse;
@@ -27,13 +27,13 @@ public class StyleController {
 	@Autowired
 	private IStyleService StyleService;
 
-	@RequestMapping("/styles")
+	@GetMapping("/styles")
 	public SigaiResponse getAllStyles() {
 		/* get all Style */
 		return new SigaiResponse(StyleService.getAllStyles(), HttpStatus.OK);
 	}
 
-	@RequestMapping("/styles/{id}")
+	@GetMapping("/styles/{id}")
 	public SigaiResponse getStyleById(@PathVariable Long id) {
 		/* return Style by id */
 		return new SigaiResponse(StyleService.getStyleById(id), HttpStatus.OK);
