@@ -1,72 +1,83 @@
 package com.softfactory.sigai.config;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import com.softfactory.sigai.services.JwtUserDetailsServices;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.filter.GenericFilterBean;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter {
+public class JwtRequestFilter extends GenericFilterBean {
 
-	/*
-	 * The purpose of this file is to handle filtering the request from the
-	 * client-side or react js, here is where all the request will come first before
-	 * hitting the rest API, if the token validation is successful then actual API
-	 * gets a request.
-	 * 
-	 */
+	private static final String AUTHORITIES_KEY = "authorities";
 
-	@Autowired
-	private JwtUserDetailsServices jwtUserDetailsServices;
+	private final JwtConfig jwtConfig;
 
-	@Autowired
-	private JwtTokenUtil jwtTokenUtil;
+	public JwtRequestFilter(JwtConfig jwtConfig) {
+		this.jwtConfig = jwtConfig;
+	}
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-			throws ServletException, IOException {
+	public void doFilter(ServletRequest servletRequest, ServletResponse response, FilterChain filterChain)
+			throws IOException, ServletException {
+		HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+		/* On récupère le header d'authentification */
+		String header = httpServletRequest.getHeader(jwtConfig.getHeader());
 
-		final String requestTokenHeader = request.getHeader("Authorization");
-
-		System.out.println("ssssdd " + requestTokenHeader);
-		String username = null;
-		String jwtToken = null;
-//		JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
-		// JWT Token is in the form "Bearer token".
-		// Remove Bearer word and get only the Token
-		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")){
-			
-			jwtToken = requestTokenHeader.substring(7);
-			System.out.println("current toekn " + jwtToken);
-
-			username = jwtTokenUtil.getUsernameFromToken(jwtToken);
-			if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
-				UserDetails userDetails = this.jwtUserDetailsServices.loadUserByUsername(username);
-
-				if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
-
-					UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-							userDetails, null, userDetails.getAuthorities());
-					usernamePasswordAuthenticationToken
-							.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-					SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-				}
-			}
+		/* On vérifie le header ainsi que que le prefix */
+		if (header == null || !header.startsWith(jwtConfig.getPrefix())) {
+			filterChain.doFilter(servletRequest, response);
+			/* si non valide oncontinue vers les autres filtres */
+			return;
 		}
-		chain.doFilter(request, response);
+
+		/* On récupère le token */
+		String token = header.replace(jwtConfig.getPrefix(), "");
+		try {
+			/*
+			 * On valide le token, si ce dernier a expiré la création du Claims lancera une
+			 * exception
+			 */
+			Claims claims = Jwts.parser().setSigningKey(jwtConfig.getSecret().getBytes()).parseClaimsJws(token)
+					.getBody();
+
+			String username = claims.getSubject();
+			if (username != null) {
+
+				List<SimpleGrantedAuthority> authorities = Arrays
+						.stream(claims.get(AUTHORITIES_KEY).toString().split(",")).map(p -> {
+							return new SimpleGrantedAuthority(AuthoritiesConstants.S_SECURITY_PREIX + p);
+						}).collect(Collectors.toList());
+				User principal = new User(username, "", authorities);
+
+				Authentication authentication = new UsernamePasswordAuthenticationToken(principal, token, authorities);
+				/* On authentifie l'utilisateur */
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+			}
+
+		} catch (Exception e) {
+			/* On vide le context de sécurité */
+			SecurityContextHolder.clearContext();
+		}
+
+		/* On continue vers le filtre suivant */
+		filterChain.doFilter(servletRequest, response);
 	}
 
 }
