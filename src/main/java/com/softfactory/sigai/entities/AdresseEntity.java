@@ -17,9 +17,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Data
 @Table(name = "adresse")
-public class AdresseEntity {
+public class AdresseEntity   {
 	
-	private static final long serialVersionUID = -354054054054L;
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,7 +49,17 @@ public class AdresseEntity {
 	@OneToOne @JoinColumn(name="id_pays", nullable=false)
     private PaysEntity pays;
 	
+	@OneToOne @JoinColumn(name="id_acheteur", nullable=false)
+    private AcheteurEntity acheteur;
 	
+	@OneToOne @JoinColumn(name="id_proprietaire", nullable=false)
+    private AcheteurEntity proprietaire;
+	
+	@OneToOne @JoinColumn(name="id_garant", nullable=true)
+    private GarantEntity garant;
+	
+	@OneToOne @JoinColumn(name="id_vente", nullable=true)
+    private VenteEntity vente;
 	
 	
 }

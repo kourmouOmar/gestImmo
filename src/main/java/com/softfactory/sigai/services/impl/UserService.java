@@ -34,7 +34,7 @@ public class UserService  implements IUserService{
 		UserEntity newUser = new UserEntity();
 		newUser.setUsername(user.getUsername());
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-		newUser.setRole(roleService.getRoleById(user.getIdRole()));
+		newUser.setRole(roleService.getRoleById(user.getRole().getId()));
 		return userRepository.save(newUser);
 	}
 	

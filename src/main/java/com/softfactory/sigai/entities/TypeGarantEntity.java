@@ -1,5 +1,6 @@
 package com.softfactory.sigai.entities;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,23 +17,31 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Persistent class for entity stored in table "typeGarant"
+ * 
+ * @author : Kourmou omar
+ * @see : <kourmou.omar@gmail.com>
+ * @creation : 21-11-2020
+ * @version : 1.0
+ */
+
 @Entity
 @RequiredArgsConstructor
 @Data
-@Table(name = "etat")
-public class EtatEntity {
-
-	private static final long serialVersionUID = -354054054054L;
-
+@Table(name = "type_garant")
+public class TypeGarantEntity {
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-
-	@Column(name = "libelle")
+	
+	@Column(name="libelle")
 	private String libelle;
-
-	@OneToMany(targetEntity = BienEntity.class, cascade = CascadeType.ALL, mappedBy = "etat")
-	@JsonIgnore
-	private List<BienEntity> bienEntity;
+	
+	@OneToMany(targetEntity = GarantEntity.class , cascade = CascadeType.ALL,mappedBy = "type_garant")
+	private List<GarantEntity> garantEntity;
 
 }

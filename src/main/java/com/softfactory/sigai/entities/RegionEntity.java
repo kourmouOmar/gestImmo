@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @Table(name = "region")
 public class RegionEntity {
 
-private static final long serialVersionUID = -354054054054L;
+	private static final long serialVersionUID = -354054054054L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
