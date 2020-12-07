@@ -30,7 +30,7 @@ public class VilleController {
 	private IVilleService VilleService;
 
 	@GetMapping("/villes")
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ASSISTANTE+"')")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
 	public SigaiResponse getAllVilles() {
 		/* get all Ville */
 		return new SigaiResponse(VilleService.getAllVilles(), HttpStatus.OK);

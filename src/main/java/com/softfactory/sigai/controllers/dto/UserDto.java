@@ -25,7 +25,7 @@ public class UserDto implements Serializable {
 	private Long id;
 	private String username;
 	private String password;
-	private Long idRole;
+	private RoleDto role;
 	
 	/**
 	 * Convert UserEntity to UserDto

@@ -49,6 +49,9 @@ public class BienEntity {
 	@OneToOne @JoinColumn(name="id_type", nullable=false)
     private TypeBienEntity type_bien;
 	
+	@OneToOne @JoinColumn(name="id_vente", nullable=true)
+    private VenteEntity vente;
+	
 	/*
 	@ManyToOne @JoinColumn(name="id_proprietaire", nullable=false)
     private ProprietaireEntity proprietaire;

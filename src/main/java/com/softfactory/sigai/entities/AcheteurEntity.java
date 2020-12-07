@@ -11,16 +11,22 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+/**
+ * Persistent class for entity stored in table "acheteur"
+ * 
+ * @author : Kourmou omar
+ * @see : <kourmou.omar@gmail.com>
+ * @creation : 21-11-2020
+ * @version : 1.0
+ */
 
 @Entity
 @RequiredArgsConstructor
 @Data
-@Table(name = "type_bien")
-public class TypeBienEntity {
+@Table(name = "acheteur")
+public class AcheteurEntity {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -28,13 +34,18 @@ public class TypeBienEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-
-	@Column(name="libelle")
-	private String libelle;
+	@Column(name="nom")
+	private String nom;
 	
+	@Column(name="prenom")
+	private String prenom;
 	
-	@OneToMany(targetEntity = BienEntity.class , cascade = CascadeType.ALL,mappedBy = "type_bien")
-	@JsonIgnore
-	private List<BienEntity> bienEntity;
-
+	@Column(name="email")
+	private String email;
+	
+	@Column(name="telephone")
+	private String telephone;
+	
+	@OneToMany(targetEntity = AdresseEntity.class , cascade = CascadeType.ALL,mappedBy = "acheteur")
+	private List<AdresseEntity> adresse;
 }
