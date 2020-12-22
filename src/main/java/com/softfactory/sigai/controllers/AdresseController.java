@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softfactory.sigai.config.SigaiResponse;
@@ -23,36 +24,37 @@ import com.softfactory.sigai.services.IAdresseService;
  * @version : 1.0
  */
 @RestController
+@RequestMapping("/adresses")
 public class AdresseController {
 
 	@Autowired
 	private IAdresseService adresseService;
 
-	@GetMapping("/adresses")
+	@GetMapping("/v0")
 	public SigaiResponse getAllAdresses() {
 		/* get all Adresse */
 		return new SigaiResponse(adresseService.getAllAdresses(), HttpStatus.OK);
 	}
 
-	@GetMapping("/adresses/{id}")
+	@GetMapping("/v0/{id}")
 	public SigaiResponse getAdresseById(@PathVariable Long id) {
 		/* return Adresse by id */
 		return new SigaiResponse(adresseService.getAdresseById(id), HttpStatus.OK);
 	}
 
-	@PostMapping("/adresses/{id}")
+	@PostMapping("/v0/{id}")
 	public SigaiResponse addAdresse(@RequestBody AdresseDto AdresseDto) {
 		/* add Adresse */
 		return new SigaiResponse(adresseService.addAdresse(AdresseDto), HttpStatus.OK);
 	}
 
-	@PutMapping("/adresses/{id}")
+	@PutMapping("/v0/{id}")
 	public SigaiResponse updateAdresse(@RequestBody AdresseDto AdresseDto) {
 		/* update Adresse */
 		return new SigaiResponse(adresseService.updateAdresse(AdresseDto), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/adresse/{id}")
+	@DeleteMapping("/v0/{id}")
 	public SigaiResponse deleteAdresse(@PathVariable Long id) {
 		/* delete Adresse */
 		adresseService.deleteAdresse(id);
