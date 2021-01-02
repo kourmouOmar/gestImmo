@@ -35,7 +35,7 @@ public interface IProprietaireService{
 	 * @param ProprietaireDto
 	 * @return ProprietaireEntity
 	 */
-	ProprietaireEntity addProprietaire(ProprietaireDto ProprietaireDto);
+	ProprietaireEntity addProprietaire(ProprietaireEntity proprietaireEntity);
 
 	/**
 	 * update Proprietaire

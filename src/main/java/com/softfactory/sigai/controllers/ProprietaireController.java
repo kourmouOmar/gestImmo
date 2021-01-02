@@ -2,6 +2,7 @@ package com.softfactory.sigai.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.softfactory.sigai.config.AuthoritiesConstants;
 import com.softfactory.sigai.config.SigaiResponse;
 import com.softfactory.sigai.controllers.dto.ProprietaireDto;
 import com.softfactory.sigai.services.impl.ProprietaireService;
@@ -25,36 +27,41 @@ import com.softfactory.sigai.services.impl.ProprietaireService;
 public class ProprietaireController {
 
 	@Autowired
-	private ProprietaireService ProprietaireService;
+	private ProprietaireService proprietaireService;
 
 	@RequestMapping("/proprietaires")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
 	public SigaiResponse getAllProprietaires() {
 		/* get all Proprietaire */
-		return new SigaiResponse(ProprietaireService.getAllProprietaires(), HttpStatus.OK);
+		return new SigaiResponse(ProprietaireDto.entitiesToDtos(proprietaireService.getAllProprietaires()), HttpStatus.OK);
 	}
 
 	@RequestMapping("/proprietaires/{id}")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
 	public SigaiResponse getProprietaireById(@PathVariable Long id) {
 		/* return Proprietaire by id */
-		return new SigaiResponse(ProprietaireService.getProprietaireById(id), HttpStatus.OK);
+		return new SigaiResponse(proprietaireService.getProprietaireById(id), HttpStatus.OK);
 	}
 
-	@PostMapping("/proprietaires/{id}")
-	public SigaiResponse addProprietaire(@RequestBody ProprietaireDto ProprietaireDto) {
+	@PostMapping("/proprietaires")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
+	public SigaiResponse addProprietaire(@RequestBody ProprietaireDto proprietaireDto) {
 		/* add Proprietaire */
-		return new SigaiResponse(ProprietaireService.addProprietaire(ProprietaireDto), HttpStatus.OK);
+		return new SigaiResponse(proprietaireService.addProprietaire(ProprietaireDto.dtoToEntity(proprietaireDto)), HttpStatus.OK);
 	}
 
-	@PutMapping("/proprietaires/{id}")
-	public SigaiResponse updateProprietaire(@RequestBody ProprietaireDto ProprietaireDto) {
+	@PutMapping("/proprietaire")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
+	public SigaiResponse updateProprietaire(@RequestBody ProprietaireDto proprietaireDto) {
 		/* update Proprietaire */
-		return new SigaiResponse(ProprietaireService.updateProprietaire(ProprietaireDto), HttpStatus.OK);
+		return new SigaiResponse(proprietaireService.updateProprietaire(proprietaireDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/proprietaire/{id}")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
 	public SigaiResponse deleteProprietaire(@PathVariable Long id) {
 		/* delete Proprietaire */
-		ProprietaireService.deleteProprietaire(id);
+		proprietaireService.deleteProprietaire(id);
 		return new SigaiResponse(HttpStatus.OK);
 	}
 

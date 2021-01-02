@@ -26,7 +26,7 @@ public class ProprietaireDto implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
-    private Long id           ;
+    private Long id;
     @Size(max=255)
     private String cin;
     @Size(max=255)
@@ -49,7 +49,9 @@ private static final long serialVersionUID = 1L;
 		ProprietaireDto dto = null;
 		if(entity != null){
 			dto = new ProprietaireDto();
-        	dto.setId(entity.getId());
+			//if(!entity.getId().equals(null)) {
+				dto.setId(entity.getId());
+			//}
         	dto.setCin(entity.getCin());  
         	dto.setEmail(entity.getEmail());  
         	dto.setNom(entity.getNom());  
@@ -67,7 +69,9 @@ private static final long serialVersionUID = 1L;
 		ProprietaireEntity entity = null;
 		if(dto != null){
 			entity = new ProprietaireEntity();
-        	entity.setId(dto.getId()) ;
+			//if(!dto.getId().equals(null)) {
+	        	entity.setId(dto.getId());
+			//}
         	entity.setCin(dto.getCin());   
         	entity.setEmail(dto.getEmail());   
         	entity.setNom(dto.getNom());   

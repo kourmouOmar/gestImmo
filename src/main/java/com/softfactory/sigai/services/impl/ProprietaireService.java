@@ -36,9 +36,9 @@ public class ProprietaireService implements IProprietaireService {
 	}
 
 	@Override
-	public ProprietaireEntity addProprietaire(ProprietaireDto proprietaireDto) {
+	public ProprietaireEntity addProprietaire(ProprietaireEntity proprietaireEntity) {
 		/* add Proprietaire */
-		return proprietaireRespository.save(ProprietaireDto.dtoToEntity(proprietaireDto));
+		return proprietaireRespository.save(proprietaireEntity);
 	}
 
 	@Override
