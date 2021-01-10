@@ -2,6 +2,7 @@ package com.softfactory.sigai.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,9 +11,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.softfactory.sigai.config.AuthoritiesConstants;
 import com.softfactory.sigai.config.SigaiResponse;
 import com.softfactory.sigai.controllers.dto.RoleDto;
 import com.softfactory.sigai.services.impl.RoleService;
+import com.softfactory.sigai.util.Constants;
+
 /**
  * Spring controller "Role"
  * 
@@ -26,31 +30,36 @@ public class RoleController {
 	@Autowired
 	private RoleService roleService;
 
-	@GetMapping("/roles")
+	@GetMapping(value = "/roles", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
 	public SigaiResponse getAllRoles() {
 		/* get all role */
 		return new SigaiResponse(roleService.getAllRoles(), HttpStatus.OK);
 	}
 
-	@GetMapping("/roles/{id}")
+	@GetMapping(value = "/roles/{id}", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
 	public SigaiResponse getRoleById(@PathVariable Long id) {
 		/* return role by id */
 		return new SigaiResponse(roleService.getRoleById(id), HttpStatus.OK);
 	}
 
-	@PostMapping("/roles/{id}")
+	@PostMapping(value = "/roles/{id}", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
 	public SigaiResponse addRole(@RequestBody RoleDto roleDto) {
 		/* add role */
 		return new SigaiResponse(roleService.addRole(roleDto), HttpStatus.OK);
 	}
 
-	@PutMapping("/roles/{id}")
+	@PutMapping(value = "/roles/{id}", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
 	public SigaiResponse updateRole(@RequestBody RoleDto roleDto) {
 		/* update role */
 		return new SigaiResponse(roleService.updateRole(roleDto), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping(value = "/delete/{id}", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
 	public SigaiResponse deleteRole(@PathVariable Long id) {
 		/* delete role */
 		roleService.deleteRole(id);

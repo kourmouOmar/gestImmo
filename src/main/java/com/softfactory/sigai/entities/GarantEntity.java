@@ -15,8 +15,9 @@ import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+
 /**
- * Persistent class for entity stored in table "acheteur"
+ * Persistent class for entity stored in table "garant"
  * 
  * @author : Kourmou omar
  * @see : <kourmou.omar@gmail.com>
@@ -29,32 +30,31 @@ import lombok.RequiredArgsConstructor;
 @Data
 @Table(name = "garant")
 public class GarantEntity {
-	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@Column(name="nom")
+
+	@Column(name = "nom")
 	private String nom;
-	
-	@Column(name="prenom")
+
+	@Column(name = "prenom")
 	private String prenom;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	private String email;
-	
-	@Column(name="telephone")
+
+	@Column(name = "telephone")
 	private String telephone;
-	
-	@Column(name="rib")
+
+	@Column(name = "rib")
 	private String rib;
-	
-	@OneToMany(targetEntity = AdresseEntity.class , cascade = CascadeType.ALL,mappedBy = "garant")
+
+	@OneToMany(targetEntity = AdresseEntity.class, cascade = CascadeType.ALL, mappedBy = "garant")
 	private List<AdresseEntity> adresse;
-	
-	@OneToOne @JoinColumn(name="id_type_garant", nullable=false)
-    private TypeGarantEntity type_garant;
-	
-	
+
+	@OneToOne
+	@JoinColumn(name = "id_type_garant", nullable = false)
+	private TypeGarantEntity type_garant;
+
 }

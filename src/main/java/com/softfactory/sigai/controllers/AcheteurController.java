@@ -2,6 +2,7 @@ package com.softfactory.sigai.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.softfactory.sigai.config.AuthoritiesConstants;
 import com.softfactory.sigai.config.SigaiResponse;
 import com.softfactory.sigai.controllers.dto.AcheteurDto;
 import com.softfactory.sigai.services.impl.AcheteurService;
+import com.softfactory.sigai.util.Constants;
 
 /**
  * Spring controller "Acheteur"
@@ -29,31 +32,36 @@ public class AcheteurController {
 	@Autowired
 	private AcheteurService AcheteurService;
 
-	@GetMapping("/v0")
+	@GetMapping(value = "/v0", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.ADMIN + "')")
 	public SigaiResponse getAllAcheteurs() {
 		/* get all Acheteur */
 		return new SigaiResponse(AcheteurService.getAllAcheteurs(), HttpStatus.OK);
 	}
 
-	@GetMapping("/v0/{id}")
+	@GetMapping(value = "/v0/{id}", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.ADMIN + "')")
 	public SigaiResponse getAcheteurById(@PathVariable Long id) {
 		/* return Acheteur by id */
 		return new SigaiResponse(AcheteurService.getAcheteurById(id), HttpStatus.OK);
 	}
 
-	@PostMapping("/v0/{id}")
+	@PostMapping(value = "/v0/{id}", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.ADMIN + "')")
 	public SigaiResponse addAcheteur(@RequestBody AcheteurDto AcheteurDto) {
 		/* add Acheteur */
 		return new SigaiResponse(AcheteurService.addAcheteur(AcheteurDto), HttpStatus.OK);
 	}
 
-	@PutMapping("/v0/{id}")
+	@PutMapping(value = "/v0/{id}", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.ADMIN + "')")
 	public SigaiResponse updateAcheteur(@RequestBody AcheteurDto AcheteurDto) {
 		/* update Acheteur */
 		return new SigaiResponse(AcheteurService.updateAcheteur(AcheteurDto), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/v0/{id}")
+	@DeleteMapping(value = "/v0/{id}", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.ADMIN + "')")
 	public SigaiResponse deleteAcheteur(@PathVariable Long id) {
 		/* delete Acheteur */
 		AcheteurService.deleteAcheteur(id);

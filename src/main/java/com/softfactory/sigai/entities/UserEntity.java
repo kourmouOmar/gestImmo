@@ -1,7 +1,6 @@
 package com.softfactory.sigai.entities;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,22 +20,21 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Data
 @Table(name = "utilisateur")
-public class UserEntity implements Serializable{
-	private static final long serialVersionUID = -354054054054L;
+public class UserEntity implements Serializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
 
-	@Column(name="username")
+	@Column(name = "username")
 	private String username;
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	private String password;
-	
-	@ManyToOne @JoinColumn(name="id_role",nullable = true)
+
+	@ManyToOne
+	@JoinColumn(name = "id_role", nullable = true)
 	@Nullable
-    private RoleEntity role;
-	
+	private RoleEntity role;
 
 }

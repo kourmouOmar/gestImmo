@@ -1,6 +1,7 @@
 package com.softfactory.sigai.entities;
 
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,24 +21,19 @@ import lombok.RequiredArgsConstructor;
 @Data
 @Table(name = "role")
 public class RoleEntity {
-	
-	private static final long serialVersionUID = -354054054054L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
 
-	@Column(name="libelle",length = 50)
+	@Column(name = "libelle", length = 50)
 	private String libelle;
-	
-	@Column(name="description",length = 50)
+
+	@Column(name = "description", length = 50)
 	private String description;
-	
-	
-	@OneToMany(targetEntity = UserEntity.class , cascade = CascadeType.ALL,mappedBy = "role")
+
+	@OneToMany(targetEntity = UserEntity.class, cascade = CascadeType.ALL, mappedBy = "role")
 	@JsonIgnore
 	private List<UserEntity> userEntity;
-	
 
 }

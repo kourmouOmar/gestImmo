@@ -21,19 +21,15 @@ import lombok.RequiredArgsConstructor;
 @Data
 @Table(name = "type_bien")
 public class TypeBienEntity {
-	
-	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
 
-	@Column(name="libelle")
+	@Column(name = "libelle")
 	private String libelle;
-	
-	
-	@OneToMany(targetEntity = BienEntity.class , cascade = CascadeType.ALL,mappedBy = "type_bien")
+
+	@OneToMany(targetEntity = BienEntity.class, cascade = CascadeType.ALL, mappedBy = "type_bien")
 	@JsonIgnore
 	private List<BienEntity> bienEntity;
 

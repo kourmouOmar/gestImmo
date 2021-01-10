@@ -22,8 +22,6 @@ import lombok.RequiredArgsConstructor;
 @Table(name = "etat")
 public class EtatEntity {
 
-	private static final long serialVersionUID = -354054054054L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
