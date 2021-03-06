@@ -32,11 +32,7 @@ public class VilleController {
 	@Autowired
 	private IVilleService VilleService;
 
-<<<<<<< HEAD
-	@GetMapping("/villes")
-=======
 	@GetMapping(value ="/v0", headers = Constants.HEADERS)
->>>>>>> 8965d793cce4dfc49f5f4a230b4a27d88cee438f
 	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
 	public SigaiResponse getAllVilles() {
 		/* get all Ville */
