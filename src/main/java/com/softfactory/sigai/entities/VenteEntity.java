@@ -29,22 +29,20 @@ import lombok.RequiredArgsConstructor;
 @Data
 @Table(name = "vente")
 public class VenteEntity {
-	
-	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@Column(name="dateVente")
+
+	@Column(name = "dateVente")
 	private Date dateVente;
-	
-	@Column(name="prix")
+
+	@Column(name = "prix")
 	private double prix;
-	
-	@OneToMany(targetEntity = AdresseEntity.class , cascade = CascadeType.ALL,mappedBy = "vente")
+
+	@OneToMany(targetEntity = AdresseEntity.class, cascade = CascadeType.ALL, mappedBy = "vente")
 	private List<AdresseEntity> adresse;
-	
-	@OneToMany(targetEntity = BienEntity.class , cascade = CascadeType.ALL,mappedBy = "vente")
+
+	@OneToMany(targetEntity = BienEntity.class, cascade = CascadeType.ALL, mappedBy = "vente")
 	private List<BienEntity> bien;
 }

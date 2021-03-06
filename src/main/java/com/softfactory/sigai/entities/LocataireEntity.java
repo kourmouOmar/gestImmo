@@ -8,36 +8,37 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 public class LocataireEntity {
-	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@Column(name="nom")
+
+	@Column(name = "nom")
 	private String nom;
-	
-	@Column(name="prenom")
+
+	@Column(name = "prenom")
 	private String prenom;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	private String email;
-	
-	@Column(name="telephone")
+
+	@Column(name = "telephone")
 	private String telephone;
-	
-	@Column(name="rib")
+
+	@Column(name = "rib")
 	private String rib;
-	
-	@Column(name="dateNaissance")
+
+	@Column(name = "dateNaissance")
 	private String dateNaissance;
-	
-	@Column(name="profession")
+
+	@Column(name = "profession")
 	private String profession;
-	
-	@OneToOne @JoinColumn(name="id_adresse", nullable=false)
-    private AdresseEntity adresse;
-	
-	@OneToOne @JoinColumn(name="id_Garant", nullable=false)
-    private GarantEntity garant;
+
+	@OneToOne
+	@JoinColumn(name = "id_adresse", nullable = false)
+	private AdresseEntity adresse;
+
+	@OneToOne
+	@JoinColumn(name = "id_Garant", nullable = false)
+	private GarantEntity garant;
 }

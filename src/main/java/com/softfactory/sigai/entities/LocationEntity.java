@@ -1,7 +1,6 @@
 package com.softfactory.sigai.entities;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,28 +32,28 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LocationEntity {
-	
-	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@Column(name="dateAcquisition")
+
+	@Column(name = "dateAcquisition")
 	private Date dateAcquisition;
-	
-	@Column(name="dateLiberation")
+
+	@Column(name = "dateLiberation")
 	private Date dateLiberation;
-	
-	@Column(name="duree")
+
+	@Column(name = "duree")
 	private String duree;
-	
-	@Column(name="loyer")
+
+	@Column(name = "loyer")
 	private double loyer;
 
-	@OneToOne @JoinColumn(name="id_bien", nullable=false)
-    private BienEntity bien;
-	
-	@OneToOne @JoinColumn(name="id_locataire", nullable=false)
-    private GarantEntity locataire;
+	@OneToOne
+	@JoinColumn(name = "id_bien", nullable = false)
+	private BienEntity bien;
+
+	@OneToOne
+	@JoinColumn(name = "id_locataire", nullable = false)
+	private GarantEntity locataire;
 }

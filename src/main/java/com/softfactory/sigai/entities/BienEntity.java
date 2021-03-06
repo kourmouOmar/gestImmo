@@ -18,43 +18,47 @@ import lombok.RequiredArgsConstructor;
 @Data
 @Table(name = "bien")
 public class BienEntity {
-	
-	private static final long serialVersionUID = -354054054054L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@Column(name="annee_construction")
+
+	@Column(name = "annee_construction")
 	private String annee_construction;
-	
-	@Column(name="superficie")
+
+	@Column(name = "superficie")
 	private String superficie;
-	
-	@Column(name="nombre_pieces")
+
+	@Column(name = "nombre_pieces")
 	private String nombre_pieces;
-	
-	@OneToOne @JoinColumn(name="id_adresse", nullable=false)
-    private AdresseEntity adresse;
-	
-	@ManyToOne @JoinColumn(name="id_style", nullable=false)
-    private StyleEntity style;
-	
-	@ManyToOne @JoinColumn(name="id_view", nullable=false)
-    private ViewEntity view;
-	
-	@ManyToOne @JoinColumn(name="id_etat", nullable=false)
-    private EtatEntity etat;
-	
-	@OneToOne @JoinColumn(name="id_type", nullable=false)
-    private TypeBienEntity type_bien;
-	
-	@OneToOne @JoinColumn(name="id_vente", nullable=true)
-    private VenteEntity vente;
-	
+
+	@OneToOne
+	@JoinColumn(name = "id_adresse", nullable = false)
+	private AdresseEntity adresse;
+
+	@ManyToOne
+	@JoinColumn(name = "id_style", nullable = false)
+	private StyleEntity style;
+
+	@ManyToOne
+	@JoinColumn(name = "id_view", nullable = false)
+	private ViewEntity view;
+
+	@ManyToOne
+	@JoinColumn(name = "id_etat", nullable = false)
+	private EtatEntity etat;
+
+	@OneToOne
+	@JoinColumn(name = "id_type", nullable = false)
+	private TypeBienEntity type_bien;
+
+	@OneToOne
+	@JoinColumn(name = "id_vente", nullable = true)
+	private VenteEntity vente;
+
 	/*
-	@ManyToOne @JoinColumn(name="id_proprietaire", nullable=false)
-    private ProprietaireEntity proprietaire;
-    */
-	
+	 * @ManyToOne @JoinColumn(name="id_proprietaire", nullable=false) private
+	 * ProprietaireEntity proprietaire;
+	 */
+
 }

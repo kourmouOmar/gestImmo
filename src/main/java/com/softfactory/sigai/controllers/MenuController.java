@@ -33,7 +33,7 @@ public class MenuController {
 	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
 	public SigaiResponse getAllMenus() {
 		/* get all Menu */
-		return new SigaiResponse(MenuService.getAllMenus(), HttpStatus.OK);
+		return new SigaiResponse(MenuDto.entitiesToDtos(MenuService.getAllMenus()) , HttpStatus.OK);
 	}
 
 	@RequestMapping("/menus/{id}")

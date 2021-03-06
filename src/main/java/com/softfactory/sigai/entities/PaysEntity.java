@@ -24,20 +24,17 @@ import lombok.Setter;
 @Setter
 public class PaysEntity {
 
-	private static final long serialVersionUID = 1L;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@Column(name="libelle")
+
+	@Column(name = "libelle")
 	private String libelle;
-	
-	@Column(name="code")
+
+	@Column(name = "code")
 	private String code;
-	
-	@OneToMany(targetEntity = AdresseEntity.class , cascade = CascadeType.ALL,mappedBy = "pays")
+
+	@OneToMany(targetEntity = AdresseEntity.class, cascade = CascadeType.ALL, mappedBy = "pays")
 	private List<AdresseEntity> adresse;
 
-	
 }

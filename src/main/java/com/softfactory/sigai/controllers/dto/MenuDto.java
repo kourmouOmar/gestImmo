@@ -42,7 +42,12 @@ private static final long serialVersionUID = 1L;
     private String libelle;
     @NotNull
     @Size(max=255)
-    private String url;
+    private String url;	
+    
+    private List<MenuChildDto> childMenu;
+
+    
+    
 	// Relations
     private MenuDto menuDto;
     private ModuleDto moduleDto;
@@ -67,7 +72,8 @@ private static final long serialVersionUID = 1L;
         	dto.setIcon(entity.getIcon());  
         	dto.setIconClick(entity.getIconClick());  
         	dto.setLibelle(entity.getLibelle());  
-        	dto.setUrl(entity.getUrl());  
+        	dto.setUrl(entity.getUrl());
+			dto.setChildMenu(MenuChildDto.entitiesToDtos(entity.getChildMenus()));
 		}
 		return  dto;
     }
@@ -83,7 +89,9 @@ private static final long serialVersionUID = 1L;
         	entity.setIcon(dto.getIcon());   
         	entity.setIconClick(dto.getIconClick());   
         	entity.setLibelle(dto.getLibelle());   
-        	entity.setUrl(dto.getUrl());   
+        	entity.setUrl(dto.getUrl()); 
+			entity.setChildMenus(MenuChildDto.dtosToEntities(dto.getChildMenu()));
+
 		}
 		
 		return  entity;

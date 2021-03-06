@@ -20,15 +20,13 @@ import lombok.RequiredArgsConstructor;
 @Table(name = "region")
 public class RegionEntity {
 
-	private static final long serialVersionUID = -354054054054L;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@Column(name="libelle")
+
+	@Column(name = "libelle")
 	private String libelle;
-	
-	@OneToMany(targetEntity = AdresseEntity.class , cascade = CascadeType.ALL,mappedBy = "region")
+
+	@OneToMany(targetEntity = AdresseEntity.class, cascade = CascadeType.ALL, mappedBy = "region")
 	private List<AdresseEntity> adresse;
 }

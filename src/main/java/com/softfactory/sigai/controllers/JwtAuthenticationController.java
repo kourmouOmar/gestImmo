@@ -42,13 +42,13 @@ public class JwtAuthenticationController {
 
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
-	
+
 	@Autowired
 	private TokenProvider tokenProvider;
-	
+
 	@Autowired
 	private JwtService jwtService;
-	
+
 	@Autowired
 	private JwtUserDetailsServices userDetailsService;
 
@@ -56,18 +56,16 @@ public class JwtAuthenticationController {
 
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-		
-		authenticate( authenticationRequest.getUsername(),authenticationRequest.getPassword());
-
-		final UserDetails userDetails = userDetailsService.loadUserByUsername( authenticationRequest.getUsername());
-		/*full Name*/
+		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+		/* full Name */
 		String fullName = authenticationRequest.getUsername();
 		/* authorities */
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority("Admin"));
 		String token = tokenProvider.createToken(fullName, authorities, new Date());
-		//final String token = jwtTokenUtil.generateToken(userDetails);
-		/* construit response*/
+		// final String token = jwtTokenUtil.generateToken(userDetails);
+		/* construit response */
 		JwtResponseDto response = new JwtResponseDto();
 		response.setHeader(tokenProvider.getHeader());
 		response.setToken(token);
@@ -84,8 +82,7 @@ public class JwtAuthenticationController {
 			throw new Exception("INVALID_CREDENTIALS", e);
 		}
 	}
-	
-	
+
 	/**
 	 * Login and generate token & refresh token token v1
 	 * 
@@ -94,7 +91,6 @@ public class JwtAuthenticationController {
 	 */
 	@PostMapping(value = "/v1/auth", headers = HEADERS)
 	public SigaiResponse login1() throws Exception {
-		
 
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		UserEntity user = null;
@@ -104,20 +100,16 @@ public class JwtAuthenticationController {
 			/* Roles */
 			user = jwtService.getUserByUsername(username);
 		} catch (DataAccessException e) {
-			
 			new SigaiResponse(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
-		if (user == null ) {
+		if (user == null) {
 			sigaiResponse = new SigaiResponse(HttpStatus.UNAUTHORIZED);
 		} else {
 			/* get permission authorities */
 			Set<GrantedAuthority> authorities = jwtService.getAuthorities(user);
-
 			/* construct response */
 			sigaiResponse = new SigaiResponse(jwtService.constructResponse(user, username, authorities), HttpStatus.OK);
 		}
-
 		return sigaiResponse;
 	}
 }

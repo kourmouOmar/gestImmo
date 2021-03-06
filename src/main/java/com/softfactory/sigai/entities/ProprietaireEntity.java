@@ -1,6 +1,6 @@
 package com.softfactory.sigai.entities;
 
-import java.util.Date;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Persistent class for entity stored in table "acheteur"
@@ -25,35 +27,38 @@ import lombok.RequiredArgsConstructor;
  */
 
 @Entity
-@RequiredArgsConstructor
-@Data
+//@Data
 @Table(name = "proprietaire")
-public class ProprietaireEntity {
-	
+@NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
+public class ProprietaireEntity implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
-	@Column(name="nom")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Column(name = "nom")
 	private String nom;
-	
-	@Column(name="prenom")
+
+	@Column(name = "prenom")
 	private String prenom;
 
-	@Column(name="email")
+	@Column(name = "email")
 	private String email;
 
-	@Column(name="telephone")
+	@Column(name = "telephone")
 	private String telephone;
 
-	@Column(name="cin")
+	@Column(name = "cin")
 	private String cin;
-	
-	@Column(name="rib")
+
+	@Column(name = "rib")
 	private String rib;
-	
-	@OneToMany(targetEntity = AdresseEntity.class , cascade = CascadeType.ALL,mappedBy = "proprietaire")
+
+	@OneToMany(targetEntity = AdresseEntity.class, cascade = CascadeType.ALL, mappedBy = "proprietaire")
 	private List<AdresseEntity> adresse;
 }

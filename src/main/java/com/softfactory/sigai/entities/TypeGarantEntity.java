@@ -1,6 +1,5 @@
 package com.softfactory.sigai.entities;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -31,17 +28,15 @@ import lombok.RequiredArgsConstructor;
 @Data
 @Table(name = "type_garant")
 public class TypeGarantEntity {
-	
-	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@Column(name="libelle")
+
+	@Column(name = "libelle")
 	private String libelle;
-	
-	@OneToMany(targetEntity = GarantEntity.class , cascade = CascadeType.ALL,mappedBy = "type_garant")
+
+	@OneToMany(targetEntity = GarantEntity.class, cascade = CascadeType.ALL, mappedBy = "type_garant")
 	private List<GarantEntity> garantEntity;
 
 }
