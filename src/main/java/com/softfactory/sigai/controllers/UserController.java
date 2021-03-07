@@ -1,5 +1,7 @@
 package com.softfactory.sigai.controllers;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -33,6 +35,12 @@ public class UserController {
 	public SigaiResponse getAllUsers() {
 		/* get all users */
 		return new SigaiResponse(userService.getAllUser(),HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/user/{id}")
+	public SigaiResponse getAllUserById(@PathParam("id") Long idUser) {
+		/* get user by id */
+		return new SigaiResponse(userService.getAllUserById(idUser),HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)

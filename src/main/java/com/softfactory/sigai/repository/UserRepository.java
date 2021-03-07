@@ -15,4 +15,7 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
 	
 	@Query("SELECT u FROM UserEntity u")
 	List<UserEntity> getAllUsers();
+	
+	@Query("SELECT u from UserEntity WHERE u.id = !1")
+	UserEntity findUserById(Long idUser);
 }

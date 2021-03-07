@@ -26,4 +26,12 @@ public interface IUserService {
 	 * @return List<UserEntity>
 	 */
 	 UserEntity saveUser(UserDto user);
+	 
+	 /**
+	  *  get user by id
+	  *  
+	  * @param idUser
+	  * @return
+	  */
+	 UserEntity getAllUserById(Long idUser);
 }

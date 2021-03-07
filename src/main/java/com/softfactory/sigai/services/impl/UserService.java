@@ -37,6 +37,11 @@ public class UserService  implements IUserService{
 		newUser.setRole(roleService.getRoleById(user.getRole().getId()));
 		return userRepository.save(newUser);
 	}
+	@Override
+	public UserEntity getAllUserById(Long idUser) {
+		UserEntity userEntity = userRepository.findUserById(idUser);
+		return userEntity;
+	}
 	
 
 }
