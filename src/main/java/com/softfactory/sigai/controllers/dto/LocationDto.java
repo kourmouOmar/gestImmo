@@ -1,3 +1,6 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.controllers.dto;
 
 
@@ -6,8 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.softfactory.sigai.entities.LocationEntity;
@@ -27,20 +28,18 @@ public class LocationDto implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
-    private Long id           ;
+    private Long idLocation   ;
+    private Double duree;
     private Date dateAcquisition;
     private Date dateLiberation;
-    @Size(max=255)
-    private String duree;
     private Double loyer;
+    private Long idLocataire;
 	// Relations
     private BienDto bienDto;
-    private GarantDto garantDto;
 
 	// Relation Enum
 	public enum LocationRelationsEnum {
-		bien,
-    	garant; 
+    	bien; 
 	}
    
 	/**
@@ -51,11 +50,12 @@ private static final long serialVersionUID = 1L;
 		LocationDto dto = null;
 		if(entity != null){
 			dto = new LocationDto();
-        	dto.setId(entity.getId());
+        	dto.setIdLocation(entity.getIdLocation());
+        	dto.setDuree(entity.getDuree());  
         	dto.setDateAcquisition(entity.getDateAcquisition());  
         	dto.setDateLiberation(entity.getDateLiberation());  
-        	dto.setDuree(entity.getDuree());  
         	dto.setLoyer(entity.getLoyer());  
+        	dto.setIdLocataire(entity.getIdLocataire());  
 		}
 		return  dto;
     }
@@ -67,11 +67,12 @@ private static final long serialVersionUID = 1L;
 		LocationEntity entity = null;
 		if(dto != null){
 			entity = new LocationEntity();
-        	entity.setId(dto.getId()) ;
+        	entity.setIdLocation(dto.getIdLocation()) ;
+        	entity.setDuree(dto.getDuree());   
         	entity.setDateAcquisition(dto.getDateAcquisition());   
         	entity.setDateLiberation(dto.getDateLiberation());   
-        	entity.setDuree(dto.getDuree());   
         	entity.setLoyer(dto.getLoyer());   
+        	entity.setIdLocataire(dto.getIdLocataire());   
 		}
 		
 		return  entity;

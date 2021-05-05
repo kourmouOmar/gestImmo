@@ -1,3 +1,6 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,8 +14,8 @@ import com.softfactory.sigai.entities.LocationEntity;
 public interface ILocationRepository extends JpaRepository<LocationEntity, Long> {
 	
 	/**
-	 * get LocationEntity by id
+	 * get Location by id
 	 * */
-	@Query("SELECT a FROM LocationEntity a WHERE a.id = :id")
+	@Query("SELECT a FROM VilleEntity a WHERE a.id = :id")
 	LocationEntity getLocationBydId(@Param("id") Long id);
 }

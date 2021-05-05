@@ -1,10 +1,7 @@
-package com.softfactory.sigai.services;
-
-import java.util.List;
-
-import com.softfactory.sigai.controllers.dto.TypeGarantDto;
-import com.softfactory.sigai.entities.TypeGarantEntity;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service;
 /**
  * Spring service "TypeGarant"
  * 
@@ -12,9 +9,9 @@ import com.softfactory.sigai.entities.TypeGarantEntity;
  * @creation : 08/11/20
  * @version : 1.0
  */
-public interface ITypeGarantService {
+public interface ITypeGarantService{
 
-	/**
+/**
 	 * Get TypeGarant by Id
 	 * 
 	 * @param idTypeGarant

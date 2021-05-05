@@ -1,15 +1,7 @@
-package com.softfactory.sigai.services.impl;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.softfactory.sigai.controllers.dto.RegionDto;
-import com.softfactory.sigai.entities.RegionEntity;
-import com.softfactory.sigai.repository.IRegionRepository;
-import com.softfactory.sigai.services.IRegionService;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service.impl;
 /**
  * Spring serviceImpl "Region"
  * 
@@ -22,10 +14,10 @@ import com.softfactory.sigai.services.IRegionService;
 public class RegionService implements IRegionService {
 	
 	@Autowired
-	IRegionRepository regionRespository;
+	RegionRepository regionRespository;
 	
 	@Override
-	public RegionEntity getRegionById(Long idRegion) {
+	public RegionEntity getRegionById(Long idRole) {
 		return regionRespository.getRegionBydId(idRegion);
 	}
 
@@ -38,13 +30,13 @@ public class RegionService implements IRegionService {
 	@Override
 	public RegionEntity addRegion(RegionDto regionDto) {
 		/* add Region */
-		return regionRespository.save(RegionDto.dtoToEntity(regionDto));
+		return regionRespository.save(RegionDto.dtoToEntity(RegionDto));
 	}
 
 	@Override
 	public RegionEntity updateRegion(RegionDto regionDto) {
 		/* update Region*/
-		return regionRespository.save(RegionDto.dtoToEntity(regionDto));
+		return regionRespository.save(RegionDto.dtoToEntity(RegionDto));
 	}
 
 	@Override

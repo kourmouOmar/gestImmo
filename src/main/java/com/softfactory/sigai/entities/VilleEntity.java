@@ -1,32 +1,58 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+
 package com.softfactory.sigai.entities;
+
+ 
+import java.util.Date;
+
+
+
+import lombok.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+/**
+ * Persistent class for entity stored in table "ville"
+ */
 
 @Entity
-@RequiredArgsConstructor
-@Data
-@Table(name = "ville")
-public class VilleEntity {
+@Table(name="ville")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class VilleEntity extends AbstractCommonEntity<Long>  implements Cloneable  {
+
+    private static Logger logger = LoggerFactory.getLogger(VilleEntity.class);
+ 
+    private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_ville", nullable = false)
+    private Long idVille ;
 
-	@Column(name = "libelle")
-	private String libelle;
+    @Column(name="libelle", nullable=false, length=255)
+    private String libelle ;
 
-	@OneToMany(targetEntity = AdresseEntity.class, cascade = CascadeType.ALL, mappedBy = "ville")
-	private List<AdresseEntity> adresse;
+    @OneToMany(mappedBy="ville", targetEntity=AdresseEntity.class)
+    private List<AdresseEntity> listOfAdresse;
+
+
+     @Override
+	 public Long getId() {
+		return idVille;
+	} 
+ 
+  
+   
 }

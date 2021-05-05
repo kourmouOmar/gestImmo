@@ -1,15 +1,7 @@
-package com.softfactory.sigai.services.impl;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.softfactory.sigai.controllers.dto.PaysDto;
-import com.softfactory.sigai.entities.PaysEntity;
-import com.softfactory.sigai.repository.IPaysRepository;
-import com.softfactory.sigai.services.IPaysService;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service.impl;
 /**
  * Spring serviceImpl "Pays"
  * 
@@ -22,10 +14,10 @@ import com.softfactory.sigai.services.IPaysService;
 public class PaysService implements IPaysService {
 	
 	@Autowired
-	IPaysRepository paysRespository;
+	PaysRepository paysRespository;
 	
 	@Override
-	public PaysEntity getPaysById(Long idPays) {
+	public PaysEntity getPaysById(Long idRole) {
 		return paysRespository.getPaysBydId(idPays);
 	}
 
@@ -38,13 +30,13 @@ public class PaysService implements IPaysService {
 	@Override
 	public PaysEntity addPays(PaysDto paysDto) {
 		/* add Pays */
-		return paysRespository.save(PaysDto.dtoToEntity(paysDto));
+		return paysRespository.save(PaysDto.dtoToEntity(PaysDto));
 	}
 
 	@Override
 	public PaysEntity updatePays(PaysDto paysDto) {
 		/* update Pays*/
-		return paysRespository.save(PaysDto.dtoToEntity(paysDto));
+		return paysRespository.save(PaysDto.dtoToEntity(PaysDto));
 	}
 
 	@Override

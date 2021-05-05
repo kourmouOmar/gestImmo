@@ -1,15 +1,7 @@
-package com.softfactory.sigai.services.impl;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.softfactory.sigai.controllers.dto.VilleDto;
-import com.softfactory.sigai.entities.VilleEntity;
-import com.softfactory.sigai.repository.IVilleRepository;
-import com.softfactory.sigai.services.IVilleService;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service.impl;
 /**
  * Spring serviceImpl "Ville"
  * 
@@ -22,10 +14,10 @@ import com.softfactory.sigai.services.IVilleService;
 public class VilleService implements IVilleService {
 	
 	@Autowired
-	IVilleRepository villeRespository;
+	VilleRepository villeRespository;
 	
 	@Override
-	public VilleEntity getVilleById(Long idVille) {
+	public VilleEntity getVilleById(Long idRole) {
 		return villeRespository.getVilleBydId(idVille);
 	}
 
@@ -38,13 +30,13 @@ public class VilleService implements IVilleService {
 	@Override
 	public VilleEntity addVille(VilleDto villeDto) {
 		/* add Ville */
-		return villeRespository.save(VilleDto.dtoToEntity(villeDto));
+		return villeRespository.save(VilleDto.dtoToEntity(VilleDto));
 	}
 
 	@Override
 	public VilleEntity updateVille(VilleDto villeDto) {
 		/* update Ville*/
-		return villeRespository.save(VilleDto.dtoToEntity(villeDto));
+		return villeRespository.save(VilleDto.dtoToEntity(VilleDto));
 	}
 
 	@Override

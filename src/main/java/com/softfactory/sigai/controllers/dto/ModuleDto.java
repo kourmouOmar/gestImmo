@@ -1,3 +1,6 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.controllers.dto;
 
 
@@ -26,27 +29,29 @@ public class ModuleDto implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
-    private Long idModules    ;
+    private Long idModule     ;
     private Boolean active;
-    @Size(max=50)
+    @Size(max=255)
     private String code;
-    @Size(max=50)
+    @Size(max=255)
     private String colorLibelle;
-    @Size(max=150)
+    @Size(max=255)
     private String description;
-    @Size(max=50)
+    @Size(max=255)
     private String iconeActive;
-    @Size(max=50)
+    @Size(max=255)
     private String iconeHover;
-    @Size(max=50)
+    @Size(max=255)
     private String iconeNormale;
-    @Size(max=50)
+    @Size(max=255)
     private String libelle;
 	// Relations
+    private List<RoleModulesDto> listOfRoleModulesDto;  
     private List<MenuDto> listOfMenuDto;  
 
 	// Relation Enum
 	public enum ModuleRelationsEnum {
+		listOfRoleModules,
     	listOfMenu; 
 	}
    
@@ -58,7 +63,7 @@ private static final long serialVersionUID = 1L;
 		ModuleDto dto = null;
 		if(entity != null){
 			dto = new ModuleDto();
-        	dto.setIdModules(entity.getId());
+        	dto.setIdModule(entity.getIdModule());
         	dto.setActive(entity.getActive());  
         	dto.setCode(entity.getCode());  
         	dto.setColorLibelle(entity.getColorLibelle());  
@@ -78,7 +83,7 @@ private static final long serialVersionUID = 1L;
 		ModuleEntity entity = null;
 		if(dto != null){
 			entity = new ModuleEntity();
-        	entity.setId(dto.getIdModules()) ;
+        	entity.setIdModule(dto.getIdModule()) ;
         	entity.setActive(dto.getActive());   
         	entity.setCode(dto.getCode());   
         	entity.setColorLibelle(dto.getColorLibelle());   

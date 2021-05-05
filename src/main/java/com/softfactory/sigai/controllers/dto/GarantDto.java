@@ -1,3 +1,6 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.controllers.dto;
 
 
@@ -6,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -26,26 +30,31 @@ public class GarantDto implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
-    private Long id           ;
-    @Size(max=255)
-    private String email;
+    private Long idGarant     ;
+    @NotNull
     @Size(max=255)
     private String nom;
+    @NotNull
     @Size(max=255)
     private String prenom;
     @Size(max=255)
-    private String rib;
-    @Size(max=255)
     private String telephone;
+    @Size(max=255)
+    private String email;
+    @NotNull
+    @Size(max=255)
+    private String cin;
+    @Size(max=255)
+    private String rib;
 	// Relations
-    private List<LocationDto> listOfLocationDto;  
-    private List<AdresseDto> listOfAdresseDto;  
+    private AdresseDto adresseDto;
+    private List<LocataireDto> listOfLocataireDto;  
     private TypeGarantDto typeGarantDto;
 
 	// Relation Enum
 	public enum GarantRelationsEnum {
-		listOfLocation,
-		listOfAdresse,
+		adresse,
+		listOfLocataire,
     	typeGarant; 
 	}
    
@@ -57,12 +66,13 @@ private static final long serialVersionUID = 1L;
 		GarantDto dto = null;
 		if(entity != null){
 			dto = new GarantDto();
-        	dto.setId(entity.getId());
-        	dto.setEmail(entity.getEmail());  
+        	dto.setIdGarant(entity.getIdGarant());
         	dto.setNom(entity.getNom());  
         	dto.setPrenom(entity.getPrenom());  
-        	dto.setRib(entity.getRib());  
         	dto.setTelephone(entity.getTelephone());  
+        	dto.setEmail(entity.getEmail());  
+        	dto.setCin(entity.getCin());  
+        	dto.setRib(entity.getRib());  
 		}
 		return  dto;
     }
@@ -74,12 +84,13 @@ private static final long serialVersionUID = 1L;
 		GarantEntity entity = null;
 		if(dto != null){
 			entity = new GarantEntity();
-        	entity.setId(dto.getId()) ;
-        	entity.setEmail(dto.getEmail());   
+        	entity.setIdGarant(dto.getIdGarant()) ;
         	entity.setNom(dto.getNom());   
         	entity.setPrenom(dto.getPrenom());   
-        	entity.setRib(dto.getRib());   
         	entity.setTelephone(dto.getTelephone());   
+        	entity.setEmail(dto.getEmail());   
+        	entity.setCin(dto.getCin());   
+        	entity.setRib(dto.getRib());   
 		}
 		
 		return  entity;

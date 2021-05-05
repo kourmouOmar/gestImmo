@@ -1,15 +1,7 @@
-package com.softfactory.sigai.services.impl;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.softfactory.sigai.controllers.dto.ModuleDto;
-import com.softfactory.sigai.entities.ModuleEntity;
-import com.softfactory.sigai.repository.IModuleRepository;
-import com.softfactory.sigai.services.IModuleService;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service.impl;
 /**
  * Spring serviceImpl "Module"
  * 
@@ -22,10 +14,10 @@ import com.softfactory.sigai.services.IModuleService;
 public class ModuleService implements IModuleService {
 	
 	@Autowired
-	IModuleRepository moduleRespository;
+	ModuleRepository moduleRespository;
 	
 	@Override
-	public ModuleEntity getModuleById(Long idModule) {
+	public ModuleEntity getModuleById(Long idRole) {
 		return moduleRespository.getModuleBydId(idModule);
 	}
 
@@ -38,13 +30,13 @@ public class ModuleService implements IModuleService {
 	@Override
 	public ModuleEntity addModule(ModuleDto moduleDto) {
 		/* add Module */
-		return moduleRespository.save(ModuleDto.dtoToEntity(moduleDto));
+		return moduleRespository.save(ModuleDto.dtoToEntity(ModuleDto));
 	}
 
 	@Override
 	public ModuleEntity updateModule(ModuleDto moduleDto) {
 		/* update Module*/
-		return moduleRespository.save(ModuleDto.dtoToEntity(moduleDto));
+		return moduleRespository.save(ModuleDto.dtoToEntity(ModuleDto));
 	}
 
 	@Override

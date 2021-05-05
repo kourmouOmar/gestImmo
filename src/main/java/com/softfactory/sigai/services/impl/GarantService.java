@@ -1,15 +1,7 @@
-package com.softfactory.sigai.services.impl;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.softfactory.sigai.controllers.dto.GarantDto;
-import com.softfactory.sigai.entities.GarantEntity;
-import com.softfactory.sigai.repository.IGarantRepository;
-import com.softfactory.sigai.services.IGarantService;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service.impl;
 /**
  * Spring serviceImpl "Garant"
  * 
@@ -22,10 +14,10 @@ import com.softfactory.sigai.services.IGarantService;
 public class GarantService implements IGarantService {
 	
 	@Autowired
-	IGarantRepository garantRespository;
+	GarantRepository garantRespository;
 	
 	@Override
-	public GarantEntity getGarantById(Long idGarant) {
+	public GarantEntity getGarantById(Long idRole) {
 		return garantRespository.getGarantBydId(idGarant);
 	}
 
@@ -38,13 +30,13 @@ public class GarantService implements IGarantService {
 	@Override
 	public GarantEntity addGarant(GarantDto garantDto) {
 		/* add Garant */
-		return garantRespository.save(GarantDto.dtoToEntity(garantDto));
+		return garantRespository.save(GarantDto.dtoToEntity(GarantDto));
 	}
 
 	@Override
 	public GarantEntity updateGarant(GarantDto garantDto) {
 		/* update Garant*/
-		return garantRespository.save(GarantDto.dtoToEntity(garantDto));
+		return garantRespository.save(GarantDto.dtoToEntity(GarantDto));
 	}
 
 	@Override

@@ -14,8 +14,8 @@ import com.softfactory.sigai.entities.TypeGarantEntity;
 public interface ITypeGarantRepository extends JpaRepository<TypeGarantEntity, Long> {
 	
 	/**
-	 * get TypeGarantEntity by id
+	 * get TypeGarant by id
 	 * */
-	@Query("SELECT a FROM TypeGarantEntity a WHERE a.id = :id")
+	@Query("SELECT a FROM VilleEntity a WHERE a.id = :id")
 	TypeGarantEntity getTypeGarantBydId(@Param("id") Long id);
 }

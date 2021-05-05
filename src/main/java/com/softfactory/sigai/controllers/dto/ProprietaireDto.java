@@ -1,3 +1,6 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.controllers.dto;
 
 
@@ -6,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -26,20 +30,31 @@ public class ProprietaireDto implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
-    private Long id;
-    @Size(max=255)
-    private String cin;
-    @Size(max=255)
-    private String email;
+    private Long idProprietaire ;
+    @NotNull
     @Size(max=255)
     private String nom;
+    @NotNull
     @Size(max=255)
     private String prenom;
     @Size(max=255)
-    private String rib;
-    @Size(max=255)
     private String telephone;
+    @Size(max=255)
+    private String email;
+    @NotNull
+    @Size(max=255)
+    private String cin;
+    @Size(max=255)
+    private String rib;
 	// Relations
+    private List<BienDto> listOfBienDto;  
+    private AdresseDto adresseDto;
+
+	// Relation Enum
+	public enum ProprietaireRelationsEnum {
+		listOfBien,
+    	adresse; 
+	}
    
 	/**
      * Convert ProprietaireEntity -> ProprietaireDto
@@ -49,15 +64,13 @@ private static final long serialVersionUID = 1L;
 		ProprietaireDto dto = null;
 		if(entity != null){
 			dto = new ProprietaireDto();
-			//if(!entity.getId().equals(null)) {
-				dto.setId(entity.getId());
-			//}
-        	dto.setCin(entity.getCin());  
-        	dto.setEmail(entity.getEmail());  
+        	dto.setIdProprietaire(entity.getIdProprietaire());
         	dto.setNom(entity.getNom());  
         	dto.setPrenom(entity.getPrenom());  
-        	dto.setRib(entity.getRib());  
         	dto.setTelephone(entity.getTelephone());  
+        	dto.setEmail(entity.getEmail());  
+        	dto.setCin(entity.getCin());  
+        	dto.setRib(entity.getRib());  
 		}
 		return  dto;
     }
@@ -69,15 +82,13 @@ private static final long serialVersionUID = 1L;
 		ProprietaireEntity entity = null;
 		if(dto != null){
 			entity = new ProprietaireEntity();
-			//if(!dto.getId().equals(null)) {
-	        	entity.setId(dto.getId());
-			//}
-        	entity.setCin(dto.getCin());   
-        	entity.setEmail(dto.getEmail());   
+        	entity.setIdProprietaire(dto.getIdProprietaire()) ;
         	entity.setNom(dto.getNom());   
         	entity.setPrenom(dto.getPrenom());   
-        	entity.setRib(dto.getRib());   
         	entity.setTelephone(dto.getTelephone());   
+        	entity.setEmail(dto.getEmail());   
+        	entity.setCin(dto.getCin());   
+        	entity.setRib(dto.getRib());   
 		}
 		
 		return  entity;

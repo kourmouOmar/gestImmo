@@ -1,48 +1,66 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+
 package com.softfactory.sigai.entities;
 
+ 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+
+import lombok.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+import java.util.Date;
+
+import javax.persistence.*;
 
 /**
- * Persistent class for entity stored in table "acheteur"
- * 
- * @author : Kourmou omar
- * @see : <kourmou.omar@gmail.com>
- * @creation : 21-11-2020
- * @version : 1.0
+ * Persistent class for entity stored in table "vente"
  */
 
 @Entity
-@RequiredArgsConstructor
-@Data
-@Table(name = "vente")
-public class VenteEntity {
+@Table(name="vente")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class VenteEntity extends AbstractCommonEntity<Long>  implements Cloneable  {
+
+    private static Logger logger = LoggerFactory.getLogger(VenteEntity.class);
+ 
+    private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_vente", nullable = false)
+    private Long idVente ;
 
-	@Column(name = "dateVente")
-	private Date dateVente;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="date_vente", nullable=false)
+    private Date dateVente ;
+    @Column(name="prix", nullable=false)
+    private Double prix ;
+		
+    @ManyToOne
+    @JoinColumn(name="id_bien", referencedColumnName="id_bien")
+    private BienEntity bien;
 
-	@Column(name = "prix")
-	private double prix;
+    @ManyToOne
+    @JoinColumn(name="id_acheteur", referencedColumnName="id_acheteur")
+    private AcheteurEntity acheteur;
 
-	@OneToMany(targetEntity = AdresseEntity.class, cascade = CascadeType.ALL, mappedBy = "vente")
-	private List<AdresseEntity> adresse;
 
-	@OneToMany(targetEntity = BienEntity.class, cascade = CascadeType.ALL, mappedBy = "vente")
-	private List<BienEntity> bien;
+     @Override
+	 public Long getId() {
+		return idVente;
+	} 
+ 
+  
+   
 }

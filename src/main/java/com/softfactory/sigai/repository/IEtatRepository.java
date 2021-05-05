@@ -1,3 +1,6 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,9 +14,8 @@ import com.softfactory.sigai.entities.EtatEntity;
 public interface IEtatRepository extends JpaRepository<EtatEntity, Long> {
 	
 	/**
-	 * get EtatEntity by id
+	 * get Etat by id
 	 * */
-	@Query("SELECT e FROM EtatEntity e WHERE e.id = :id")
+	@Query("SELECT a FROM VilleEntity a WHERE a.id = :id")
 	EtatEntity getEtatBydId(@Param("id") Long id);
-
 }

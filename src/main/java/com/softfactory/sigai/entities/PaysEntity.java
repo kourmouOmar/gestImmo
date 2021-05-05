@@ -1,40 +1,60 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+
 package com.softfactory.sigai.entities;
+
+ 
+import java.util.Date;
+
+
+
+import lombok.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+/**
+ * Persistent class for entity stored in table "pays"
+ */
 
 @Entity
-@RequiredArgsConstructor
-@Data
-@Table(name = "pays")
+@Table(name="pays")
 @Getter
 @Setter
-public class PaysEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class PaysEntity extends AbstractCommonEntity<Long>  implements Cloneable  {
+
+    private static Logger logger = LoggerFactory.getLogger(PaysEntity.class);
+ 
+    private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_pays", nullable = false)
+    private Long idPays ;
 
-	@Column(name = "libelle")
-	private String libelle;
+    @Column(name="libelle", nullable=false, length=255)
+    private String libelle ;
+    @Column(name="code", nullable=false, length=255)
+    private String code ;
 
-	@Column(name = "code")
-	private String code;
+    @OneToMany(mappedBy="pays", targetEntity=AdresseEntity.class)
+    private List<AdresseEntity> listOfAdresse;
 
-	@OneToMany(targetEntity = AdresseEntity.class, cascade = CascadeType.ALL, mappedBy = "pays")
-	private List<AdresseEntity> adresse;
 
+     @Override
+	 public Long getId() {
+		return idPays;
+	} 
+ 
+  
+   
 }

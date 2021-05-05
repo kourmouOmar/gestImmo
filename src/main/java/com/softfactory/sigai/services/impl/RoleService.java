@@ -1,20 +1,12 @@
-package com.softfactory.sigai.services.impl;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.softfactory.sigai.controllers.dto.RoleDto;
-import com.softfactory.sigai.entities.RoleEntity;
-import com.softfactory.sigai.repository.RoleRepository;
-import com.softfactory.sigai.services.IRoleService;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service.impl;
 /**
- * Spring service "User"
+ * Spring serviceImpl "Role"
  * 
- * @author : kourmou Omar
- * @creation : 31/10/20
+ * @author : illass elbarhoumi
+ * @creation : 08/11/20
  * @version : 1.0
  */
 
@@ -31,26 +23,25 @@ public class RoleService implements IRoleService {
 
 	@Override
 	public List<RoleEntity> getAllRoles() {
-		/* get all role*/
+		/* get all Role*/
 		return roleRespository.findAll();
 	}
 
 	@Override
 	public RoleEntity addRole(RoleDto roleDto) {
-		/* add role */
-		return roleRespository.save(RoleDto.dtoToEntity(roleDto));
+		/* add Role */
+		return roleRespository.save(RoleDto.dtoToEntity(RoleDto));
 	}
 
 	@Override
 	public RoleEntity updateRole(RoleDto roleDto) {
-		/* update role*/
-		return roleRespository.save(RoleDto.dtoToEntity(roleDto));
+		/* update Role*/
+		return roleRespository.save(RoleDto.dtoToEntity(RoleDto));
 	}
 
 	@Override
 	public void deleteRole(Long idRole) {
-		/* delete role*/
+		/* delete Role*/
 		roleRespository.deleteById(idRole);
 	}
-
 }

@@ -1,59 +1,69 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+
 package com.softfactory.sigai.entities;
+
+ 
+import java.util.Date;
+
+
+
+import lombok.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.*;
 
 /**
  * Persistent class for entity stored in table "location"
- * 
- * @author : Kourmou omar
- * @see : <kourmou.omar@gmail.com>
- * @creation : 21-11-2020
- * @version : 1.0
  */
 
 @Entity
-@Table(name = "location")
+@Table(name="location")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LocationEntity {
+@ToString
+public class LocationEntity extends AbstractCommonEntity<Long>  implements Cloneable  {
+
+    private static Logger logger = LoggerFactory.getLogger(LocationEntity.class);
+ 
+    private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_location", nullable = false)
+    private Long idLocation ;
 
-	@Column(name = "dateAcquisition")
-	private Date dateAcquisition;
+    @Column(name="duree")
+    private Double duree ;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="date_acquisition")
+    private Date dateAcquisition ;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="date_liberation")
+    private Date dateLiberation ;
+    @Column(name="loyer")
+    private Double loyer ;
+    @Column(name="id_locataire")
+    private Long idLocataire ;
+	
+    @ManyToOne
+    @JoinColumn(name="id_bien", referencedColumnName="id_bien")
+    private BienEntity bien;
 
-	@Column(name = "dateLiberation")
-	private Date dateLiberation;
 
-	@Column(name = "duree")
-	private String duree;
-
-	@Column(name = "loyer")
-	private double loyer;
-
-	@OneToOne
-	@JoinColumn(name = "id_bien", nullable = false)
-	private BienEntity bien;
-
-	@OneToOne
-	@JoinColumn(name = "id_locataire", nullable = false)
-	private GarantEntity locataire;
+     @Override
+	 public Long getId() {
+		return idLocation;
+	} 
+ 
+  
+   
 }

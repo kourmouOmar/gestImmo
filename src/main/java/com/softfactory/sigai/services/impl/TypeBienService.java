@@ -1,15 +1,7 @@
-package com.softfactory.sigai.services.impl;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.softfactory.sigai.controllers.dto.TypeBienDto;
-import com.softfactory.sigai.entities.TypeBienEntity;
-import com.softfactory.sigai.repository.ITypeBienRepository;
-import com.softfactory.sigai.services.ITypeBienService;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service.impl;
 /**
  * Spring serviceImpl "TypeBien"
  * 
@@ -22,10 +14,10 @@ import com.softfactory.sigai.services.ITypeBienService;
 public class TypeBienService implements ITypeBienService {
 	
 	@Autowired
-	ITypeBienRepository typebienRespository;
+	TypeBienRepository typebienRespository;
 	
 	@Override
-	public TypeBienEntity getTypeBienById(Long idTypeBien) {
+	public TypeBienEntity getTypeBienById(Long idRole) {
 		return typebienRespository.getTypeBienBydId(idTypeBien);
 	}
 
@@ -38,13 +30,13 @@ public class TypeBienService implements ITypeBienService {
 	@Override
 	public TypeBienEntity addTypeBien(TypeBienDto typebienDto) {
 		/* add TypeBien */
-		return typebienRespository.save(TypeBienDto.dtoToEntity(typebienDto));
+		return typebienRespository.save(TypeBienDto.dtoToEntity(TypeBienDto));
 	}
 
 	@Override
 	public TypeBienEntity updateTypeBien(TypeBienDto typebienDto) {
 		/* update TypeBien*/
-		return typebienRespository.save(TypeBienDto.dtoToEntity(typebienDto));
+		return typebienRespository.save(TypeBienDto.dtoToEntity(TypeBienDto));
 	}
 
 	@Override

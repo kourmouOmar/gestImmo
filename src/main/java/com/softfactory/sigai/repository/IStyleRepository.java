@@ -1,3 +1,6 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,8 +14,8 @@ import com.softfactory.sigai.entities.StyleEntity;
 public interface IStyleRepository extends JpaRepository<StyleEntity, Long> {
 	
 	/**
-	 * get StyleEntity by id
+	 * get Style by id
 	 * */
-	@Query("SELECT a FROM StyleEntity a WHERE a.id = :id")
+	@Query("SELECT a FROM VilleEntity a WHERE a.id = :id")
 	StyleEntity getStyleBydId(@Param("id") Long id);
 }

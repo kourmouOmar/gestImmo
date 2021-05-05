@@ -6,14 +6,17 @@ package com.softfactory.sigai.controllers.dto;
 
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.validation.constraints.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.softfactory.sigai.entities.BienEntity;
 import com.softfactory.sigai.util.Functions;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Setter
@@ -24,27 +27,30 @@ public class BienDto implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
-    private Long id           ;
-    @Size(max=255)
-    private String anneeConstruction;
-    @Size(max=255)
-    private String nombrePieces;
-    @Size(max=255)
-    private String superficie;
+    private Long idBien       ;
+    private Long anneeConstruction;
+    private Double superficie;
+    private Long nombrePieces;
 	// Relations
-    private TypeBienDto typeBienDto;
-    private ViewDto viewDto;
-    private EtatDto etatDto;
     private StyleDto styleDto;
+    private List<VenteDto> listOfVenteDto;  
+    private TypeBienDto typeBienDto;
+    private EtatDto etatDto;
     private AdresseDto adresseDto;
+    private ProprietaireDto proprietaireDto;
+    private List<LocationDto> listOfLocationDto;  
+    private VueDto vueDto;
 
 	// Relation Enum
 	public enum BienRelationsEnum {
-		typeBien,
-		view,
-		etat,
 		style,
-    	adresse; 
+		listOfVente,
+		typeBien,
+		etat,
+		adresse,
+		proprietaire,
+		listOfLocation,
+    	vue; 
 	}
    
 	/**
@@ -55,10 +61,10 @@ private static final long serialVersionUID = 1L;
 		BienDto dto = null;
 		if(entity != null){
 			dto = new BienDto();
-        	dto.setId(entity.getId());
-        	dto.setAnneeConstruction(entity.getAnnee_construction());  
-        	dto.setNombrePieces(entity.getNombre_pieces());  
+        	dto.setIdBien(entity.getIdBien());
+        	dto.setAnneeConstruction(entity.getAnneeConstruction());  
         	dto.setSuperficie(entity.getSuperficie());  
+        	dto.setNombrePieces(entity.getNombrePieces());  
 		}
 		return  dto;
     }
@@ -70,10 +76,10 @@ private static final long serialVersionUID = 1L;
 		BienEntity entity = null;
 		if(dto != null){
 			entity = new BienEntity();
-        	entity.setId(dto.getId()) ;
-        	entity.setAnnee_construction(dto.getAnneeConstruction());   
-        	entity.setNombre_pieces(dto.getNombrePieces());   
+        	entity.setIdBien(dto.getIdBien()) ;
+        	entity.setAnneeConstruction(dto.getAnneeConstruction());   
         	entity.setSuperficie(dto.getSuperficie());   
+        	entity.setNombrePieces(dto.getNombrePieces());   
 		}
 		
 		return  entity;

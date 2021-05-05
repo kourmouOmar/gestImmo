@@ -32,32 +32,28 @@ private static final long serialVersionUID = 1L;
 
     private Long idMenu       ;
     @NotNull
-    @Size(max=255)
-    private String icon;
-    @NotNull
-    @Size(max=255)
-    private String iconClick;
-    @NotNull
-    @Size(max=255)
+    @Size(max=50)
     private String libelle;
     @NotNull
-    @Size(max=255)
-    private String url;	
-    
-    private List<MenuChildDto> childMenu;
-
-    
-    
+    @Size(max=50)
+    private String icon;
+    @NotNull
+    @Size(max=50)
+    private String iconClick;
+    @NotNull
+    @Size(max=100)
+    private String url;
+    private Long parentId;
 	// Relations
-    private MenuDto menuDto;
     private ModuleDto moduleDto;
-    private List<MenuDto> listOfMenuDto;  
+    private List<RoleMenusDto> listOfRoleMenusDto;  
+    private List<MenuPermissionsDto> listOfMenuPermissionsDto;  
 
 	// Relation Enum
 	public enum MenuRelationsEnum {
-		menu,
 		module,
-    	listOfMenu; 
+		listOfRoleMenus,
+    	listOfMenuPermissions; 
 	}
    
 	/**
@@ -69,11 +65,11 @@ private static final long serialVersionUID = 1L;
 		if(entity != null){
 			dto = new MenuDto();
         	dto.setIdMenu(entity.getIdMenu());
+        	dto.setLibelle(entity.getLibelle());  
         	dto.setIcon(entity.getIcon());  
         	dto.setIconClick(entity.getIconClick());  
-        	dto.setLibelle(entity.getLibelle());  
-        	dto.setUrl(entity.getUrl());
-			dto.setChildMenu(MenuChildDto.entitiesToDtos(entity.getChildMenus()));
+        	dto.setUrl(entity.getUrl());  
+        	dto.setParentId(entity.getParentId());  
 		}
 		return  dto;
     }
@@ -86,12 +82,11 @@ private static final long serialVersionUID = 1L;
 		if(dto != null){
 			entity = new MenuEntity();
         	entity.setIdMenu(dto.getIdMenu()) ;
+        	entity.setLibelle(dto.getLibelle());   
         	entity.setIcon(dto.getIcon());   
         	entity.setIconClick(dto.getIconClick());   
-        	entity.setLibelle(dto.getLibelle());   
-        	entity.setUrl(dto.getUrl()); 
-			entity.setChildMenus(MenuChildDto.dtosToEntities(dto.getChildMenu()));
-
+        	entity.setUrl(dto.getUrl());   
+        	entity.setParentId(dto.getParentId());   
 		}
 		
 		return  entity;

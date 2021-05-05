@@ -1,15 +1,7 @@
-package com.softfactory.sigai.services.impl;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.softfactory.sigai.controllers.dto.VenteDto;
-import com.softfactory.sigai.entities.VenteEntity;
-import com.softfactory.sigai.repository.IVenteRepository;
-import com.softfactory.sigai.services.IVenteService;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service.impl;
 /**
  * Spring serviceImpl "Vente"
  * 
@@ -22,10 +14,10 @@ import com.softfactory.sigai.services.IVenteService;
 public class VenteService implements IVenteService {
 	
 	@Autowired
-	IVenteRepository venteRespository;
+	VenteRepository venteRespository;
 	
 	@Override
-	public VenteEntity getVenteById(Long idVente) {
+	public VenteEntity getVenteById(Long idRole) {
 		return venteRespository.getVenteBydId(idVente);
 	}
 
@@ -38,13 +30,13 @@ public class VenteService implements IVenteService {
 	@Override
 	public VenteEntity addVente(VenteDto venteDto) {
 		/* add Vente */
-		return venteRespository.save(VenteDto.dtoToEntity(venteDto));
+		return venteRespository.save(VenteDto.dtoToEntity(VenteDto));
 	}
 
 	@Override
 	public VenteEntity updateVente(VenteDto venteDto) {
 		/* update Vente*/
-		return venteRespository.save(VenteDto.dtoToEntity(venteDto));
+		return venteRespository.save(VenteDto.dtoToEntity(VenteDto));
 	}
 
 	@Override

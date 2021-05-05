@@ -1,3 +1,6 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.controllers.dto;
 
 
@@ -6,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -26,23 +30,25 @@ public class AcheteurDto implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
-    private Long id           ;
-    @Size(max=255)
-    private String email;
+    private Long idAcheteur   ;
+    @NotNull
     @Size(max=255)
     private String nom;
+    @NotNull
     @Size(max=255)
     private String prenom;
     @Size(max=255)
     private String telephone;
+    @Size(max=255)
+    private String email;
 	// Relations
-    private List<AdresseDto> listOfAdresse2Dto;  
-    private List<AdresseDto> listOfAdresseDto;  
+    private AdresseDto adresseDto;
+    private List<VenteDto> listOfVenteDto;  
 
 	// Relation Enum
 	public enum AcheteurRelationsEnum {
-		listOfAdresse2,
-    	listOfAdresse; 
+		adresse,
+    	listOfVente; 
 	}
    
 	/**
@@ -53,11 +59,11 @@ private static final long serialVersionUID = 1L;
 		AcheteurDto dto = null;
 		if(entity != null){
 			dto = new AcheteurDto();
-        	dto.setId(entity.getId());
-        	dto.setEmail(entity.getEmail());  
+        	dto.setIdAcheteur(entity.getIdAcheteur());
         	dto.setNom(entity.getNom());  
         	dto.setPrenom(entity.getPrenom());  
         	dto.setTelephone(entity.getTelephone());  
+        	dto.setEmail(entity.getEmail());  
 		}
 		return  dto;
     }
@@ -69,11 +75,11 @@ private static final long serialVersionUID = 1L;
 		AcheteurEntity entity = null;
 		if(dto != null){
 			entity = new AcheteurEntity();
-        	entity.setId(dto.getId()) ;
-        	entity.setEmail(dto.getEmail());   
+        	entity.setIdAcheteur(dto.getIdAcheteur()) ;
         	entity.setNom(dto.getNom());   
         	entity.setPrenom(dto.getPrenom());   
         	entity.setTelephone(dto.getTelephone());   
+        	entity.setEmail(dto.getEmail());   
 		}
 		
 		return  entity;

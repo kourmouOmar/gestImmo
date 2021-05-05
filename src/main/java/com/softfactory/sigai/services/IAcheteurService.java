@@ -1,9 +1,13 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.services;
 
 import java.util.List;
 
 import com.softfactory.sigai.controllers.dto.AcheteurDto;
 import com.softfactory.sigai.entities.AcheteurEntity;
+
 
 /**
  * Spring service "Acheteur"

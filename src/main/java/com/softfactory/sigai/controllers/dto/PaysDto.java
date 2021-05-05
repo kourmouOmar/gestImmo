@@ -6,14 +6,20 @@ package com.softfactory.sigai.controllers.dto;
 
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.*;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.softfactory.sigai.entities.PaysEntity;
 import com.softfactory.sigai.util.Functions;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Setter
@@ -24,9 +30,11 @@ public class PaysDto implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
-    private Long id           ;
+    private Long idPays       ;
+    @NotNull
     @Size(max=255)
     private String libelle;
+    @NotNull
     @Size(max=255)
     private String code;
 	// Relations
@@ -45,7 +53,7 @@ private static final long serialVersionUID = 1L;
 		PaysDto dto = null;
 		if(entity != null){
 			dto = new PaysDto();
-        	dto.setId(entity.getId());
+        	dto.setIdPays(entity.getIdPays());
         	dto.setLibelle(entity.getLibelle());  
         	dto.setCode(entity.getCode());  
 		}
@@ -59,7 +67,7 @@ private static final long serialVersionUID = 1L;
 		PaysEntity entity = null;
 		if(dto != null){
 			entity = new PaysEntity();
-        	entity.setId(dto.getId()) ;
+        	entity.setIdPays(dto.getIdPays()) ;
         	entity.setLibelle(dto.getLibelle());   
         	entity.setCode(dto.getCode());   
 		}

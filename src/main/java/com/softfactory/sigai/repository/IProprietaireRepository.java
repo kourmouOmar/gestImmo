@@ -1,3 +1,6 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,8 +14,8 @@ import com.softfactory.sigai.entities.ProprietaireEntity;
 public interface IProprietaireRepository extends JpaRepository<ProprietaireEntity, Long> {
 	
 	/**
-	 * get ProprietaireEntity by id
+	 * get Proprietaire by id
 	 * */
-	@Query("SELECT a FROM ProprietaireEntity a WHERE a.id = :id")
+	@Query("SELECT a FROM VilleEntity a WHERE a.id = :id")
 	ProprietaireEntity getProprietaireBydId(@Param("id") Long id);
 }

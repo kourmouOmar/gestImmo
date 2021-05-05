@@ -7,8 +7,8 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.util.CollectionUtils;
-import com.softfactory.sigai.entities.MenuEntity;
 
+import com.softfactory.sigai.entities.MenuEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

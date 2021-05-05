@@ -21,28 +21,27 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @Component
-public class SimpleCorsFilter implements Filter{
+public class SimpleCorsFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setHeader("Access-Control-Allow-Credentials", "true");
 		response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
 		response.setHeader("Access-Control-Max-Age", "3600");
-		response.setHeader("Access-Control-Allow-Headers","x-auth-token, Content-Type, Accept, X-Requested-With, remember-me, authorization , Bearer, ");
+		response.setHeader("Access-Control-Allow-Headers",
+				"x-auth-token, Content-Type, Accept, X-Requested-With, remember-me, authorization , Bearer, ");
 		chain.doFilter(req, res);
-		
+
 	}
-	
+
 	@Bean
 	public FilterRegistrationBean gatewayCorsFilter() {
 
-		//logger.info("corsFilter...");
+		// logger.info("corsFilter...");
 
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		final CorsConfiguration config = new CorsConfiguration();
@@ -66,16 +65,14 @@ public class SimpleCorsFilter implements Filter{
 		return registrationBean;
 	}
 
-	
 	@Override
 	public void destroy() {
- 
+
 	}
- 
+
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
- 
-	}
-	
-}
 
+	}
+
+}

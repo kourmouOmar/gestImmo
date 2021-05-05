@@ -1,42 +1,60 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+
 package com.softfactory.sigai.entities;
+
+ 
+import java.util.Date;
+
+
+
+import lombok.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import javax.persistence.*;
 
 /**
- * Persistent class for entity stored in table "typeGarant"
- * 
- * @author : Kourmou omar
- * @see : <kourmou.omar@gmail.com>
- * @creation : 21-11-2020
- * @version : 1.0
+ * Persistent class for entity stored in table "type_garant"
  */
 
 @Entity
-@RequiredArgsConstructor
-@Data
-@Table(name = "type_garant")
-public class TypeGarantEntity {
+@Table(name="type_garant")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class TypeGarantEntity extends AbstractCommonEntity<Long>  implements Cloneable  {
+
+    private static Logger logger = LoggerFactory.getLogger(TypeGarantEntity.class);
+ 
+    private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_type_garant", nullable = false)
+    private Long idTypeGarant ;
 
-	@Column(name = "libelle")
-	private String libelle;
+    @Column(name="libelle", nullable=false, length=255)
+    private String libelle ;
+    @Column(name="description", nullable=false, length=255)
+    private String description ;
 
-	@OneToMany(targetEntity = GarantEntity.class, cascade = CascadeType.ALL, mappedBy = "type_garant")
-	private List<GarantEntity> garantEntity;
+    @OneToMany(mappedBy="typeGarant", targetEntity=GarantEntity.class)
+    private List<GarantEntity> listOfGarant;
 
+
+     @Override
+	 public Long getId() {
+		return idTypeGarant;
+	} 
+ 
+  
+   
 }

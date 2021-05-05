@@ -1,20 +1,18 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.controllers.dto;
 
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.*;
+import com.sofrecom.sirhus.socle.util.Functions;
 import java.util.Date;
-import java.util.List;
-
+import com.sofrecom.sirhus.transverse.repository.entite.VenteEntity;
+import javax.validation.constraints.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.softfactory.sigai.entities.VenteEntity;
-import com.softfactory.sigai.util.Functions;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Setter
@@ -23,19 +21,21 @@ import lombok.Setter;
 @NoArgsConstructor
 public class VenteDto implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private Long idVente      ;
+    @NotNull
     private Date dateVente;
+    @NotNull
     private Double prix;
 	// Relations
-    private List<AdresseDto> listOfAdresseDto;  
-    private List<BienDto> listOfBienDto;  
+    private BienDto bienDto;
+    private AcheteurDto acheteurDto;
 
 	// Relation Enum
 	public enum VenteRelationsEnum {
-		listOfAdresse,
-    	listOfBien; 
+		bien,
+    	acheteur; 
 	}
    
 	/**
@@ -46,7 +46,7 @@ public class VenteDto implements Serializable {
 		VenteDto dto = null;
 		if(entity != null){
 			dto = new VenteDto();
-        	dto.setId(entity.getId());
+        	dto.setIdVente(entity.getIdVente());
         	dto.setDateVente(entity.getDateVente());  
         	dto.setPrix(entity.getPrix());  
 		}
@@ -60,9 +60,9 @@ public class VenteDto implements Serializable {
 		VenteEntity entity = null;
 		if(dto != null){
 			entity = new VenteEntity();
-        	entity.setId(dto.getId()) ;
+        	entity.setIdVente(dto.getIdVente()) ;
         	entity.setDateVente(dto.getDateVente());   
-        	entity.setPrix(dto.getPrix());;   
+        	entity.setPrix(dto.getPrix());   
 		}
 		
 		return  entity;

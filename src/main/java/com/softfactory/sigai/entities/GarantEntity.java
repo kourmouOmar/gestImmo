@@ -1,60 +1,76 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+
 package com.softfactory.sigai.entities;
+
+ 
+import java.util.Date;
+
+
+
+import lombok.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import javax.persistence.*;
 
 /**
  * Persistent class for entity stored in table "garant"
- * 
- * @author : Kourmou omar
- * @see : <kourmou.omar@gmail.com>
- * @creation : 21-11-2020
- * @version : 1.0
  */
 
 @Entity
-@RequiredArgsConstructor
-@Data
-@Table(name = "garant")
-public class GarantEntity {
+@Table(name="garant")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class GarantEntity extends AbstractCommonEntity<Long>  implements Cloneable  {
+
+    private static Logger logger = LoggerFactory.getLogger(GarantEntity.class);
+ 
+    private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_garant", nullable = false)
+    private Long idGarant ;
 
-	@Column(name = "nom")
-	private String nom;
+    @Column(name="nom", nullable=false, length=255)
+    private String nom ;
+    @Column(name="prenom", nullable=false, length=255)
+    private String prenom ;
+    @Column(name="telephone", length=255)
+    private String telephone ;
+    @Column(name="email", length=255)
+    private String email ;
+    @Column(name="cin", nullable=false, length=255)
+    private String cin ;
+    @Column(name="rib", length=255)
+    private String rib ;
+		
+    @ManyToOne
+    @JoinColumn(name="id_adresse", referencedColumnName="id_adresse")
+    private AdresseEntity adresse;
 
-	@Column(name = "prenom")
-	private String prenom;
+    @OneToMany(mappedBy="garant", targetEntity=LocataireEntity.class)
+    private List<LocataireEntity> listOfLocataire;
 
-	@Column(name = "email")
-	private String email;
+    @ManyToOne
+    @JoinColumn(name="id_type_garant", referencedColumnName="id_type_garant")
+    private TypeGarantEntity typeGarant;
 
-	@Column(name = "telephone")
-	private String telephone;
 
-	@Column(name = "rib")
-	private String rib;
-
-	@OneToMany(targetEntity = AdresseEntity.class, cascade = CascadeType.ALL, mappedBy = "garant")
-	private List<AdresseEntity> adresse;
-
-	@OneToOne
-	@JoinColumn(name = "id_type_garant", nullable = false)
-	private TypeGarantEntity type_garant;
-
+     @Override
+	 public Long getId() {
+		return idGarant;
+	} 
+ 
+  
+   
 }

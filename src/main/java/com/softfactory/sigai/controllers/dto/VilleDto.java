@@ -1,14 +1,17 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.controllers.dto;
 
 
 
 import java.io.Serializable;
 import java.util.*;
+import com.sofrecom.sirhus.socle.util.Functions;
+import java.util.List;
+import com.sofrecom.sirhus.transverse.repository.entite.VilleEntity;
 import javax.validation.constraints.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.softfactory.sigai.entities.VilleEntity;
-import com.softfactory.sigai.util.Functions;
-
 import lombok.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -20,7 +23,8 @@ public class VilleDto implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
-    private Long id           ;
+    private Long idVille      ;
+    @NotNull
     @Size(max=255)
     private String libelle;
 	// Relations
@@ -39,7 +43,7 @@ private static final long serialVersionUID = 1L;
 		VilleDto dto = null;
 		if(entity != null){
 			dto = new VilleDto();
-        	dto.setId(entity.getId());
+        	dto.setIdVille(entity.getIdVille());
         	dto.setLibelle(entity.getLibelle());  
 		}
 		return  dto;
@@ -52,7 +56,7 @@ private static final long serialVersionUID = 1L;
 		VilleEntity entity = null;
 		if(dto != null){
 			entity = new VilleEntity();
-        	entity.setId(dto.getId()) ;
+        	entity.setIdVille(dto.getIdVille()) ;
         	entity.setLibelle(dto.getLibelle());   
 		}
 		

@@ -1,3 +1,6 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,8 +14,8 @@ import com.softfactory.sigai.entities.AdresseEntity;
 public interface IAdresseRepository extends JpaRepository<AdresseEntity, Long> {
 	
 	/**
-	 * get adreesse by id
+	 * get Adresse by id
 	 * */
-	@Query("SELECT a FROM AdresseEntity a WHERE a.id = :id")
+	@Query("SELECT a FROM VilleEntity a WHERE a.id = :id")
 	AdresseEntity getAdresseBydId(@Param("id") Long id);
 }

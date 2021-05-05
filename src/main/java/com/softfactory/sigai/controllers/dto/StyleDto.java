@@ -6,14 +6,19 @@ package com.softfactory.sigai.controllers.dto;
 
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.*;
+
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.softfactory.sigai.entities.StyleEntity;
 import com.softfactory.sigai.util.Functions;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Setter
@@ -24,9 +29,11 @@ public class StyleDto implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
-    private Long id           ;
+    private Long idStyle      ;
     @Size(max=255)
     private String libelle;
+    @Size(max=255)
+    private String description;
 	// Relations
     private List<BienDto> listOfBienDto;  
 
@@ -43,8 +50,9 @@ private static final long serialVersionUID = 1L;
 		StyleDto dto = null;
 		if(entity != null){
 			dto = new StyleDto();
-        	dto.setId(entity.getId());
+        	dto.setIdStyle(entity.getIdStyle());
         	dto.setLibelle(entity.getLibelle());  
+        	dto.setDescription(entity.getDescription());  
 		}
 		return  dto;
     }
@@ -56,8 +64,9 @@ private static final long serialVersionUID = 1L;
 		StyleEntity entity = null;
 		if(dto != null){
 			entity = new StyleEntity();
-        	entity.setId(dto.getId()) ;
+        	entity.setIdStyle(dto.getIdStyle()) ;
         	entity.setLibelle(dto.getLibelle());   
+        	entity.setDescription(dto.getDescription());   
 		}
 		
 		return  entity;

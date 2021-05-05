@@ -1,69 +1,93 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+
 package com.softfactory.sigai.entities;
 
-import javax.persistence.CascadeType;
+ 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+/**
+ * Persistent class for entity stored in table "adresse"
+ */
 
 @Entity
-@RequiredArgsConstructor
-@Data
-@Table(name = "adresse")
-public class AdresseEntity {
+@Table(name="adresse")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class AdresseEntity extends AbstractCommonEntity<Long>  implements Cloneable  {
+
+    private static Logger logger = LoggerFactory.getLogger(AdresseEntity.class);
+ 
+    private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_adresse", nullable = false)
+    private Long idAdresse ;
 
-	@Column(name = "num_appartement")
-	private int num_appartement;
+    @Column(name="num_appartement", length=255)
+    private String numAppartement ;
+    @Column(name="etage")
+    private Double etage ;
+    @Column(name="batiment", length=255)
+    private String batiment ;
+    @Column(name="quartier", length=255)
+    private String quartier ;
+    @Column(name="code_postale")
+    private Double codePostale ;
+		
+    @OneToMany(mappedBy="adresse", targetEntity=BienEntity.class)
+    private List<BienEntity> listOfBien;
 
-	@Column(name = "num_etage")
-	private int num_etage;
+    @OneToMany(mappedBy="adresse", targetEntity=AcheteurEntity.class)
+    private List<AcheteurEntity> listOfAcheteur;
 
-	@Column(name = "batiment")
-	private String batiment;
+    @OneToMany(mappedBy="adresse", targetEntity=GarantEntity.class)
+    private List<GarantEntity> listOfGarant;
 
-	@Column(name = "quartier")
-	private String quartier;
+    @ManyToOne
+    @JoinColumn(name="id_pays", referencedColumnName="id_pays")
+    private PaysEntity pays;
 
-	@OneToOne(targetEntity = BienEntity.class, cascade = CascadeType.ALL, mappedBy = "adresse")
-	private BienEntity bien;
+    @OneToMany(mappedBy="adresse", targetEntity=LocataireEntity.class)
+    private List<LocataireEntity> listOfLocataire;
 
-	@OneToOne
-	@JoinColumn(name = "id_ville", nullable = false)
-	private VilleEntity ville;
+    @ManyToOne
+    @JoinColumn(name="id_ville", referencedColumnName="id_ville")
+    private VilleEntity ville;
 
-	@OneToOne
-	@JoinColumn(name = "id_region", nullable = false)
-	private RegionEntity region;
+    @OneToMany(mappedBy="adresse", targetEntity=ProprietaireEntity.class)
+    private List<ProprietaireEntity> listOfProprietaire;
 
-	@OneToOne
-	@JoinColumn(name = "id_pays", nullable = false)
-	private PaysEntity pays;
 
-	@OneToOne
-	@JoinColumn(name = "id_acheteur", nullable = false)
-	private AcheteurEntity acheteur;
-
-	@OneToOne
-	@JoinColumn(name = "id_proprietaire", nullable = false)
-	private AcheteurEntity proprietaire;
-
-	@OneToOne
-	@JoinColumn(name = "id_garant", nullable = true)
-	private GarantEntity garant;
-
-	@OneToOne
-	@JoinColumn(name = "id_vente", nullable = true)
-	private VenteEntity vente;
-
+     @Override
+	 public Long getId() {
+		return idAdresse;
+	} 
+ 
+  
+   
 }

@@ -1,10 +1,7 @@
-package com.softfactory.sigai.services;
-
-import java.util.List;
-
-import com.softfactory.sigai.controllers.dto.VilleDto;
-import com.softfactory.sigai.entities.VilleEntity;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service;
 /**
  * Spring service "Ville"
  * 

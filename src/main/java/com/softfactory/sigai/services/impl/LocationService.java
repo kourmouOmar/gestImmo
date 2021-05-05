@@ -1,16 +1,7 @@
-
-package com.softfactory.sigai.services.impl;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.softfactory.sigai.controllers.dto.LocationDto;
-import com.softfactory.sigai.entities.LocationEntity;
-import com.softfactory.sigai.repository.ILocationRepository;
-import com.softfactory.sigai.services.ILocationService;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service.impl;
 /**
  * Spring serviceImpl "Location"
  * 
@@ -23,10 +14,10 @@ import com.softfactory.sigai.services.ILocationService;
 public class LocationService implements ILocationService {
 	
 	@Autowired
-	ILocationRepository locationRespository;
+	LocationRepository locationRespository;
 	
 	@Override
-	public LocationEntity getLocationById(Long idLocation) {
+	public LocationEntity getLocationById(Long idRole) {
 		return locationRespository.getLocationBydId(idLocation);
 	}
 
@@ -39,13 +30,13 @@ public class LocationService implements ILocationService {
 	@Override
 	public LocationEntity addLocation(LocationDto locationDto) {
 		/* add Location */
-		return locationRespository.save(LocationDto.dtoToEntity(locationDto));
+		return locationRespository.save(LocationDto.dtoToEntity(LocationDto));
 	}
 
 	@Override
 	public LocationEntity updateLocation(LocationDto locationDto) {
 		/* update Location*/
-		return locationRespository.save(LocationDto.dtoToEntity(locationDto));
+		return locationRespository.save(LocationDto.dtoToEntity(LocationDto));
 	}
 
 	@Override

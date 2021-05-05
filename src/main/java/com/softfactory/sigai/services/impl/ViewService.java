@@ -1,15 +1,7 @@
-package com.softfactory.sigai.services.impl;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.softfactory.sigai.controllers.dto.ViewDto;
-import com.softfactory.sigai.entities.ViewEntity;
-import com.softfactory.sigai.repository.IViewRepository;
-import com.softfactory.sigai.services.IViewService;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service.impl;
 /**
  * Spring serviceImpl "View"
  * 
@@ -22,10 +14,10 @@ import com.softfactory.sigai.services.IViewService;
 public class ViewService implements IViewService {
 	
 	@Autowired
-	IViewRepository viewRespository;
+	ViewRepository viewRespository;
 	
 	@Override
-	public ViewEntity getViewById(Long idView) {
+	public ViewEntity getViewById(Long idRole) {
 		return viewRespository.getViewBydId(idView);
 	}
 
@@ -38,13 +30,13 @@ public class ViewService implements IViewService {
 	@Override
 	public ViewEntity addView(ViewDto viewDto) {
 		/* add View */
-		return viewRespository.save(ViewDto.dtoToEntity(viewDto));
+		return viewRespository.save(ViewDto.dtoToEntity(ViewDto));
 	}
 
 	@Override
 	public ViewEntity updateView(ViewDto viewDto) {
 		/* update View*/
-		return viewRespository.save(ViewDto.dtoToEntity(viewDto));
+		return viewRespository.save(ViewDto.dtoToEntity(ViewDto));
 	}
 
 	@Override

@@ -1,3 +1,6 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,8 +14,8 @@ import com.softfactory.sigai.entities.BienEntity;
 public interface IBienRepository extends JpaRepository<BienEntity, Long> {
 	
 	/**
-	 * get BienEntity by id
+	 * get Bien by id
 	 * */
-	@Query("SELECT b FROM BienEntity b WHERE b.id = :id")
+	@Query("SELECT a FROM VilleEntity a WHERE a.id = :id")
 	BienEntity getBienBydId(@Param("id") Long id);
 }

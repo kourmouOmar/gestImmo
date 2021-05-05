@@ -1,10 +1,7 @@
-package com.softfactory.sigai.services;
-
-import java.util.List;
-
-import com.softfactory.sigai.controllers.dto.ProprietaireDto;
-import com.softfactory.sigai.entities.ProprietaireEntity;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service;
 /**
  * Spring service "Proprietaire"
  * 
@@ -35,7 +32,7 @@ public interface IProprietaireService{
 	 * @param ProprietaireDto
 	 * @return ProprietaireEntity
 	 */
-	ProprietaireEntity addProprietaire(ProprietaireEntity proprietaireEntity);
+	ProprietaireEntity addProprietaire(ProprietaireDto ProprietaireDto);
 
 	/**
 	 * update Proprietaire

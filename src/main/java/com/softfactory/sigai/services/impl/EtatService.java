@@ -1,15 +1,7 @@
-package com.softfactory.sigai.services.impl;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.softfactory.sigai.controllers.dto.EtatDto;
-import com.softfactory.sigai.entities.EtatEntity;
-import com.softfactory.sigai.repository.IEtatRepository;
-import com.softfactory.sigai.services.IEtatService;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service.impl;
 /**
  * Spring serviceImpl "Etat"
  * 
@@ -22,10 +14,10 @@ import com.softfactory.sigai.services.IEtatService;
 public class EtatService implements IEtatService {
 	
 	@Autowired
-	IEtatRepository etatRespository;
+	EtatRepository etatRespository;
 	
 	@Override
-	public EtatEntity getEtatById(Long idEtat) {
+	public EtatEntity getEtatById(Long idRole) {
 		return etatRespository.getEtatBydId(idEtat);
 	}
 
@@ -38,13 +30,13 @@ public class EtatService implements IEtatService {
 	@Override
 	public EtatEntity addEtat(EtatDto etatDto) {
 		/* add Etat */
-		return etatRespository.save(EtatDto.dtoToEntity(etatDto));
+		return etatRespository.save(EtatDto.dtoToEntity(EtatDto));
 	}
 
 	@Override
 	public EtatEntity updateEtat(EtatDto etatDto) {
 		/* update Etat*/
-		return etatRespository.save(EtatDto.dtoToEntity(etatDto));
+		return etatRespository.save(EtatDto.dtoToEntity(EtatDto));
 	}
 
 	@Override

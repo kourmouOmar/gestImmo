@@ -1,15 +1,7 @@
-package com.softfactory.sigai.services.impl;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.softfactory.sigai.controllers.dto.AdresseDto;
-import com.softfactory.sigai.entities.AdresseEntity;
-import com.softfactory.sigai.repository.IAdresseRepository;
-import com.softfactory.sigai.services.IAdresseService;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service.impl;
 /**
  * Spring serviceImpl "Adresse"
  * 
@@ -22,10 +14,10 @@ import com.softfactory.sigai.services.IAdresseService;
 public class AdresseService implements IAdresseService {
 	
 	@Autowired
-	IAdresseRepository adresseRespository;
+	AdresseRepository adresseRespository;
 	
 	@Override
-	public AdresseEntity getAdresseById(Long idAdresse) {
+	public AdresseEntity getAdresseById(Long idRole) {
 		return adresseRespository.getAdresseBydId(idAdresse);
 	}
 
@@ -38,13 +30,13 @@ public class AdresseService implements IAdresseService {
 	@Override
 	public AdresseEntity addAdresse(AdresseDto adresseDto) {
 		/* add Adresse */
-		return adresseRespository.save(AdresseDto.dtoToEntity(adresseDto));
+		return adresseRespository.save(AdresseDto.dtoToEntity(AdresseDto));
 	}
 
 	@Override
 	public AdresseEntity updateAdresse(AdresseDto adresseDto) {
 		/* update Adresse*/
-		return adresseRespository.save(AdresseDto.dtoToEntity(adresseDto));
+		return adresseRespository.save(AdresseDto.dtoToEntity(AdresseDto));
 	}
 
 	@Override

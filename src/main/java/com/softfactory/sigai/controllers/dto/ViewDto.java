@@ -1,21 +1,18 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.controllers.dto;
 
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.*;
+import com.sofrecom.sirhus.socle.util.Functions;
 import java.util.List;
-
-import javax.validation.constraints.Size;
-
+import com.sofrecom.sirhus.transverse.repository.entite.ViewEntity;
+import javax.validation.constraints.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.softfactory.sigai.entities.ViewEntity;
-import com.softfactory.sigai.util.Functions;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Setter

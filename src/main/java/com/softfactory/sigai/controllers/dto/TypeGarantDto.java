@@ -1,21 +1,18 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
 package com.softfactory.sigai.controllers.dto;
 
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.*;
+import com.sofrecom.sirhus.socle.util.Functions;
 import java.util.List;
-
-import javax.validation.constraints.Size;
-
+import com.sofrecom.sirhus.transverse.repository.entite.TypeGarantEntity;
+import javax.validation.constraints.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.softfactory.sigai.entities.TypeGarantEntity;
-import com.softfactory.sigai.util.Functions;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Setter
@@ -26,9 +23,13 @@ public class TypeGarantDto implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
-    private Long id           ;
+    private Long idTypeGarant ;
+    @NotNull
     @Size(max=255)
     private String libelle;
+    @NotNull
+    @Size(max=255)
+    private String description;
 	// Relations
     private List<GarantDto> listOfGarantDto;  
 
@@ -45,8 +46,9 @@ private static final long serialVersionUID = 1L;
 		TypeGarantDto dto = null;
 		if(entity != null){
 			dto = new TypeGarantDto();
-        	dto.setId(entity.getId());
+        	dto.setIdTypeGarant(entity.getIdTypeGarant());
         	dto.setLibelle(entity.getLibelle());  
+        	dto.setDescription(entity.getDescription());  
 		}
 		return  dto;
     }
@@ -58,8 +60,9 @@ private static final long serialVersionUID = 1L;
 		TypeGarantEntity entity = null;
 		if(dto != null){
 			entity = new TypeGarantEntity();
-        	entity.setId(dto.getId()) ;
+        	entity.setIdTypeGarant(dto.getIdTypeGarant()) ;
         	entity.setLibelle(dto.getLibelle());   
+        	entity.setDescription(dto.getDescription());   
 		}
 		
 		return  entity;

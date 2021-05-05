@@ -1,20 +1,17 @@
-package com.softfactory.sigai.services;
-
-import java.util.List;
-
-import com.softfactory.sigai.controllers.dto.RoleDto;
-import com.softfactory.sigai.entities.RoleEntity;
-
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+package com.softfactory.sigai.service;
 /**
  * Spring service "Role"
  * 
- * @author : kourmou Omar
- * @creation : 31/10/20
+ * @author : illass elbarhoumi
+ * @creation : 08/11/20
  * @version : 1.0
  */
-public interface IRoleService {
+public interface IRoleService{
 
-	/**
+/**
 	 * Get Role by Id
 	 * 
 	 * @param idRole
@@ -23,32 +20,32 @@ public interface IRoleService {
 	RoleEntity getRoleById(Long idRole);
 
 	/**
-	 * get all role
+	 * get all Role
 	 *
 	 * @return List<RoleEntity>
 	 */
 	List<RoleEntity> getAllRoles();
 
 	/**
-	 * add role
+	 * add Role
 	 *
 	 * @param RoleDto
 	 * @return RoleEntity
 	 */
-	RoleEntity addRole(RoleDto roleDto);
+	RoleEntity addRole(RoleDto RoleDto);
 
 	/**
-	 * update role
+	 * update Role
 	 *
 	 * @param RoleDto
 	 * @return RoleEntity
 	 */
-	RoleEntity updateRole(RoleDto roleDto);
+	RoleEntity updateRole(RoleDto RoleDto);
 
 	/**
-	 * delete role
+	 * delete Role
 	 *
-	 * @param id role
+	 * @param idRole
 	 * @return RoleEntity
 	 */
 	void deleteRole(Long idRole);

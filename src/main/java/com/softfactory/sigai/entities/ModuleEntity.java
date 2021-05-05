@@ -1,98 +1,75 @@
+/*
+ * Be careful, do not modify this class, it is generated automatically.
+ */
+
 package com.softfactory.sigai.entities;
+
+ 
+import java.util.Date;
+
+
+
+import lombok.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.softfactory.sigai.entities.common.AbstractCommonEntity;
-import com.sun.istack.NotNull;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.*;
 
 /**
- * Persistent class for entity stored in table "Module"
- * 
- * @author : Kourmou omar
- * @see : <kourmou.omar@gmail.com>
- * @creation : 21-11-2020
- * @version : 1.0
+ * Persistent class for entity stored in table "module"
  */
 
 @Entity
-@Table(name = "module")
+@Table(name="module")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ModuleEntity extends AbstractCommonEntity<Long> {
+@ToString
+public class ModuleEntity extends AbstractCommonEntity<Long>  implements Cloneable  {
 
-	private static final long serialVersionUID = 1L;
+    private static Logger logger = LoggerFactory.getLogger(ModuleEntity.class);
+ 
+    private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id_modules", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name = "id_module", nullable = false)
+    private Long idModule ;
 
-	@NotNull
-	@Column(length = 50)
-	private String libelle;
+    @Column(name="active")
+    private Boolean active ;
+    @Column(name="code", length=255)
+    private String code ;
+    @Column(name="color_libelle", length=255)
+    private String colorLibelle ;
+    @Column(name="description", length=255)
+    private String description ;
+    @Column(name="icone_active", length=255)
+    private String iconeActive ;
+    @Column(name="icone_hover", length=255)
+    private String iconeHover ;
+    @Column(name="icone_normale", length=255)
+    private String iconeNormale ;
+    @Column(name="libelle", length=255)
+    private String libelle ;
 
-	@NotNull
-	@Column(length = 50)
-	private String code;
+    @OneToMany(mappedBy="module", targetEntity=RoleModulesEntity.class)
+    private List<RoleModulesEntity> listOfRoleModules;
 
-	@NotNull
-	private Boolean active;
-
-	@Column(length = 150)
-	private String description;
-
-	@Column(length = 50)
-	private String iconeActive;
-
-	@Column(length = 50)
-	private String iconeNormale;
-
-	@Column(length = 50)
-	private String iconeHover;
-	
-	@Column(length = 50)
-	private String colorLibelle;
-
-	
-	@OneToMany(mappedBy = "module", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonIgnore
-	private List<MenuEntity> menus;
-
-	/**
-	 * copy constructor recommended to use over Clone as The clone method returns a
-	 * general Object reference. Therefore, we need to typecast it to the
-	 * appropriate type
-	 * 
-	 * @param entity
-	 */
-	public ModuleEntity(ModuleEntity entity) {
-		this.id = entity.getId();
-		this.libelle = entity.getLibelle();
-		this.code = entity.getCode();
-		this.active = entity.getActive();
-		this.description = entity.getDescription();
-		this.iconeActive = entity.getIconeActive();
-		this.iconeNormale = entity.getIconeNormale();
-		this.iconeHover = entity.getIconeHover();
-		this.colorLibelle = entity.getColorLibelle();
-	}
+    @OneToMany(mappedBy="module", targetEntity=MenuEntity.class)
+    private List<MenuEntity> listOfMenu;
 
 
+     @Override
+	 public Long getId() {
+		return idModule;
+	} 
+ 
+  
+   
 }
