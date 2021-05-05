@@ -1,7 +1,13 @@
 /*
  * Be careful, do not modify this class, it is generated automatically.
  */
-package com.softfactory.sigai.service;
+package com.softfactory.sigai.services;
+
+import java.util.List;
+
+import com.softfactory.sigai.controllers.dto.ProprietaireDto;
+import com.softfactory.sigai.entities.ProprietaireEntity;
+
 /**
  * Spring service "Proprietaire"
  * 

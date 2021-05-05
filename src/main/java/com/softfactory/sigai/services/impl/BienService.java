@@ -1,7 +1,18 @@
 /*
  * Be careful, do not modify this class, it is generated automatically.
  */
-package com.softfactory.sigai.service.impl;
+package com.softfactory.sigai.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.softfactory.sigai.controllers.dto.BienDto;
+import com.softfactory.sigai.entities.BienEntity;
+import com.softfactory.sigai.repository.IBienRepository;
+import com.softfactory.sigai.services.IBienService;
+
 /**
  * Spring serviceImpl "Bien"
  * 
@@ -14,10 +25,10 @@ package com.softfactory.sigai.service.impl;
 public class BienService implements IBienService {
 	
 	@Autowired
-	BienRepository bienRespository;
+	IBienRepository bienRespository;
 	
 	@Override
-	public BienEntity getBienById(Long idRole) {
+	public BienEntity getBienById(Long idBien) {
 		return bienRespository.getBienBydId(idBien);
 	}
 
@@ -30,13 +41,13 @@ public class BienService implements IBienService {
 	@Override
 	public BienEntity addBien(BienDto bienDto) {
 		/* add Bien */
-		return bienRespository.save(BienDto.dtoToEntity(BienDto));
+		return bienRespository.save(BienDto.dtoToEntity(bienDto));
 	}
 
 	@Override
 	public BienEntity updateBien(BienDto bienDto) {
 		/* update Bien*/
-		return bienRespository.save(BienDto.dtoToEntity(BienDto));
+		return bienRespository.save(BienDto.dtoToEntity(bienDto));
 	}
 
 	@Override

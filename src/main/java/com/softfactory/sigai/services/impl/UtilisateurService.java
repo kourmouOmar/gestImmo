@@ -1,7 +1,18 @@
 /*
  * Be careful, do not modify this class, it is generated automatically.
  */
-package com.softfactory.sigai.service.impl;
+package com.softfactory.sigai.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.softfactory.sigai.controllers.dto.UtilisateurDto;
+import com.softfactory.sigai.entities.UtilisateurEntity;
+import com.softfactory.sigai.repository.IUtilisateurRepository;
+import com.softfactory.sigai.services.IUtilisateurService;
+
 /**
  * Spring serviceImpl "Utilisateur"
  * 
@@ -14,11 +25,11 @@ package com.softfactory.sigai.service.impl;
 public class UtilisateurService implements IUtilisateurService {
 	
 	@Autowired
-	UtilisateurRepository utilisateurRespository;
+	IUtilisateurRepository utilisateurRespository;
 	
 	@Override
-	public UtilisateurEntity getUtilisateurById(Long idRole) {
-		return utilisateurRespository.getUtilisateurBydId(idUtilisateur);
+	public UtilisateurEntity getUtilisateurById(Long idUtilisateur) {
+		return utilisateurRespository.getUtilisateurById(idUtilisateur);
 	}
 
 	@Override
@@ -30,13 +41,13 @@ public class UtilisateurService implements IUtilisateurService {
 	@Override
 	public UtilisateurEntity addUtilisateur(UtilisateurDto utilisateurDto) {
 		/* add Utilisateur */
-		return utilisateurRespository.save(UtilisateurDto.dtoToEntity(UtilisateurDto));
+		return utilisateurRespository.save(UtilisateurDto.dtoToEntity(utilisateurDto));
 	}
 
 	@Override
 	public UtilisateurEntity updateUtilisateur(UtilisateurDto utilisateurDto) {
 		/* update Utilisateur*/
-		return utilisateurRespository.save(UtilisateurDto.dtoToEntity(UtilisateurDto));
+		return utilisateurRespository.save(UtilisateurDto.dtoToEntity(utilisateurDto));
 	}
 
 	@Override

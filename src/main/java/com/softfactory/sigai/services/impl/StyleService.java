@@ -1,7 +1,18 @@
 /*
  * Be careful, do not modify this class, it is generated automatically.
  */
-package com.softfactory.sigai.service.impl;
+package com.softfactory.sigai.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.softfactory.sigai.controllers.dto.StyleDto;
+import com.softfactory.sigai.entities.StyleEntity;
+import com.softfactory.sigai.repository.IStyleRepository;
+import com.softfactory.sigai.services.IStyleService;
+
 /**
  * Spring serviceImpl "Style"
  * 
@@ -14,10 +25,10 @@ package com.softfactory.sigai.service.impl;
 public class StyleService implements IStyleService {
 	
 	@Autowired
-	StyleRepository styleRespository;
+	IStyleRepository styleRespository;
 	
 	@Override
-	public StyleEntity getStyleById(Long idRole) {
+	public StyleEntity getStyleById(Long idStyle) {
 		return styleRespository.getStyleBydId(idStyle);
 	}
 
@@ -30,13 +41,13 @@ public class StyleService implements IStyleService {
 	@Override
 	public StyleEntity addStyle(StyleDto styleDto) {
 		/* add Style */
-		return styleRespository.save(StyleDto.dtoToEntity(StyleDto));
+		return styleRespository.save(StyleDto.dtoToEntity(styleDto));
 	}
 
 	@Override
 	public StyleEntity updateStyle(StyleDto styleDto) {
 		/* update Style*/
-		return styleRespository.save(StyleDto.dtoToEntity(StyleDto));
+		return styleRespository.save(StyleDto.dtoToEntity(styleDto));
 	}
 
 	@Override

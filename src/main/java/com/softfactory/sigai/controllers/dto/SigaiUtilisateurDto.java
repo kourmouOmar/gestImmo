@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 /**
  * dto "SigaiUserDto"
  * 
@@ -19,7 +20,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SigaiUserDto {
+public class SigaiUtilisateurDto {
 	@JsonProperty("user_name")
 	private String username;
 	

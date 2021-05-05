@@ -1,7 +1,18 @@
 /*
  * Be careful, do not modify this class, it is generated automatically.
  */
-package com.softfactory.sigai.service.impl;
+package com.softfactory.sigai.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.softfactory.sigai.controllers.dto.RoleMenusDto;
+import com.softfactory.sigai.entities.RoleMenusEntity;
+import com.softfactory.sigai.repository.IRoleMenusRepository;
+import com.softfactory.sigai.services.IRoleMenusService;
+
 /**
  * Spring serviceImpl "RoleMenus"
  * 
@@ -14,10 +25,10 @@ package com.softfactory.sigai.service.impl;
 public class RoleMenusService implements IRoleMenusService {
 	
 	@Autowired
-	RoleMenusRepository rolemenusRespository;
+	IRoleMenusRepository rolemenusRespository;
 	
 	@Override
-	public RoleMenusEntity getRoleMenusById(Long idRole) {
+	public RoleMenusEntity getRoleMenusById(Long idRoleMenus) {
 		return rolemenusRespository.getRoleMenusBydId(idRoleMenus);
 	}
 
@@ -30,13 +41,13 @@ public class RoleMenusService implements IRoleMenusService {
 	@Override
 	public RoleMenusEntity addRoleMenus(RoleMenusDto rolemenusDto) {
 		/* add RoleMenus */
-		return rolemenusRespository.save(RoleMenusDto.dtoToEntity(RoleMenusDto));
+		return rolemenusRespository.save(RoleMenusDto.dtoToEntity(rolemenusDto));
 	}
 
 	@Override
 	public RoleMenusEntity updateRoleMenus(RoleMenusDto rolemenusDto) {
 		/* update RoleMenus*/
-		return rolemenusRespository.save(RoleMenusDto.dtoToEntity(RoleMenusDto));
+		return rolemenusRespository.save(RoleMenusDto.dtoToEntity(rolemenusDto));
 	}
 
 	@Override

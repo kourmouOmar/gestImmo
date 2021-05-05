@@ -5,6 +5,7 @@ package com.softfactory.sigai.services;
 
 import java.util.List;
 
+import com.softfactory.sigai.controllers.dto.LocataireDto;
 import com.softfactory.sigai.entities.LocataireEntity;
 
 /**

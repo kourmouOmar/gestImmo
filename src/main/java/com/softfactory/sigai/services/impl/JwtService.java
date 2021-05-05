@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.softfactory.sigai.config.TokenProvider;
 import com.softfactory.sigai.controllers.dto.JwtResponseDto;
-import com.softfactory.sigai.controllers.dto.SigaiUserDto;
+import com.softfactory.sigai.controllers.dto.SigaiUtilisateurDto;
 import com.softfactory.sigai.entities.UserEntity;
 import com.softfactory.sigai.repository.UserRepository;
 import com.softfactory.sigai.services.IJwtService;
@@ -61,9 +61,9 @@ public class JwtService implements IJwtService {
 	}
 
 	@Override
-	public SigaiUserDto constructResponse(UserEntity user, String username, Set<GrantedAuthority> authorities) {
+	public SigaiUtilisateurDto constructResponse(UserEntity user, String username, Set<GrantedAuthority> authorities) {
 
-		SigaiUserDto sigaiUserDto = new SigaiUserDto();
+		SigaiUtilisateurDto SigaiUtilisateurDto = new SigaiUtilisateurDto();
 		try {
 			/* construct full name */
 			StringBuilder fullName = new StringBuilder(user.getUsername()).append(" ").append(user.getUsername());
@@ -82,13 +82,13 @@ public class JwtService implements IJwtService {
 			// response.setId(user.getId());
 			// response.setIdEntite(user.getEntite().getId());
 
-			sigaiUserDto = new SigaiUserDto(username, fullName.toString(), response);
+			SigaiUtilisateurDto = new SigaiUtilisateurDto(username, fullName.toString(), response);
 
 		} catch (Exception e) {
 			throw e;
 		}
 
-		return sigaiUserDto;
+		return SigaiUtilisateurDto;
 	}
 
 }

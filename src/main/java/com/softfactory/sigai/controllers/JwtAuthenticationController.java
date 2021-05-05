@@ -29,8 +29,8 @@ import com.softfactory.sigai.config.TokenProvider;
 import com.softfactory.sigai.controllers.dto.JwtResponseDto;
 import com.softfactory.sigai.entities.JwtRequest;
 import com.softfactory.sigai.entities.UserEntity;
+import com.softfactory.sigai.services.IJwtService;
 import com.softfactory.sigai.services.JwtUserDetailsServices;
-import com.softfactory.sigai.services.impl.JwtService;
 import com.softfactory.sigai.util.Functions;
 
 @RestController
@@ -47,7 +47,7 @@ public class JwtAuthenticationController {
 	private TokenProvider tokenProvider;
 
 	@Autowired
-	private JwtService jwtService;
+	private IJwtService jwtService;
 
 	@Autowired
 	private JwtUserDetailsServices userDetailsService;

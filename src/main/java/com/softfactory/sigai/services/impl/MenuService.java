@@ -1,7 +1,18 @@
 /*
  * Be careful, do not modify this class, it is generated automatically.
  */
-package com.softfactory.sigai.service.impl;
+package com.softfactory.sigai.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.softfactory.sigai.controllers.dto.MenuDto;
+import com.softfactory.sigai.entities.MenuEntity;
+import com.softfactory.sigai.repository.IMenuRepository;
+import com.softfactory.sigai.services.IMenuService;
+
 /**
  * Spring serviceImpl "Menu"
  * 
@@ -14,10 +25,10 @@ package com.softfactory.sigai.service.impl;
 public class MenuService implements IMenuService {
 	
 	@Autowired
-	MenuRepository menuRespository;
+	IMenuRepository menuRespository;
 	
 	@Override
-	public MenuEntity getMenuById(Long idRole) {
+	public MenuEntity getMenuById(Long idMenu) {
 		return menuRespository.getMenuBydId(idMenu);
 	}
 
@@ -30,13 +41,13 @@ public class MenuService implements IMenuService {
 	@Override
 	public MenuEntity addMenu(MenuDto menuDto) {
 		/* add Menu */
-		return menuRespository.save(MenuDto.dtoToEntity(MenuDto));
+		return menuRespository.save(MenuDto.dtoToEntity(menuDto));
 	}
 
 	@Override
 	public MenuEntity updateMenu(MenuDto menuDto) {
 		/* update Menu*/
-		return menuRespository.save(MenuDto.dtoToEntity(MenuDto));
+		return menuRespository.save(MenuDto.dtoToEntity(menuDto));
 	}
 
 	@Override

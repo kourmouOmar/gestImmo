@@ -1,7 +1,18 @@
 /*
  * Be careful, do not modify this class, it is generated automatically.
  */
-package com.softfactory.sigai.service.impl;
+package com.softfactory.sigai.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.softfactory.sigai.controllers.dto.RoleMenusPermissionsDto;
+import com.softfactory.sigai.entities.RoleMenusPermissionsEntity;
+import com.softfactory.sigai.repository.IRoleMenusPermissionsRepository;
+import com.softfactory.sigai.services.IRoleMenusPermissionsService;
+
 /**
  * Spring serviceImpl "RoleMenusPermissions"
  * 
@@ -14,10 +25,10 @@ package com.softfactory.sigai.service.impl;
 public class RoleMenusPermissionsService implements IRoleMenusPermissionsService {
 	
 	@Autowired
-	RoleMenusPermissionsRepository rolemenuspermissionsRespository;
+	IRoleMenusPermissionsRepository rolemenuspermissionsRespository;
 	
 	@Override
-	public RoleMenusPermissionsEntity getRoleMenusPermissionsById(Long idRole) {
+	public RoleMenusPermissionsEntity getRoleMenusPermissionsById(Long idRoleMenusPermissions) {
 		return rolemenuspermissionsRespository.getRoleMenusPermissionsBydId(idRoleMenusPermissions);
 	}
 
@@ -30,13 +41,13 @@ public class RoleMenusPermissionsService implements IRoleMenusPermissionsService
 	@Override
 	public RoleMenusPermissionsEntity addRoleMenusPermissions(RoleMenusPermissionsDto rolemenuspermissionsDto) {
 		/* add RoleMenusPermissions */
-		return rolemenuspermissionsRespository.save(RoleMenusPermissionsDto.dtoToEntity(RoleMenusPermissionsDto));
+		return rolemenuspermissionsRespository.save(RoleMenusPermissionsDto.dtoToEntity(rolemenuspermissionsDto));
 	}
 
 	@Override
 	public RoleMenusPermissionsEntity updateRoleMenusPermissions(RoleMenusPermissionsDto rolemenuspermissionsDto) {
 		/* update RoleMenusPermissions*/
-		return rolemenuspermissionsRespository.save(RoleMenusPermissionsDto.dtoToEntity(RoleMenusPermissionsDto));
+		return rolemenuspermissionsRespository.save(RoleMenusPermissionsDto.dtoToEntity(rolemenuspermissionsDto));
 	}
 
 	@Override

@@ -9,9 +9,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.softfactory.sigai.controllers.dto.UserDto;
-import com.softfactory.sigai.entities.UserEntity;
-import com.softfactory.sigai.repository.UserRepository;
+import com.softfactory.sigai.controllers.dto.UtilisateurDto;
+import com.softfactory.sigai.entities.UtilisateurEntity;
+import com.softfactory.sigai.repository.IUtilisateurRepository;
 import com.softfactory.sigai.services.impl.RoleService;
 
 
@@ -21,7 +21,7 @@ import com.softfactory.sigai.services.impl.RoleService;
 public class JwtUserDetailsServices implements UserDetailsService{
 
 	@Autowired(required=true)
-	private UserRepository userRepository;
+	private IUtilisateurRepository utilisateurRepository;
 	
 	@Autowired(required=true)
 	private RoleService roleService;
@@ -32,7 +32,7 @@ public class JwtUserDetailsServices implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 				
-		UserEntity user = userRepository.findByUsername(username);
+		UtilisateurEntity user = utilisateurRepository.getUtilisateurByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
@@ -42,14 +42,14 @@ public class JwtUserDetailsServices implements UserDetailsService{
 	}
 	
 
-	public UserEntity save(UserDto user) {
+	public UtilisateurEntity save(UtilisateurDto user) {
 		
-		UserEntity newUser = new UserEntity();
+		UtilisateurEntity newUser = new UtilisateurEntity();
 		newUser.setUsername(user.getUsername());
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-		newUser.setRole(roleService.getRoleById(user.getRole().getId()));
+		//newUser.setRole(roleService.getRoleById(user.getListOfUtilisateurRolesDto()));
 		
-		return userRepository.save(newUser);
+		return utilisateurRepository.save(newUser);
 	}
 	
 }

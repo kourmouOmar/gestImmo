@@ -11,8 +11,7 @@ import lombok.Setter;
  *  Dto correspondant qux informations trans;ises sous forme de token Nom
  *  @author Omar_kourmou
  *  @version 1.0
- *  
- * */
+ **/
 @Setter
 @Getter
 @AllArgsConstructor

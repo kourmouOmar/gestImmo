@@ -1,7 +1,18 @@
 /*
  * Be careful, do not modify this class, it is generated automatically.
  */
-package com.softfactory.sigai.service.impl;
+package com.softfactory.sigai.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.softfactory.sigai.controllers.dto.MenuPermissionsDto;
+import com.softfactory.sigai.entities.MenuPermissionsEntity;
+import com.softfactory.sigai.repository.IMenuPermissionsRepository;
+import com.softfactory.sigai.services.IMenuPermissionsService;
+
 /**
  * Spring serviceImpl "MenuPermissions"
  * 
@@ -14,10 +25,10 @@ package com.softfactory.sigai.service.impl;
 public class MenuPermissionsService implements IMenuPermissionsService {
 	
 	@Autowired
-	MenuPermissionsRepository menupermissionsRespository;
+	IMenuPermissionsRepository menupermissionsRespository;
 	
 	@Override
-	public MenuPermissionsEntity getMenuPermissionsById(Long idRole) {
+	public MenuPermissionsEntity getMenuPermissionsById(Long idMenuPermissions) {
 		return menupermissionsRespository.getMenuPermissionsBydId(idMenuPermissions);
 	}
 
@@ -30,13 +41,13 @@ public class MenuPermissionsService implements IMenuPermissionsService {
 	@Override
 	public MenuPermissionsEntity addMenuPermissions(MenuPermissionsDto menupermissionsDto) {
 		/* add MenuPermissions */
-		return menupermissionsRespository.save(MenuPermissionsDto.dtoToEntity(MenuPermissionsDto));
+		return menupermissionsRespository.save(MenuPermissionsDto.dtoToEntity(menupermissionsDto));
 	}
 
 	@Override
 	public MenuPermissionsEntity updateMenuPermissions(MenuPermissionsDto menupermissionsDto) {
 		/* update MenuPermissions*/
-		return menupermissionsRespository.save(MenuPermissionsDto.dtoToEntity(MenuPermissionsDto));
+		return menupermissionsRespository.save(MenuPermissionsDto.dtoToEntity(menupermissionsDto));
 	}
 
 	@Override

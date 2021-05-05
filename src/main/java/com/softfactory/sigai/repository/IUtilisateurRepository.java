@@ -16,6 +16,13 @@ public interface IUtilisateurRepository extends JpaRepository<UtilisateurEntity,
 	/**
 	 * get Utilisateur by id
 	 * */
-	@Query("SELECT a FROM VilleEntity a WHERE a.id = :id")
-	UtilisateurEntity getUtilisateurBydId(@Param("id") Long id);
+	@Query("SELECT a FROM UtilisateurEntity a WHERE a.id = :id")
+	UtilisateurEntity getUtilisateurById(@Param("id") Long id);
+	
+	
+	/**
+	 * get Utilisateur by username
+	 * */
+	@Query("SELECT a FROM UtilisateurEntity a WHERE a.username = :username")
+	UtilisateurEntity getUtilisateurByUsername(@Param("username") String username);
 }

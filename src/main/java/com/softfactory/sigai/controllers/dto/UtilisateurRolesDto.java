@@ -6,12 +6,19 @@ package com.softfactory.sigai.controllers.dto;
 
 
 import java.io.Serializable;
-import java.util.*;
-import com.sofrecom.sirhus.socle.util.Functions;
-import com.sofrecom.sirhus.transverse.repository.entite.UtilisateurRolesEntity;
-import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import com.softfactory.sigai.entities.UtilisateurRolesEntity;
+import com.softfactory.sigai.util.Functions;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Setter

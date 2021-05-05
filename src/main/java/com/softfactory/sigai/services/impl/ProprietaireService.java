@@ -1,7 +1,18 @@
 /*
  * Be careful, do not modify this class, it is generated automatically.
  */
-package com.softfactory.sigai.service.impl;
+package com.softfactory.sigai.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.softfactory.sigai.controllers.dto.ProprietaireDto;
+import com.softfactory.sigai.entities.ProprietaireEntity;
+import com.softfactory.sigai.repository.IProprietaireRepository;
+import com.softfactory.sigai.services.IProprietaireService;
+
 /**
  * Spring serviceImpl "Proprietaire"
  * 
@@ -14,10 +25,10 @@ package com.softfactory.sigai.service.impl;
 public class ProprietaireService implements IProprietaireService {
 	
 	@Autowired
-	ProprietaireRepository proprietaireRespository;
+	IProprietaireRepository proprietaireRespository;
 	
 	@Override
-	public ProprietaireEntity getProprietaireById(Long idRole) {
+	public ProprietaireEntity getProprietaireById(Long idProprietaire) {
 		return proprietaireRespository.getProprietaireBydId(idProprietaire);
 	}
 
@@ -30,13 +41,13 @@ public class ProprietaireService implements IProprietaireService {
 	@Override
 	public ProprietaireEntity addProprietaire(ProprietaireDto proprietaireDto) {
 		/* add Proprietaire */
-		return proprietaireRespository.save(ProprietaireDto.dtoToEntity(ProprietaireDto));
+		return proprietaireRespository.save(ProprietaireDto.dtoToEntity(proprietaireDto));
 	}
 
 	@Override
 	public ProprietaireEntity updateProprietaire(ProprietaireDto proprietaireDto) {
 		/* update Proprietaire*/
-		return proprietaireRespository.save(ProprietaireDto.dtoToEntity(ProprietaireDto));
+		return proprietaireRespository.save(ProprietaireDto.dtoToEntity(proprietaireDto));
 	}
 
 	@Override

@@ -1,7 +1,18 @@
 /*
  * Be careful, do not modify this class, it is generated automatically.
  */
-package com.softfactory.sigai.service.impl;
+package com.softfactory.sigai.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.softfactory.sigai.controllers.dto.VueDto;
+import com.softfactory.sigai.entities.VueEntity;
+import com.softfactory.sigai.repository.IVueRepository;
+import com.softfactory.sigai.services.IVueService;
+
 /**
  * Spring serviceImpl "Vue"
  * 
@@ -14,10 +25,10 @@ package com.softfactory.sigai.service.impl;
 public class VueService implements IVueService {
 	
 	@Autowired
-	VueRepository vueRespository;
+	IVueRepository vueRespository;
 	
 	@Override
-	public VueEntity getVueById(Long idRole) {
+	public VueEntity getVueById(Long idVue) {
 		return vueRespository.getVueBydId(idVue);
 	}
 
@@ -30,13 +41,13 @@ public class VueService implements IVueService {
 	@Override
 	public VueEntity addVue(VueDto vueDto) {
 		/* add Vue */
-		return vueRespository.save(VueDto.dtoToEntity(VueDto));
+		return vueRespository.save(VueDto.dtoToEntity(vueDto));
 	}
 
 	@Override
 	public VueEntity updateVue(VueDto vueDto) {
 		/* update Vue*/
-		return vueRespository.save(VueDto.dtoToEntity(VueDto));
+		return vueRespository.save(VueDto.dtoToEntity(vueDto));
 	}
 
 	@Override

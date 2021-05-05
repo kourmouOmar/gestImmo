@@ -1,7 +1,18 @@
 /*
  * Be careful, do not modify this class, it is generated automatically.
  */
-package com.softfactory.sigai.service.impl;
+package com.softfactory.sigai.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.softfactory.sigai.controllers.dto.RolePermissionsDto;
+import com.softfactory.sigai.entities.RolePermissionsEntity;
+import com.softfactory.sigai.repository.IRolePermissionsRepository;
+import com.softfactory.sigai.services.IRolePermissionsService;
+
 /**
  * Spring serviceImpl "RolePermissions"
  * 
@@ -14,10 +25,10 @@ package com.softfactory.sigai.service.impl;
 public class RolePermissionsService implements IRolePermissionsService {
 	
 	@Autowired
-	RolePermissionsRepository rolepermissionsRespository;
+	IRolePermissionsRepository rolepermissionsRespository;
 	
 	@Override
-	public RolePermissionsEntity getRolePermissionsById(Long idRole) {
+	public RolePermissionsEntity getRolePermissionsById(Long idRolePermissions) {
 		return rolepermissionsRespository.getRolePermissionsBydId(idRolePermissions);
 	}
 
@@ -30,13 +41,13 @@ public class RolePermissionsService implements IRolePermissionsService {
 	@Override
 	public RolePermissionsEntity addRolePermissions(RolePermissionsDto rolepermissionsDto) {
 		/* add RolePermissions */
-		return rolepermissionsRespository.save(RolePermissionsDto.dtoToEntity(RolePermissionsDto));
+		return rolepermissionsRespository.save(RolePermissionsDto.dtoToEntity(rolepermissionsDto));
 	}
 
 	@Override
 	public RolePermissionsEntity updateRolePermissions(RolePermissionsDto rolepermissionsDto) {
 		/* update RolePermissions*/
-		return rolepermissionsRespository.save(RolePermissionsDto.dtoToEntity(RolePermissionsDto));
+		return rolepermissionsRespository.save(RolePermissionsDto.dtoToEntity(rolepermissionsDto));
 	}
 
 	@Override

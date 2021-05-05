@@ -47,7 +47,7 @@ public class ProprietaireController {
 	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
 	public SigaiResponse addProprietaire(@RequestBody ProprietaireDto proprietaireDto) {
 		/* add Proprietaire */
-		return new SigaiResponse(proprietaireService.addProprietaire(ProprietaireDto.dtoToEntity(proprietaireDto)), HttpStatus.OK);
+		return new SigaiResponse(proprietaireService.addProprietaire(proprietaireDto), HttpStatus.OK);
 	}
 
 	@PutMapping("/proprietaire")
