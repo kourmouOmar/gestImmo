@@ -5,6 +5,7 @@ package com.softfactory.sigai.services;
 
 import java.util.List;
 
+import com.softfactory.sigai.controllers.dto.MenuPermissionsDto;
 import com.softfactory.sigai.entities.MenuPermissionsEntity;
 
 /**
