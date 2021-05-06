@@ -1,0 +1,36 @@
+## application informations
+info:
+  app:
+    name: Sigai service application
+    description: Microservice SIGAI-SERVICE
+    version: 1.0.0
+    
+## server informations
+server:
+  port: 1011
+  servlet:
+    context-path: /sigai-api
+
+## bdd informations
+bdd_name: sigai_db
+bdd_host: 127.0.0.1            
+bdd_port: 3306
+
+## jwt secret property
+jwt:
+  secret: sigaiprojet    
+
+## Maria DB settings
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://${bdd_host}:${bdd_port}/${bdd_name}?user=${spring.datasource.username}&password=${spring.datasource.password}
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true

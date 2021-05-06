@@ -5,7 +5,7 @@ import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 
 import com.softfactory.sigai.controllers.dto.SigaiUtilisateurDto;
-import com.softfactory.sigai.entities.UserEntity;
+import com.softfactory.sigai.entities.UtilisateurEntity;
 
 /**
  * interface  "IJwtService"
@@ -22,7 +22,7 @@ public interface IJwtService {
 	 * @param username
 	 * @return
 	 */
-	UserEntity getUserByUsername(String username);
+	UtilisateurEntity getUserByUsername(String username);
 
 	
 
@@ -32,7 +32,7 @@ public interface IJwtService {
 	 * @param user
 	 * @return
 	 */
-	Set<GrantedAuthority> getAuthorities(UserEntity user);
+	Set<GrantedAuthority> getAuthorities(UtilisateurEntity user);
 
 	/**
 	 * Construct login response
@@ -42,5 +42,5 @@ public interface IJwtService {
 	 * @param authorities
 	 * @return
 	 */
-	SigaiUtilisateurDto constructResponse(UserEntity user, String username, Set<GrantedAuthority> authorities);
+	SigaiUtilisateurDto constructResponse(UtilisateurEntity user, String username, Set<GrantedAuthority> authorities);
 }

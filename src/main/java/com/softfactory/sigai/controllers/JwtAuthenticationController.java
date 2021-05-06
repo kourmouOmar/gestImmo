@@ -28,7 +28,7 @@ import com.softfactory.sigai.config.SigaiResponse;
 import com.softfactory.sigai.config.TokenProvider;
 import com.softfactory.sigai.controllers.dto.JwtResponseDto;
 import com.softfactory.sigai.entities.JwtRequest;
-import com.softfactory.sigai.entities.UserEntity;
+import com.softfactory.sigai.entities.UtilisateurEntity;
 import com.softfactory.sigai.services.IJwtService;
 import com.softfactory.sigai.services.JwtUserDetailsServices;
 import com.softfactory.sigai.util.Functions;
@@ -93,7 +93,7 @@ public class JwtAuthenticationController {
 	public SigaiResponse login1() throws Exception {
 
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		UserEntity user = null;
+		UtilisateurEntity user = null;
 		SigaiResponse sigaiResponse = null;
 
 		try {
