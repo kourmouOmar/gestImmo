@@ -4,6 +4,7 @@
 package com.softfactory.sigai.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,18 +24,18 @@ import com.softfactory.sigai.services.IUtilisateurService;
 
 @Service
 public class UtilisateurService implements IUtilisateurService {
-	
+
 	@Autowired
 	IUtilisateurRepository utilisateurRespository;
-	
+
 	@Override
-	public UtilisateurEntity getUtilisateurById(Long idUtilisateur) {
-		return utilisateurRespository.getUtilisateurById(idUtilisateur);
+	public Optional<UtilisateurEntity> getUtilisateurById(Long idUtilisateur) {
+		return utilisateurRespository.findById(idUtilisateur);
 	}
 
 	@Override
 	public List<UtilisateurEntity> getAllUtilisateurs() {
-		/* get all Utilisateur*/
+		/* get all Utilisateur */
 		return utilisateurRespository.findAll();
 	}
 
@@ -46,13 +47,13 @@ public class UtilisateurService implements IUtilisateurService {
 
 	@Override
 	public UtilisateurEntity updateUtilisateur(UtilisateurDto utilisateurDto) {
-		/* update Utilisateur*/
+		/* update Utilisateur */
 		return utilisateurRespository.save(UtilisateurDto.dtoToEntity(utilisateurDto));
 	}
 
 	@Override
 	public void deleteUtilisateur(Long idUtilisateur) {
-		/* delete Utilisateur*/
+		/* delete Utilisateur */
 		utilisateurRespository.deleteById(idUtilisateur);
 	}
 }

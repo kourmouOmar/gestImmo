@@ -4,6 +4,7 @@
 package com.softfactory.sigai.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.softfactory.sigai.controllers.dto.UtilisateurDto;
 import com.softfactory.sigai.entities.UtilisateurEntity;
@@ -23,7 +24,7 @@ public interface IUtilisateurService{
 	 * @param idUtilisateur
 	 * @return UtilisateurEntity
 	 */
-	UtilisateurEntity getUtilisateurById(Long idUtilisateur);
+	Optional<UtilisateurEntity> getUtilisateurById(Long idUtilisateur);
 
 	/**
 	 * get all Utilisateur

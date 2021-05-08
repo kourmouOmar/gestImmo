@@ -17,6 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,7 @@ import com.softfactory.sigai.entities.JwtRequest;
 import com.softfactory.sigai.entities.UtilisateurEntity;
 import com.softfactory.sigai.services.IJwtService;
 import com.softfactory.sigai.services.JwtUserDetailsServices;
+import com.softfactory.sigai.util.Constants;
 import com.softfactory.sigai.util.Functions;
 
 @RestController
@@ -90,7 +92,7 @@ public class JwtAuthenticationController {
 	 * @throws Exception
 	 */
 	@PostMapping(value = "/v1/auth", headers = HEADERS)
-	public SigaiResponse login1() throws Exception {
+	public SigaiResponse login1(){
 
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		UtilisateurEntity user = null;
@@ -111,5 +113,11 @@ public class JwtAuthenticationController {
 			sigaiResponse = new SigaiResponse(jwtService.constructResponse(user, username, authorities), HttpStatus.OK);
 		}
 		return sigaiResponse;
+	}
+	
+	@GetMapping(value = "/v0/test", headers = Constants.HEADERS)
+	public SigaiResponse test() {
+
+		return new SigaiResponse("this is working !", HttpStatus.OK);
 	}
 }

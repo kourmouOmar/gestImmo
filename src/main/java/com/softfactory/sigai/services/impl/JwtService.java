@@ -38,7 +38,7 @@ public class JwtService implements IJwtService {
 	public UtilisateurEntity getUserByUsername(String username) {
 		UtilisateurEntity userEntity = new UtilisateurEntity();
 		try {
-			userEntity = utilisateurRepository.getUtilisateurByUsername(username);
+			userEntity = utilisateurRepository.findUtilisateurByUsername(username);
 
 		} catch (Exception e) {
 			throw e;

@@ -33,7 +33,7 @@ public class VilleController {
 	private IVilleService VilleService;
 
 	@GetMapping(value ="/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
+	//@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
 	public SigaiResponse getAllVilles() {
 		/* get all Ville */
 		return new SigaiResponse(VilleService.getAllVilles(), HttpStatus.OK);

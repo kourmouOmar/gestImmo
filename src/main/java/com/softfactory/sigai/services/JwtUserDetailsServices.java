@@ -32,7 +32,7 @@ public class JwtUserDetailsServices implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 				
-		UtilisateurEntity user = utilisateurRepository.getUtilisateurByUsername(username);
+		UtilisateurEntity user = utilisateurRepository.findUtilisateurByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}

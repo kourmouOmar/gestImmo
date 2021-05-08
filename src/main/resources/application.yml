@@ -28,9 +28,12 @@ spring:
     username: root
     password: root
   jpa:
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         jdbc:
           lob:
             non_contextual_creation: true
+  devtools:
+    restart:
+       enabled: true
