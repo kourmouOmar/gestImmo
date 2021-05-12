@@ -33,35 +33,35 @@ public class PaysController {
 	private IPaysService PaysService;
 
 	@GetMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ASSISTANTE+"')")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.GET_ALL_PAYS+"')")
 	public SigaiResponse getAllPayss() {
 		/* get all Pays */
 		return new SigaiResponse(PaysService.getAllPayss(), HttpStatus.OK);
 	}
 
 	@GetMapping(value ="/v0/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ASSISTANTE+"')")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.GET_PAYS_BY_ID+"')")
 	public SigaiResponse getPaysById(@PathVariable Long id) {
 		/* return Pays by id */
 		return new SigaiResponse(PaysService.getPaysById(id), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ASSISTANTE+"')")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.SAVE_PAYS+"')")
 	public SigaiResponse addPays(@RequestBody PaysDto PaysDto) {
 		/* add Pays */
 		return new SigaiResponse(PaysService.addPays(PaysDto), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ASSISTANTE+"')")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.UPDATE_PAYS+"')")
 	public SigaiResponse updatePays(@RequestBody PaysDto PaysDto) {
 		/* update Pays */
 		return new SigaiResponse(PaysService.updatePays(PaysDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ASSISTANTE+"')")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.DELETE_PAYS+"')")
 	public SigaiResponse deletePays(@PathVariable Long id) {
 		/* delete Pays */
 		PaysService.deletePays(id);

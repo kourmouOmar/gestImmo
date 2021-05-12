@@ -30,35 +30,35 @@ public class ProprietaireController {
 	private ProprietaireService proprietaireService;
 
 	@RequestMapping("/proprietaires")
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.GET_ALL_PROPREETAIRE+"')")
 	public SigaiResponse getAllProprietaires() {
 		/* get all Proprietaire */
 		return new SigaiResponse(ProprietaireDto.entitiesToDtos(proprietaireService.getAllProprietaires()), HttpStatus.OK);
 	}
 
 	@RequestMapping("/proprietaires/{id}")
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.GET_PROPREETAIRE_BY_ID+"')")
 	public SigaiResponse getProprietaireById(@PathVariable Long id) {
 		/* return Proprietaire by id */
 		return new SigaiResponse(proprietaireService.getProprietaireById(id), HttpStatus.OK);
 	}
 
 	@PostMapping("/proprietaires")
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.SAVE_PROPREETAIRE+"')")
 	public SigaiResponse addProprietaire(@RequestBody ProprietaireDto proprietaireDto) {
 		/* add Proprietaire */
 		return new SigaiResponse(proprietaireService.addProprietaire(proprietaireDto), HttpStatus.OK);
 	}
 
 	@PutMapping("/proprietaire")
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.UPDATE_PROPREETAIRE+"')")
 	public SigaiResponse updateProprietaire(@RequestBody ProprietaireDto proprietaireDto) {
 		/* update Proprietaire */
 		return new SigaiResponse(proprietaireService.updateProprietaire(proprietaireDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/proprietaire/{id}")
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
+	@PreAuthorize("hasRole('"+AuthoritiesConstants.DELETE_PROPREETAIRE+"')")
 	public SigaiResponse deleteProprietaire(@PathVariable Long id) {
 		/* delete Proprietaire */
 		proprietaireService.deleteProprietaire(id);

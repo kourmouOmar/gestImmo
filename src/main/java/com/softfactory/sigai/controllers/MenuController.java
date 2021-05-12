@@ -30,31 +30,35 @@ public class MenuController {
 	private MenuService MenuService;
 
 	@RequestMapping("/menus")
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_MENU + "')")
 	public SigaiResponse getAllMenus() {
 		/* get all Menu */
-		return new SigaiResponse(MenuDto.entitiesToDtos(MenuService.getAllMenus()) , HttpStatus.OK);
+		return new SigaiResponse(MenuDto.entitiesToDtos(MenuService.getAllMenus()), HttpStatus.OK);
 	}
 
 	@RequestMapping("/menus/{id}")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_MODULE_BY_ID + "')")
 	public SigaiResponse getMenuById(@PathVariable Long id) {
 		/* return Menu by id */
 		return new SigaiResponse(MenuService.getMenuById(id), HttpStatus.OK);
 	}
 
 	@PostMapping("/menus/{id}")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_MENU + "')")
 	public SigaiResponse addMenu(@RequestBody MenuDto MenuDto) {
 		/* add Menu */
 		return new SigaiResponse(MenuService.addMenu(MenuDto), HttpStatus.OK);
 	}
 
 	@PutMapping("/menus/{id}")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_MENU + "')")
 	public SigaiResponse updateMenu(@RequestBody MenuDto MenuDto) {
 		/* update Menu */
 		return new SigaiResponse(MenuService.updateMenu(MenuDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/menu/{id}")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_MENU + "')")
 	public SigaiResponse deleteMenu(@PathVariable Long id) {
 		/* delete Menu */
 		MenuService.deleteMenu(id);

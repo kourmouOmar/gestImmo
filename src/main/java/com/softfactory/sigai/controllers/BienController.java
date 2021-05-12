@@ -33,31 +33,35 @@ public class BienController {
 	private IBienService BienService;
 
 	@GetMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ADMIN + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_BIEN + "')")
 	public SigaiResponse getAllBiens() {
 		/* get all Bien */
 		return new SigaiResponse(BienDto.entitiesToDtos(BienService.getAllBiens()), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/v0/{id}", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_BIEN_BY_ID + "')")
 	public SigaiResponse getBienById(@PathVariable Long id) {
 		/* return Bien by id */
 		return new SigaiResponse(BienService.getBienById(id), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/v0", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_BIEN + "')")
 	public SigaiResponse addBien(@RequestBody BienDto BienDto) {
 		/* add Bien */
 		return new SigaiResponse(BienService.addBien(BienDto), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/v0", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_BIEN + "')")
 	public SigaiResponse updateBien(@RequestBody BienDto BienDto) {
 		/* update Bien */
 		return new SigaiResponse(BienService.updateBien(BienDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/v0", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_BIEN + "')")
 	public SigaiResponse deleteBien(@PathVariable Long id) {
 		/* delete Bien */
 		BienService.deleteBien(id);

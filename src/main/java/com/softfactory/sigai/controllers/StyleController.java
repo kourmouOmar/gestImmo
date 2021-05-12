@@ -33,35 +33,35 @@ public class StyleController {
 	private IStyleService StyleService;
 
 	@GetMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_STYLE + "')")
 	public SigaiResponse getAllStyles() {
 		/* get all Style */
 		return new SigaiResponse(StyleService.getAllStyles(), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/v0/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_STYLE_BY_ID + "')")
 	public SigaiResponse getStyleById(@PathVariable Long id) {
 		/* return Style by id */
 		return new SigaiResponse(StyleService.getStyleById(id), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_STYLE + "')")
 	public SigaiResponse addStyle(@RequestBody StyleDto StyleDto) {
 		/* add Style */
 		return new SigaiResponse(StyleService.addStyle(StyleDto), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_STYLE + "')")
 	public SigaiResponse updateStyle(@RequestBody StyleDto StyleDto) {
 		/* update Style */
 		return new SigaiResponse(StyleService.updateStyle(StyleDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_STYLE + "')")
 	public SigaiResponse deleteStyle(@PathVariable Long id) {
 		/* delete Style */
 		StyleService.deleteStyle(id);

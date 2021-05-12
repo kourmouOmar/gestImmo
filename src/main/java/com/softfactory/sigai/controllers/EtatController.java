@@ -33,35 +33,35 @@ public class EtatController {
 	private IEtatService EtatService;
 
 	@GetMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_ETAT + "')")
 	public SigaiResponse getAllEtats() {
 		/* get all Etat */
 		return new SigaiResponse(EtatService.getAllEtats(), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/v0/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ETAT_BY_ID + "')")
 	public SigaiResponse getEtatById(@PathVariable Long id) {
 		/* return Etat by id */
 		return new SigaiResponse(EtatService.getEtatById(id), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_ETAT+ "')")
 	public SigaiResponse addEtat(@RequestBody EtatDto EtatDto) {
 		/* add Etat */
 		return new SigaiResponse(EtatService.addEtat(EtatDto), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_ETAT + "')")
 	public SigaiResponse updateEtat(@RequestBody EtatDto EtatDto) {
 		/* update Etat */
 		return new SigaiResponse(EtatService.updateEtat(EtatDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_ETAT + "')")
 	public SigaiResponse deleteEtat(@PathVariable Long id) {
 		/* delete Etat */
 		EtatService.deleteEtat(id);

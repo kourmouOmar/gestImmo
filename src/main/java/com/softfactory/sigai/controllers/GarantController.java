@@ -31,35 +31,35 @@ public class GarantController {
 	private GarantService GarantService;
 
 	@RequestMapping(value = "/garants", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_GARANT + "')")
 	public SigaiResponse getAllGarants() {
 		/* get all Garant */
 		return new SigaiResponse(GarantService.getAllGarants(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/garants/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ETAT_BY_ID + "')")
 	public SigaiResponse getGarantById(@PathVariable Long id) {
 		/* return Garant by id */
 		return new SigaiResponse(GarantService.getGarantById(id), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/garants/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_GARANT + "')")
 	public SigaiResponse addGarant(@RequestBody GarantDto GarantDto) {
 		/* add Garant */
 		return new SigaiResponse(GarantService.addGarant(GarantDto), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/garants/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_GARANT + "')")
 	public SigaiResponse updateGarant(@RequestBody GarantDto GarantDto) {
 		/* update Garant */
 		return new SigaiResponse(GarantService.updateGarant(GarantDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/garant/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_GARANT + "')")
 	public SigaiResponse deleteGarant(@PathVariable Long id) {
 		/* delete Garant */
 		GarantService.deleteGarant(id);

@@ -32,35 +32,35 @@ public class VenteController {
 	private VenteService VenteService;
 
 	@RequestMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_VENTE + "')")
 	public SigaiResponse getAllVentes() {
 		/* get all Vente */
 		return new SigaiResponse(VenteService.getAllVentes(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/v0/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_VENTE_BY_ID + "')")
 	public SigaiResponse getVenteById(@PathVariable Long id) {
 		/* return Vente by id */
 		return new SigaiResponse(VenteService.getVenteById(id), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_VENTE + "')")
 	public SigaiResponse addVente(@RequestBody VenteDto VenteDto) {
 		/* add Vente */
 		return new SigaiResponse(VenteService.addVente(VenteDto), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_VENTE + "')")
 	public SigaiResponse updateVente(@RequestBody VenteDto VenteDto) {
 		/* update Vente */
 		return new SigaiResponse(VenteService.updateVente(VenteDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_VENTE + "')")
 	public SigaiResponse deleteVente(@PathVariable Long id) {
 		/* delete Vente */
 		VenteService.deleteVente(id);

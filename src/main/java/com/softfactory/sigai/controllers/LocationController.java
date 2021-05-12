@@ -32,35 +32,35 @@ public class LocationController {
 	private LocationService LocationService;
 
 	@RequestMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_LOCATION + "')")
 	public SigaiResponse getAllLocations() {
 		/* get all Location */
 		return new SigaiResponse(LocationService.getAllLocations(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/v0/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_LOCATION_BY_ID + "')")
 	public SigaiResponse getLocationById(@PathVariable Long id) {
 		/* return Location by id */
 		return new SigaiResponse(LocationService.getLocationById(id), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_LOCATION+ "')")
 	public SigaiResponse addLocation(@RequestBody LocationDto LocationDto) {
 		/* add Location */
 		return new SigaiResponse(LocationService.addLocation(LocationDto), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_LOCATION + "')")
 	public SigaiResponse updateLocation(@RequestBody LocationDto LocationDto) {
 		/* update Location */
 		return new SigaiResponse(LocationService.updateLocation(LocationDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_LOCATION + "')")
 	public SigaiResponse deleteLocation(@PathVariable Long id) {
 		/* delete Location */
 		LocationService.deleteLocation(id);

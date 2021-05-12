@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -23,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -50,11 +49,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf().disable().authorizeRequests()
-				.antMatchers("/v0/test","/auth","/v1/auth","/register", "/villes/v0", "/h2-console", "/swagger-ui").permitAll().anyRequest()
-				.authenticated().and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().httpBasic();
-		httpSecurity.addFilterBefore(new JwtRequestFilter(jwtConfigSigai()), UsernamePasswordAuthenticationFilter.class)
-				.authorizeRequests();
+				//.antMatchers(HttpMethod.OPTIONS, "/**")
+				.antMatchers("/**","/sigai-api/auth","/sigai-api/v1/auth","/register", "/users", "/h2-console", "/swagger-ui")
+				.permitAll()
+				.anyRequest()
+				.authenticated()
+				.and()
+				.exceptionHandling().
+				authenticationEntryPoint(jwtAuthenticationEntryPoint)
+				.and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and()
+				.httpBasic();
+		httpSecurity.addFilterBefore(new JwtRequestFilter(jwtConfigSigai()), UsernamePasswordAuthenticationFilter.class).authorizeRequests();
+		
 	}
 
 	@Bean

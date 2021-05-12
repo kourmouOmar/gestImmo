@@ -31,35 +31,35 @@ public class RoleController {
 	private RoleService roleService;
 
 	@GetMapping(value = "/roles", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_ROLE + "')")
 	public SigaiResponse getAllRoles() {
 		/* get all role */
 		return new SigaiResponse(roleService.getAllRoles(), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/roles/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ROLE_BY_ID + "')")
 	public SigaiResponse getRoleById(@PathVariable Long id) {
 		/* return role by id */
 		return new SigaiResponse(roleService.getRoleById(id), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/roles/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_ROLE + "')")
 	public SigaiResponse addRole(@RequestBody RoleDto roleDto) {
 		/* add role */
 		return new SigaiResponse(roleService.addRole(roleDto), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/roles/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_ROLE + "')")
 	public SigaiResponse updateRole(@RequestBody RoleDto roleDto) {
 		/* update role */
 		return new SigaiResponse(roleService.updateRole(roleDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/delete/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ASSISTANTE + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_ROLE+ "')")
 	public SigaiResponse deleteRole(@PathVariable Long id) {
 		/* delete role */
 		roleService.deleteRole(id);

@@ -65,6 +65,8 @@ public class JwtAuthenticationController {
 		/* authorities */
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority("Admin"));
+		/* authorites */
+		
 		String token = tokenProvider.createToken(fullName, authorities, new Date());
 		// final String token = jwtTokenUtil.generateToken(userDetails);
 		/* construit response */
@@ -92,8 +94,8 @@ public class JwtAuthenticationController {
 	 * @throws Exception
 	 */
 	@PostMapping(value = "/v1/auth", headers = HEADERS)
-	public SigaiResponse login1(){
-
+	public SigaiResponse login1() throws Exception {
+		System.out.println("debut auth");
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		UtilisateurEntity user = null;
 		SigaiResponse sigaiResponse = null;

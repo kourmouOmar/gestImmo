@@ -32,36 +32,36 @@ public class VilleController {
 	@Autowired
 	private IVilleService VilleService;
 
-	@GetMapping(value ="/v0", headers = Constants.HEADERS)
-	//@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
+	@GetMapping(value = "/v0", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_VILLE + "')")
 	public SigaiResponse getAllVilles() {
 		/* get all Ville */
 		return new SigaiResponse(VilleService.getAllVilles(), HttpStatus.OK);
 	}
 
-	@GetMapping(value ="/v0/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
+	@GetMapping(value = "/v0/{id}", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_VILLE_BY_ID + "')")
 	public SigaiResponse getVilleById(@PathVariable Long id) {
 		/* return Ville by id */
 		return new SigaiResponse(VilleService.getVilleById(id), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_VILLE + "')")
 	public SigaiResponse addVille(@RequestBody VilleDto VilleDto) {
 		/* add Ville */
 		return new SigaiResponse(VilleService.addVille(VilleDto), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_VILLE + "')")
 	public SigaiResponse updateVille(@RequestBody VilleDto VilleDto) {
 		/* update Ville */
 		return new SigaiResponse(VilleService.updateVille(VilleDto), HttpStatus.OK);
 	}
 
-	@DeleteMapping(value ="/v0/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ASSISTANTE+"')")
+	@DeleteMapping(value = "/v0/{id}", headers = Constants.HEADERS)
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_VILLE + "')")
 	public SigaiResponse deleteVille(@PathVariable Long id) {
 		/* delete Ville */
 		VilleService.deleteVille(id);

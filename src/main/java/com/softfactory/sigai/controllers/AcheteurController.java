@@ -33,35 +33,35 @@ public class AcheteurController {
 	private AcheteurService AcheteurService;
 
 	@GetMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ADMIN + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_ACHETEUR + "')")
 	public SigaiResponse getAllAcheteurs() {
 		/* get all Acheteur */
 		return new SigaiResponse(AcheteurService.getAllAcheteurs(), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/v0/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ADMIN + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ACHETEUR_BY_ID + "')")
 	public SigaiResponse getAcheteurById(@PathVariable Long id) {
 		/* return Acheteur by id */
 		return new SigaiResponse(AcheteurService.getAcheteurById(id), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/v0/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ADMIN + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_ACHETEUR + "')")
 	public SigaiResponse addAcheteur(@RequestBody AcheteurDto AcheteurDto) {
 		/* add Acheteur */
 		return new SigaiResponse(AcheteurService.addAcheteur(AcheteurDto), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/v0/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ADMIN + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_ACHETEUR + "')")
 	public SigaiResponse updateAcheteur(@RequestBody AcheteurDto AcheteurDto) {
 		/* update Acheteur */
 		return new SigaiResponse(AcheteurService.updateAcheteur(AcheteurDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/v0/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.ADMIN + "')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_ACHETEUR + "')")
 	public SigaiResponse deleteAcheteur(@PathVariable Long id) {
 		/* delete Acheteur */
 		AcheteurService.deleteAcheteur(id);

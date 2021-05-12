@@ -30,31 +30,35 @@ public class ModuleController {
 	private ModuleService ModuleService;
 
 	@RequestMapping("/modules")
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.ADMIN+"')")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_MODULE + "')")
 	public SigaiResponse getAllModules() {
 		/* get all Module */
 		return new SigaiResponse(ModuleService.getAllModules(), HttpStatus.OK);
 	}
 
 	@RequestMapping("/modules/{id}")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_MODULE_BY_ID + "')")
 	public SigaiResponse getModuleById(@PathVariable Long id) {
 		/* return Module by id */
 		return new SigaiResponse(ModuleService.getModuleById(id), HttpStatus.OK);
 	}
 
 	@PostMapping("/modules/{id}")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_MODULE + "')")
 	public SigaiResponse addModule(@RequestBody ModuleDto ModuleDto) {
 		/* add Module */
 		return new SigaiResponse(ModuleService.addModule(ModuleDto), HttpStatus.OK);
 	}
 
 	@PutMapping("/modules/{id}")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_MODULE + "')")
 	public SigaiResponse updateModule(@RequestBody ModuleDto ModuleDto) {
 		/* update Module */
 		return new SigaiResponse(ModuleService.updateModule(ModuleDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/module/{id}")
+	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_MODULE + "')")
 	public SigaiResponse deleteModule(@PathVariable Long id) {
 		/* delete Module */
 		ModuleService.deleteModule(id);
