@@ -30,41 +30,42 @@ import com.softfactory.sigai.util.Constants;
 public class VilleController {
 
 	@Autowired
-	private IVilleService VilleService;
+	private IVilleService villeService;
 
 	@GetMapping(value = "/v0", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_VILLE + "')")
 	public SigaiResponse getAllVilles() {
 		/* get all Ville */
-		return new SigaiResponse(VilleService.getAllVilles(), HttpStatus.OK);
+		return new SigaiResponse(villeService.getAllVilles(), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/v0/{id}", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_VILLE_BY_ID + "')")
 	public SigaiResponse getVilleById(@PathVariable Long id) {
 		/* return Ville by id */
-		return new SigaiResponse(VilleService.getVilleById(id), HttpStatus.OK);
+		return new SigaiResponse(villeService.getVilleById(id), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/v0", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_VILLE + "')")
-	public SigaiResponse addVille(@RequestBody VilleDto VilleDto) {
+	public SigaiResponse addVille(@RequestBody VilleDto villeDto) {
+
 		/* add Ville */
-		return new SigaiResponse(VilleService.addVille(VilleDto), HttpStatus.OK);
+		return new SigaiResponse(villeService.addVille(villeDto), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/v0", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_VILLE + "')")
-	public SigaiResponse updateVille(@RequestBody VilleDto VilleDto) {
+	public SigaiResponse updateVille(@RequestBody VilleDto villeDto) {
 		/* update Ville */
-		return new SigaiResponse(VilleService.updateVille(VilleDto), HttpStatus.OK);
+		return new SigaiResponse(villeService.updateVille(villeDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/v0/{id}", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_VILLE + "')")
 	public SigaiResponse deleteVille(@PathVariable Long id) {
 		/* delete Ville */
-		VilleService.deleteVille(id);
+		villeService.deleteVille(id);
 		return new SigaiResponse(HttpStatus.OK);
 	}
 
