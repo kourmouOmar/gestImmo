@@ -8,14 +8,15 @@ import com.softfactory.sigai.controllers.dto.SigaiUtilisateurDto;
 import com.softfactory.sigai.entities.UtilisateurEntity;
 
 /**
- * interface  "IJwtService"
+ * interface "IJwtService"
+ * 
  * @author Omar_kourmou
  * @see kourmou.omar@gmail.com
  * @creation 05-12-2020
  * @version 1.0
- * */
+ */
 public interface IJwtService {
-	
+
 	/**
 	 * find User by username
 	 * 
@@ -24,15 +25,13 @@ public interface IJwtService {
 	 */
 	UtilisateurEntity getUserByUsername(String username);
 
-	
-
 	/**
 	 * get authorities for user
 	 * 
 	 * @param user
 	 * @return
 	 */
-	Set<GrantedAuthority> getAuthorities(UtilisateurEntity user);
+	Set<String> getAuthorities(UtilisateurEntity user);
 
 	/**
 	 * Construct login response
@@ -43,4 +42,13 @@ public interface IJwtService {
 	 * @return
 	 */
 	SigaiUtilisateurDto constructResponse(UtilisateurEntity user, String username, Set<GrantedAuthority> authorities);
+	
+	
+	/**
+	 * construct user authorities
+	 * 
+	 * @param authorities
+	 * @return
+	 */
+	Set<GrantedAuthority> constructGrantedAuthorities(Set<String> authorities);
 }

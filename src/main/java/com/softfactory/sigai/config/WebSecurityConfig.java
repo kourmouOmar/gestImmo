@@ -3,6 +3,7 @@ package com.softfactory.sigai.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -50,13 +51,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf().disable().authorizeRequests()
 				//.antMatchers(HttpMethod.OPTIONS, "/**")
-				.antMatchers("/**","/sigai-api/auth","/sigai-api/v1/auth","/register", "/users", "/h2-console", "/swagger-ui")
+				.antMatchers(HttpMethod.OPTIONS,"/**","/villes/v0","/sigai-api/auth","/sigai-api/v1/auth","/register", "/sigai-api/v0/test","/users", "/h2-console", "/swagger-ui")
 				.permitAll()
 				.anyRequest()
 				.authenticated()
 				.and()
-				.exceptionHandling().
-				authenticationEntryPoint(jwtAuthenticationEntryPoint)
+				.exceptionHandling()
+				.authenticationEntryPoint(jwtAuthenticationEntryPoint)
 				.and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()

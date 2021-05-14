@@ -16,6 +16,7 @@ import com.softfactory.sigai.entities.UtilisateurEntity;
 import com.softfactory.sigai.repository.IUtilisateurRepository;
 import com.softfactory.sigai.services.IJwtService;
 import com.softfactory.sigai.util.Functions;
+
 /**
  * Spring serviceImpl "JwtService"
  * 
@@ -47,11 +48,13 @@ public class JwtService implements IJwtService {
 	}
 
 	@Override
-	public Set<GrantedAuthority> getAuthorities(UtilisateurEntity user) {
-		Set<GrantedAuthority> authorities = new LinkedHashSet<>();
+	public Set<String> getAuthorities(UtilisateurEntity user) {
+		Set<String> authorities = new LinkedHashSet<>();
 		try {
-			//authorities.add(new SimpleGrantedAuthority(user.getRole().getLibelle()));
-			authorities.add(new SimpleGrantedAuthority(""));
+			user.getListOfUtilisateurRoles().forEach(r -> {
+				/* get role */
+				authorities.add(r.getRoleEntity().getLibelle());
+			});
 
 		} catch (Exception e) {
 			throw e;
@@ -61,7 +64,8 @@ public class JwtService implements IJwtService {
 	}
 
 	@Override
-	public SigaiUtilisateurDto constructResponse(UtilisateurEntity user, String username, Set<GrantedAuthority> authorities) {
+	public SigaiUtilisateurDto constructResponse(UtilisateurEntity user, String username,
+			Set<GrantedAuthority> authorities) {
 
 		SigaiUtilisateurDto SigaiUtilisateurDto = new SigaiUtilisateurDto();
 		try {
@@ -89,6 +93,20 @@ public class JwtService implements IJwtService {
 		}
 
 		return SigaiUtilisateurDto;
+	}
+
+	@Override
+	public Set<GrantedAuthority> constructGrantedAuthorities(Set<String> authorities) {
+		Set<GrantedAuthority> grantedAuthorities = new LinkedHashSet<>();
+		try {
+			if (authorities != null && Boolean.FALSE.equals(authorities.isEmpty())) {
+				authorities.forEach(v -> grantedAuthorities.add(new SimpleGrantedAuthority(v)));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+
+		return grantedAuthorities;
 	}
 
 }

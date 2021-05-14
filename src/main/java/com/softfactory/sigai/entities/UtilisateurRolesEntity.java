@@ -45,12 +45,14 @@ public class UtilisateurRolesEntity extends AbstractCommonEntity<Long>  implemen
 	@Column(name = "id_utilisateur_roles", nullable = false)
     private Long idUtilisateurRoles ;
 
-    @Column(name="id_roles", nullable=false)
-    private Long idRoles ;
+
+	@ManyToOne
+	@JoinColumn(name = "id_roles", referencedColumnName="id_role")
+	private RoleEntity roleEntity;
 	
     @ManyToOne
     @JoinColumn(name="id_utilisateur", referencedColumnName="id_utilisateur")
-    private UtilisateurEntity utilisateur;
+    private UtilisateurEntity utilisateurEntity;
 
 
      @Override

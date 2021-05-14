@@ -66,7 +66,7 @@ public class UtilisateurEntity extends AbstractCommonEntity<Long>  implements Cl
     @Column(name="password", nullable=false, length=255)
     private String password ;
 
-    @OneToMany(mappedBy="utilisateur", targetEntity=UtilisateurRolesEntity.class, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="utilisateurEntity", targetEntity=UtilisateurRolesEntity.class, fetch = FetchType.LAZY)
 	@JsonIgnore
     private List<UtilisateurRolesEntity> listOfUtilisateurRoles;
 

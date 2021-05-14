@@ -17,7 +17,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,7 +65,7 @@ public class JwtAuthenticationController {
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority("Admin"));
 		/* authorites */
-		
+
 		String token = tokenProvider.createToken(fullName, authorities, new Date());
 		// final String token = jwtTokenUtil.generateToken(userDetails);
 		/* construit response */
@@ -110,15 +109,21 @@ public class JwtAuthenticationController {
 			sigaiResponse = new SigaiResponse(HttpStatus.UNAUTHORIZED);
 		} else {
 			/* get permission authorities */
-			Set<GrantedAuthority> authorities = jwtService.getAuthorities(user);
+			Set<String> authorities = jwtService.getAuthorities(user);
+			Set<GrantedAuthority> grantedAuthorities = jwtService.constructGrantedAuthorities(authorities);
 			/* construct response */
-			sigaiResponse = new SigaiResponse(jwtService.constructResponse(user, username, authorities), HttpStatus.OK);
+			sigaiResponse = new SigaiResponse(jwtService.constructResponse(user, username, grantedAuthorities),
+					HttpStatus.OK);
 		}
 		return sigaiResponse;
 	}
-	
-	@GetMapping(value = "/v0/test", headers = Constants.HEADERS)
+
+	@PostMapping(value = "/v0/test", headers = Constants.HEADERS)
 	public SigaiResponse test() {
+
+		System.out.println("debut auth");
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		System.out.println("username : " + username);
 
 		return new SigaiResponse("this is working !", HttpStatus.OK);
 	}
