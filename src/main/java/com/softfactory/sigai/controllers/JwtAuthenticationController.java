@@ -110,6 +110,8 @@ public class JwtAuthenticationController {
 		} else {
 			/* get permission authorities */
 			Set<String> authorities = jwtService.getAuthorities(user);
+			/** */
+			
 			Set<GrantedAuthority> grantedAuthorities = jwtService.constructGrantedAuthorities(authorities);
 			/* construct response */
 			sigaiResponse = new SigaiResponse(jwtService.constructResponse(user, username, grantedAuthorities),

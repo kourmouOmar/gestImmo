@@ -1,6 +1,7 @@
 package com.softfactory.sigai.controllers.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,5 +24,7 @@ public class JwtResponseDto  implements Serializable{
 	private String expires;
 	
 	private String token;
+	
+	private List<String>  menu;
 
 }

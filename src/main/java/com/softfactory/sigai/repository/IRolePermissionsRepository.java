@@ -3,6 +3,8 @@
  */
 package com.softfactory.sigai.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,6 +18,15 @@ public interface IRolePermissionsRepository extends JpaRepository<RolePermission
 	/**
 	 * get RolePermissions by id
 	 * */
-	@Query("SELECT a FROM VilleEntity a WHERE a.id = :id")
+	@Query("SELECT a FROM RolePermissionsEntity a WHERE a.id = :id")
 	RolePermissionsEntity getRolePermissionsBydId(@Param("id") Long id);
+	
+	/**
+	 * Role Permissions Entity
+	 * 
+	 * @param idRole
+	 * @return
+	 */
+	@Query("SELECT rp FROM RolePermissionsEntity rp WHERE rp.role.id = :idRole")
+	List<RolePermissionsEntity> getRolePermissionByRole(@Param("idRole") Long idRole);
 }

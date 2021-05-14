@@ -1,7 +1,9 @@
 package com.softfactory.sigai.services.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,9 @@ import org.springframework.stereotype.Service;
 import com.softfactory.sigai.config.TokenProvider;
 import com.softfactory.sigai.controllers.dto.JwtResponseDto;
 import com.softfactory.sigai.controllers.dto.SigaiUtilisateurDto;
+import com.softfactory.sigai.entities.RolePermissionsEntity;
 import com.softfactory.sigai.entities.UtilisateurEntity;
+import com.softfactory.sigai.repository.IRolePermissionsRepository;
 import com.softfactory.sigai.repository.IUtilisateurRepository;
 import com.softfactory.sigai.services.IJwtService;
 import com.softfactory.sigai.util.Functions;
@@ -31,10 +35,13 @@ public class JwtService implements IJwtService {
 
 	@Autowired
 	private IUtilisateurRepository utilisateurRepository;
+	
+	@Autowired
+	private IRolePermissionsRepository rolePermissionsRepository;
 
 	@Autowired
 	private TokenProvider tokenProvider;
-
+	
 	@Override
 	public UtilisateurEntity getUserByUsername(String username) {
 		UtilisateurEntity userEntity = new UtilisateurEntity();
@@ -50,10 +57,17 @@ public class JwtService implements IJwtService {
 	@Override
 	public Set<String> getAuthorities(UtilisateurEntity user) {
 		Set<String> authorities = new LinkedHashSet<>();
+		// get permmission
 		try {
 			user.getListOfUtilisateurRoles().forEach(r -> {
 				/* get role */
-				authorities.add(r.getRoleEntity().getLibelle());
+				List<RolePermissionsEntity>  rolePermissions = rolePermissionsRepository.getRolePermissionByRole(r.getRoleEntity().getIdRole());
+				rolePermissions.forEach(rolePer ->{
+					authorities.add(rolePer.getPermission().getLibelle());
+					
+				});
+				
+				//authorities.add(r.getRoleEntity().getLibelle());
 			});
 
 		} catch (Exception e) {
@@ -66,8 +80,8 @@ public class JwtService implements IJwtService {
 	@Override
 	public SigaiUtilisateurDto constructResponse(UtilisateurEntity user, String username,
 			Set<GrantedAuthority> authorities) {
-
 		SigaiUtilisateurDto SigaiUtilisateurDto = new SigaiUtilisateurDto();
+		
 		try {
 			/* construct full name */
 			StringBuilder fullName = new StringBuilder(user.getPrenom()).append(" ").append(user.getNom());
@@ -83,6 +97,7 @@ public class JwtService implements IJwtService {
 			response.setHeader(tokenProvider.getHeader());
 			response.setToken(tokenProvider.getPrefix() + token);
 			response.setExpires(Functions.formatDate(tokenProvider.getExpirationTime(now), DATE_FORMAT));
+			response.setMenu(constructGrantedMenus(user));
 			// response.setId(user.getId());
 			// response.setIdEntite(user.getEntite().getId());
 
@@ -107,6 +122,33 @@ public class JwtService implements IJwtService {
 		}
 
 		return grantedAuthorities;
+	}
+	
+	private List<String> constructGrantedMenus(UtilisateurEntity user) {
+		List<String> menu = new ArrayList<>();
+		// get permmission
+		try {
+			user.getListOfUtilisateurRoles().forEach(r -> {
+				/* get role */
+				List<RolePermissionsEntity>  rolePermissions = rolePermissionsRepository.getRolePermissionByRole(r.getRoleEntity().getIdRole());
+				rolePermissions.forEach(rolePer ->{
+					
+					rolePer.getListOfRoleMenusPermissions().forEach(v ->{
+						if(v.getMenuPermissions().getMenu() != null) {
+							menu.add(v.getMenuPermissions().getMenu().getLibelle());
+
+						}
+					});
+				});
+				
+				//authorities.add(r.getRoleEntity().getLibelle());
+			});
+
+		} catch (Exception e) {
+			throw e;
+		}
+
+		return menu;
 	}
 
 }
