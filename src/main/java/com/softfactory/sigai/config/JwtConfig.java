@@ -25,7 +25,7 @@ public class JwtConfig {
 	@Value("${security.jwt.header:Authorization}")
 	private String header;
 	
-	@Value("${security.jwt.prefix:Bearer}")
+	@Value("${security.jwt.prefix:Bearer }")
 	private String prefix;
 	
 	@Value("${token.timeout:600}")

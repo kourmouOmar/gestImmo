@@ -1,6 +1,5 @@
 package com.softfactory.sigai.services.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -13,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.softfactory.sigai.config.TokenProvider;
 import com.softfactory.sigai.controllers.dto.JwtResponseDto;
+import com.softfactory.sigai.controllers.dto.MenusAuthoritiesDto;
 import com.softfactory.sigai.controllers.dto.SigaiUtilisateurDto;
+import com.softfactory.sigai.entities.MenuEntity;
 import com.softfactory.sigai.entities.RolePermissionsEntity;
 import com.softfactory.sigai.entities.UtilisateurEntity;
 import com.softfactory.sigai.repository.IRolePermissionsRepository;
@@ -35,13 +36,13 @@ public class JwtService implements IJwtService {
 
 	@Autowired
 	private IUtilisateurRepository utilisateurRepository;
-	
+
 	@Autowired
 	private IRolePermissionsRepository rolePermissionsRepository;
 
 	@Autowired
 	private TokenProvider tokenProvider;
-	
+
 	@Override
 	public UtilisateurEntity getUserByUsername(String username) {
 		UtilisateurEntity userEntity = new UtilisateurEntity();
@@ -55,33 +56,47 @@ public class JwtService implements IJwtService {
 	}
 
 	@Override
-	public Set<String> getAuthorities(UtilisateurEntity user) {
+	public MenusAuthoritiesDto getAuthoritiesAndMenus(UtilisateurEntity user) {
+
 		Set<String> authorities = new LinkedHashSet<>();
-		// get permmission
+		Set<String> menus = new LinkedHashSet<>();
+		MenusAuthoritiesDto menusAuthoritiesDto = new MenusAuthoritiesDto();
+		Set<MenuEntity> menusEntities = new LinkedHashSet<>();
+
+		/*
+		 * get permmissions and menus
+		 */
 		try {
 			user.getListOfUtilisateurRoles().forEach(r -> {
 				/* get role */
-				List<RolePermissionsEntity>  rolePermissions = rolePermissionsRepository.getRolePermissionByRole(r.getRoleEntity().getIdRole());
-				rolePermissions.forEach(rolePer ->{
+				List<RolePermissionsEntity> rolePermissions = rolePermissionsRepository
+						.getRolePermissionByRole(r.getRoleEntity().getIdRole());
+				rolePermissions.forEach(rolePer -> {
 					authorities.add(rolePer.getPermission().getLibelle());
-					
+					rolePer.getListOfRoleMenusPermissions().forEach(v -> {
+						if (v.getMenuPermissions().getMenu() != null) {
+							menus.add(v.getMenuPermissions().getMenu().getLibelle());
+							menusEntities.add(v.getMenuPermissions().getMenu());
+						}
+					});
 				});
-				
-				//authorities.add(r.getRoleEntity().getLibelle());
 			});
 
 		} catch (Exception e) {
 			throw e;
 		}
 
-		return authorities;
+		menusAuthoritiesDto.setAuthorities(constructGrantedAuthorities(authorities));
+		menusAuthoritiesDto.setMenus(menusEntities);
+
+		return menusAuthoritiesDto;
 	}
 
 	@Override
 	public SigaiUtilisateurDto constructResponse(UtilisateurEntity user, String username,
-			Set<GrantedAuthority> authorities) {
-		SigaiUtilisateurDto SigaiUtilisateurDto = new SigaiUtilisateurDto();
-		
+			MenusAuthoritiesDto menusAuthoritiesDto) {
+		SigaiUtilisateurDto sigaiUtilisateurDto;
+
 		try {
 			/* construct full name */
 			StringBuilder fullName = new StringBuilder(user.getPrenom()).append(" ").append(user.getNom());
@@ -90,24 +105,22 @@ public class JwtService implements IJwtService {
 			Date now = new Date();
 
 			/* Token generation */
-			String token = tokenProvider.createToken(username, authorities, now);
+			String token = tokenProvider.createToken(username, menusAuthoritiesDto.getAuthorities(), now);
 
 			/* finally we construct the response */
 			JwtResponseDto response = new JwtResponseDto();
 			response.setHeader(tokenProvider.getHeader());
 			response.setToken(tokenProvider.getPrefix() + token);
 			response.setExpires(Functions.formatDate(tokenProvider.getExpirationTime(now), DATE_FORMAT));
-			response.setMenu(constructGrantedMenus(user));
-			// response.setId(user.getId());
-			// response.setIdEntite(user.getEntite().getId());
+			response.setMenus(menusAuthoritiesDto.getMenus());
 
-			SigaiUtilisateurDto = new SigaiUtilisateurDto(username, fullName.toString(), response);
+			sigaiUtilisateurDto = new SigaiUtilisateurDto(username, fullName.toString(), response);
 
 		} catch (Exception e) {
 			throw e;
 		}
 
-		return SigaiUtilisateurDto;
+		return sigaiUtilisateurDto;
 	}
 
 	@Override
@@ -123,32 +136,4 @@ public class JwtService implements IJwtService {
 
 		return grantedAuthorities;
 	}
-	
-	private List<String> constructGrantedMenus(UtilisateurEntity user) {
-		List<String> menu = new ArrayList<>();
-		// get permmission
-		try {
-			user.getListOfUtilisateurRoles().forEach(r -> {
-				/* get role */
-				List<RolePermissionsEntity>  rolePermissions = rolePermissionsRepository.getRolePermissionByRole(r.getRoleEntity().getIdRole());
-				rolePermissions.forEach(rolePer ->{
-					
-					rolePer.getListOfRoleMenusPermissions().forEach(v ->{
-						if(v.getMenuPermissions().getMenu() != null) {
-							menu.add(v.getMenuPermissions().getMenu().getLibelle());
-
-						}
-					});
-				});
-				
-				//authorities.add(r.getRoleEntity().getLibelle());
-			});
-
-		} catch (Exception e) {
-			throw e;
-		}
-
-		return menu;
-	}
-
 }
