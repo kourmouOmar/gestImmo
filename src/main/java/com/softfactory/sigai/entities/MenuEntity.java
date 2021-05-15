@@ -6,10 +6,8 @@ package com.softfactory.sigai.entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,11 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -42,8 +35,6 @@ import lombok.ToString;
 @ToString
 public class MenuEntity extends AbstractCommonEntity<Long> implements Cloneable {
 
-	private static Logger logger = LoggerFactory.getLogger(MenuEntity.class);
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -63,13 +54,8 @@ public class MenuEntity extends AbstractCommonEntity<Long> implements Cloneable 
 	@Column(name = "url", nullable = false, length = 100)
 	private String url;
 
-	@ManyToOne()
-    @JoinColumn(name = "id_menu")
+	@Column(name = "parent_id")
 	private Long parentId;
-	
-	@OneToMany(mappedBy = "parentId")
-	@JsonIgnore
-	private List<MenuEntity> childMenus;
 
 	@ManyToOne
 	@JoinColumn(name = "id_module", referencedColumnName = "id_module")
