@@ -48,8 +48,9 @@ public class MenuPermissionsEntity extends AbstractCommonEntity<Long>  implement
 	@Column(name = "id_menu_permissions", nullable = false)
     private Long idMenuPermissions ;
 
-    @Column(name="id_permission")
-    private Long idPermission ;
+	@ManyToOne
+	@JoinColumn(name = "id_permission")
+	private PermissionEntity permission;
 	
     @ManyToOne
     @JoinColumn(name="id_menu", referencedColumnName="id_menu")

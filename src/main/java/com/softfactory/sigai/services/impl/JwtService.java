@@ -1,5 +1,6 @@
 package com.softfactory.sigai.services.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -9,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.softfactory.sigai.config.TokenProvider;
 import com.softfactory.sigai.controllers.dto.JwtResponseDto;
+import com.softfactory.sigai.controllers.dto.MenuDto;
 import com.softfactory.sigai.controllers.dto.MenusAuthoritiesDto;
 import com.softfactory.sigai.controllers.dto.SigaiUtilisateurDto;
 import com.softfactory.sigai.entities.MenuEntity;
@@ -58,36 +61,45 @@ public class JwtService implements IJwtService {
 	@Override
 	public MenusAuthoritiesDto getAuthoritiesAndMenus(UtilisateurEntity user) {
 
+		Set<MenuDto> listMenuDtos;
 		Set<String> authorities = new LinkedHashSet<>();
-		Set<String> menus = new LinkedHashSet<>();
+		Set<MenuEntity> childs = new LinkedHashSet<>();
+		Set<MenuEntity> parents = new LinkedHashSet<>();
 		MenusAuthoritiesDto menusAuthoritiesDto = new MenusAuthoritiesDto();
-		Set<MenuEntity> menusEntities = new LinkedHashSet<>();
 
 		/*
 		 * get permmissions and menus
 		 */
 		try {
+
 			user.getListOfUtilisateurRoles().forEach(r -> {
 				/* get role */
 				List<RolePermissionsEntity> rolePermissions = rolePermissionsRepository
 						.getRolePermissionByRole(r.getRoleEntity().getIdRole());
-				rolePermissions.forEach(rolePer -> {
-					authorities.add(rolePer.getPermission().getLibelle());
-					rolePer.getListOfRoleMenusPermissions().forEach(v -> {
-						if (v.getMenuPermissions().getMenu() != null) {
-							menus.add(v.getMenuPermissions().getMenu().getLibelle());
-							menusEntities.add(v.getMenuPermissions().getMenu());
-						}
-					});
-				});
+				rolePermissions.forEach(rolePer -> authorities.add(rolePer.getPermission().getLibelle()));
 			});
+
+			user.getListOfUtilisateurRoles().forEach(r -> r.getRoleEntity().getListOfRolePermissions()
+					.forEach(rp -> rp.getListOfRoleMenusPermissions().forEach(rmp -> {
+						if (rmp.getMenuPermissions().getMenu() != null
+								&& rmp.getMenuPermissions().getMenu().getParentMenu() == null) {
+							parents.add(rmp.getMenuPermissions().getMenu());
+						} else if (rmp.getMenuPermissions().getMenu() != null
+								&& rmp.getMenuPermissions().getMenu().getParentMenu() != null) {
+							childs.add(rmp.getMenuPermissions().getMenu());
+							parents.add(rmp.getMenuPermissions().getMenu().getParentMenu());
+						}
+					})));
 
 		} catch (Exception e) {
 			throw e;
 		}
 
+		/* get menus and its parents */
+		listMenuDtos = getUserMenus(parents, childs);
+
 		menusAuthoritiesDto.setAuthorities(constructGrantedAuthorities(authorities));
-		menusAuthoritiesDto.setMenus(menusEntities);
+		menusAuthoritiesDto.setMenus(listMenuDtos);
 
 		return menusAuthoritiesDto;
 	}
@@ -135,5 +147,26 @@ public class JwtService implements IJwtService {
 		}
 
 		return grantedAuthorities;
+	}
+
+	private Set<MenuDto> getUserMenus(Set<MenuEntity> parents, Set<MenuEntity> childs) {
+		Set<MenuDto> menuEntities = new LinkedHashSet<>();
+		if (!CollectionUtils.isEmpty(parents) && !CollectionUtils.isEmpty(childs)) {
+			/* loop through parent menus */
+			
+			for(MenuEntity menuParent : parents) {
+				MenuEntity menu = new MenuEntity(menuParent);
+				List<MenuEntity> childsList = new ArrayList<>();
+
+				for(MenuEntity menuChild : childs) {
+					if (menuChild.getParentMenu().getIdMenu().equals(menuParent.getIdMenu())) {
+						menuParent.getChildMenus().add(menuChild);
+					}
+				}
+				//menuParent.setChildMenus(childsList);
+				menuEntities.add(MenuDto.entityToDto(menuParent));
+			}
+		}
+		return menuEntities;
 	}
 }

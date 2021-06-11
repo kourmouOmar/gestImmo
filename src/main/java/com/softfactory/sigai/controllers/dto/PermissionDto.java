@@ -31,14 +31,16 @@ public class PermissionDto implements Serializable {
 private static final long serialVersionUID = 1L;
 
     private Long idPermission ;
+    
     @NotNull
     @Size(max=50)
     private String libelle;
+    
     @Size(max=255)
     private String description;
+    
     @NotNull
     private Boolean active;
-    private Long parentId;
 	// Relations
     private List<RolePermissionsDto> listOfRolePermissionsDto;  
 
@@ -59,7 +61,6 @@ private static final long serialVersionUID = 1L;
         	dto.setLibelle(entity.getLibelle());  
         	dto.setDescription(entity.getDescription());  
         	dto.setActive(entity.getActive());  
-        	dto.setParentId(entity.getParentId());  
 		}
 		return  dto;
     }
@@ -75,7 +76,6 @@ private static final long serialVersionUID = 1L;
         	entity.setLibelle(dto.getLibelle());   
         	entity.setDescription(dto.getDescription());   
         	entity.setActive(dto.getActive());   
-        	entity.setParentId(dto.getParentId());   
 		}
 		
 		return  entity;

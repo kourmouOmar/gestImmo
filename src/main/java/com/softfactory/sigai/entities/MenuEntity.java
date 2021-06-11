@@ -6,8 +6,10 @@ package com.softfactory.sigai.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -54,12 +61,18 @@ public class MenuEntity extends AbstractCommonEntity<Long> implements Cloneable 
 	@Column(name = "url", nullable = false, length = 100)
 	private String url;
 
-	@Column(name = "parent_id")
-	private Long parentId;
+	@ManyToOne
+	@JoinColumn(name = "parent_id")
+	private MenuEntity parentMenu;
 
 	@ManyToOne
 	@JoinColumn(name = "id_module", referencedColumnName = "id_module")
 	private ModuleEntity module;
+
+	@OneToMany(mappedBy = "parentMenu", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
+	private List<MenuEntity> childMenus;
 
 	@OneToMany(mappedBy = "menu", targetEntity = RoleMenusEntity.class)
 	private List<RoleMenusEntity> listOfRoleMenus;
@@ -72,16 +85,16 @@ public class MenuEntity extends AbstractCommonEntity<Long> implements Cloneable 
 		return idMenu;
 	}
 
-	public MenuEntity(MenuEntity menuEntity) {
-		this.idMenu = menuEntity.getIdMenu();
-		this.libelle = menuEntity.getLibelle();
-		this.icon = menuEntity.getIcon();
-		this.iconClick = menuEntity.getIconClick();
-		this.url = menuEntity.getUrl();
-		this.parentId = menuEntity.getParentId();
-		this.module = menuEntity.getModule();
-		this.listOfRoleMenus = menuEntity.getListOfRoleMenus();
-		this.listOfMenuPermissions = menuEntity.getListOfMenuPermissions();
+	public MenuEntity(MenuEntity entity) {
+		this.idMenu = entity.getIdMenu();
+		this.libelle = entity.getLibelle();
+		this.icon = entity.getIcon();
+		this.iconClick = entity.getIconClick();
+		this.url = entity.getUrl();
+		this.parentMenu = entity.getParentMenu();
+		this.module = entity.getModule();
+		this.childMenus = entity.getChildMenus();
+		this.listOfMenuPermissions = entity.getListOfMenuPermissions();
 	}
 
 }

@@ -1,11 +1,10 @@
 package com.softfactory.sigai.controllers.dto;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
-
-import com.softfactory.sigai.entities.MenuEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,7 +25,7 @@ public class MenusAuthoritiesDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Set<MenuEntity> menus;
+	private Set<MenuDto> menus;
 	private Set<GrantedAuthority> authorities;
 
 }

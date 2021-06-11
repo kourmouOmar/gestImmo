@@ -48,6 +48,7 @@ public class RoleEntity extends AbstractCommonEntity<Long>  implements Cloneable
 
     @Column(name="libelle", length=255)
     private String libelle ;
+    
     @Column(name="description", length=255)
     private String description ;
 

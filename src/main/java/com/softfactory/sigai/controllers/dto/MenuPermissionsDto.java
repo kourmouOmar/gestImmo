@@ -28,9 +28,12 @@ public class MenuPermissionsDto implements Serializable {
 private static final long serialVersionUID = 1L;
 
     private Long idMenuPermissions ;
-    private Long idPermission;
-	// Relations
+    
+    private PermissionDto permissionDto;
+    	
+    // Relations
     private MenuDto menuDto;
+    
     private List<RoleMenusPermissionsDto> listOfRoleMenusPermissionsDto;  
 
 	// Relation Enum
@@ -48,7 +51,7 @@ private static final long serialVersionUID = 1L;
 		if(entity != null){
 			dto = new MenuPermissionsDto();
         	dto.setIdMenuPermissions(entity.getIdMenuPermissions());
-        	dto.setIdPermission(entity.getIdPermission());  
+        	dto.setPermissionDto(PermissionDto.entityToDto(entity.getPermission()));  
 		}
 		return  dto;
     }
@@ -61,7 +64,7 @@ private static final long serialVersionUID = 1L;
 		if(dto != null){
 			entity = new MenuPermissionsEntity();
         	entity.setIdMenuPermissions(dto.getIdMenuPermissions()) ;
-        	entity.setIdPermission(dto.getIdPermission());   
+        	entity.setPermission(PermissionDto.dtoToEntity(dto.getPermissionDto()));  
 		}
 		
 		return  entity;
