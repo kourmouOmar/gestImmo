@@ -62,6 +62,7 @@ public class MenuDto implements Serializable {
 			dto.setIcon(entity.getIcon());
 			dto.setIconClick(entity.getIconClick());
 			dto.setUrl(entity.getUrl());
+			dto.setChildMenu(MenuChildDto.entitiesToDtos(entity.getChildMenus()));
 		}
 		return dto;
 	}

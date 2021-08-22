@@ -81,11 +81,11 @@ public class JwtService implements IJwtService {
 
 			user.getListOfUtilisateurRoles().forEach(r -> r.getRoleEntity().getListOfRolePermissions()
 					.forEach(rp -> rp.getListOfRoleMenusPermissions().forEach(rmp -> {
-						if (rmp.getMenuPermissions().getMenu() != null
-								&& rmp.getMenuPermissions().getMenu().getParentMenu() == null) {
+						if (rmp.getMenuPermissions().getMenu() != null && rmp.getMenuPermissions().getMenu().getParentMenu() == null) {
+							
 							parents.add(rmp.getMenuPermissions().getMenu());
-						} else if (rmp.getMenuPermissions().getMenu() != null
-								&& rmp.getMenuPermissions().getMenu().getParentMenu() != null) {
+							
+						} else if (rmp.getMenuPermissions().getMenu() != null && rmp.getMenuPermissions().getMenu().getParentMenu() != null) {
 							childs.add(rmp.getMenuPermissions().getMenu());
 							parents.add(rmp.getMenuPermissions().getMenu().getParentMenu());
 						}
@@ -97,9 +97,10 @@ public class JwtService implements IJwtService {
 
 		/* get menus and its parents */
 		listMenuDtos = getUserMenus(parents, childs);
-
+		
 		menusAuthoritiesDto.setAuthorities(constructGrantedAuthorities(authorities));
 		menusAuthoritiesDto.setMenus(listMenuDtos);
+		
 
 		return menusAuthoritiesDto;
 	}
@@ -165,6 +166,7 @@ public class JwtService implements IJwtService {
 				}
 				//menuParent.setChildMenus(childsList);
 				menuEntities.add(MenuDto.entityToDto(menuParent));
+		
 			}
 		}
 		return menuEntities;

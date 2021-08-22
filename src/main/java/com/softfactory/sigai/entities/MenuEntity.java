@@ -71,7 +71,7 @@ public class MenuEntity extends AbstractCommonEntity<Long> implements Cloneable 
 
 	@OneToMany(mappedBy = "parentMenu", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JsonIgnore
+	//@JsonIgnore
 	private List<MenuEntity> childMenus;
 
 	@OneToMany(mappedBy = "menu", targetEntity = RoleMenusEntity.class)
