@@ -4,7 +4,6 @@
 
 package com.softfactory.sigai.entities;
 
- 
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,9 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,66 +27,61 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name="bien")
+@Table(name = "bien")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class BienEntity extends AbstractCommonEntity<Long>  implements Cloneable  {
+public class BienEntity extends AbstractCommonEntity<Long> implements Cloneable {
 
-    private static Logger logger = LoggerFactory.getLogger(BienEntity.class);
- 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_bien", nullable = false)
-    private Long idBien ;
+	private Long idBien;
 
-    @Column(name="annee_construction")
-    private Long anneeConstruction ;
-    @Column(name="superficie")
-    private Double superficie ;
-    @Column(name="nombre_pieces")
-    private Long nombrePieces ;
-						
-    @ManyToOne
-    @JoinColumn(name="id_style", referencedColumnName="id_style")
-    private StyleEntity style;
+	@Column(name = "annee_construction")
+	private Long anneeConstruction;
+	@Column(name = "superficie")
+	private Double superficie;
+	@Column(name = "nombre_pieces")
+	private Long nombrePieces;
 
-    @OneToMany(mappedBy="bien", targetEntity=VenteEntity.class)
-    private List<VenteEntity> listOfVente;
+	@ManyToOne
+	@JoinColumn(name = "id_style", referencedColumnName = "id_style")
+	private StyleEntity style;
 
-    @ManyToOne
-    @JoinColumn(name="id_type", referencedColumnName="id_type_bien")
-    private TypeBienEntity typeBien;
+	@OneToMany(mappedBy = "bien", targetEntity = VenteEntity.class)
+	private List<VenteEntity> listOfVente;
 
-    @ManyToOne
-    @JoinColumn(name="id_etat", referencedColumnName="id_etat")
-    private EtatEntity etat;
+	@ManyToOne
+	@JoinColumn(name = "id_type", referencedColumnName = "id_type_bien")
+	private TypeBienEntity typeBien;
 
-    @ManyToOne
-    @JoinColumn(name="id_adresse", referencedColumnName="id_adresse")
-    private AdresseEntity adresse;
+	@ManyToOne
+	@JoinColumn(name = "id_etat", referencedColumnName = "id_etat")
+	private EtatEntity etat;
 
-    @ManyToOne
-    @JoinColumn(name="id_proprietaire", referencedColumnName="id_proprietaire")
-    private ProprietaireEntity proprietaire;
+	@ManyToOne
+	@JoinColumn(name = "id_adresse", referencedColumnName = "id_adresse")
+	private AdresseEntity adresse;
 
-    @OneToMany(mappedBy="bien", targetEntity=LocationEntity.class)
-    private List<LocationEntity> listOfLocation;
+	@ManyToOne
+	@JoinColumn(name = "id_proprietaire", referencedColumnName = "id_proprietaire")
+	private ProprietaireEntity proprietaire;
 
-    @ManyToOne
-    @JoinColumn(name="id_vue", referencedColumnName="id_vue")
-    private VueEntity vue;
+	@OneToMany(mappedBy = "bien", targetEntity = LocationEntity.class)
+	private List<LocationEntity> listOfLocation;
 
+	@ManyToOne
+	@JoinColumn(name = "id_vue", referencedColumnName = "id_vue")
+	private VueEntity vue;
 
-     @Override
-	 public Long getId() {
+	@Override
+	public Long getId() {
 		return idBien;
-	} 
- 
-  
-   
+	}
+
 }

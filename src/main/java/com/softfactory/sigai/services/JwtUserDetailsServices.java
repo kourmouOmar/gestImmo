@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.softfactory.sigai.controllers.dto.UtilisateurDto;
 import com.softfactory.sigai.entities.UtilisateurEntity;
 import com.softfactory.sigai.repository.IUtilisateurRepository;
-import com.softfactory.sigai.services.impl.RoleService;
 
 
 
@@ -23,8 +22,8 @@ public class JwtUserDetailsServices implements UserDetailsService{
 	@Autowired(required=true)
 	private IUtilisateurRepository utilisateurRepository;
 	
-	@Autowired(required=true)
-	private RoleService roleService;
+	//@Autowired(required=true)
+	//private RoleService roleService;
 	
 	@Autowired(required=true)
 	private PasswordEncoder bcryptEncoder;

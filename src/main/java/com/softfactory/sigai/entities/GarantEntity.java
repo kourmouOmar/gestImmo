@@ -4,7 +4,6 @@
 
 package com.softfactory.sigai.entities;
 
- 
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,9 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,53 +27,48 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name="garant")
+@Table(name = "garant")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class GarantEntity extends AbstractCommonEntity<Long>  implements Cloneable  {
+public class GarantEntity extends AbstractCommonEntity<Long> implements Cloneable {
 
-    private static Logger logger = LoggerFactory.getLogger(GarantEntity.class);
- 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_garant", nullable = false)
-    private Long idGarant ;
+	private Long idGarant;
 
-    @Column(name="nom", nullable=false, length=255)
-    private String nom ;
-    @Column(name="prenom", nullable=false, length=255)
-    private String prenom ;
-    @Column(name="telephone", length=255)
-    private String telephone ;
-    @Column(name="email", length=255)
-    private String email ;
-    @Column(name="cin", nullable=false, length=255)
-    private String cin ;
-    @Column(name="rib", length=255)
-    private String rib ;
-		
-    @ManyToOne
-    @JoinColumn(name="id_adresse", referencedColumnName="id_adresse")
-    private AdresseEntity adresse;
+	@Column(name = "nom", nullable = false, length = 255)
+	private String nom;
+	@Column(name = "prenom", nullable = false, length = 255)
+	private String prenom;
+	@Column(name = "telephone", length = 255)
+	private String telephone;
+	@Column(name = "email", length = 255)
+	private String email;
+	@Column(name = "cin", nullable = false, length = 255)
+	private String cin;
+	@Column(name = "rib", length = 255)
+	private String rib;
 
-    @OneToMany(mappedBy="garant", targetEntity=LocataireEntity.class)
-    private List<LocataireEntity> listOfLocataire;
+	@ManyToOne
+	@JoinColumn(name = "id_adresse", referencedColumnName = "id_adresse")
+	private AdresseEntity adresse;
 
-    @ManyToOne
-    @JoinColumn(name="id_type_garant", referencedColumnName="id_type_garant")
-    private TypeGarantEntity typeGarant;
+	@OneToMany(mappedBy = "garant", targetEntity = LocataireEntity.class)
+	private List<LocataireEntity> listOfLocataire;
 
+	@ManyToOne
+	@JoinColumn(name = "id_type_garant", referencedColumnName = "id_type_garant")
+	private TypeGarantEntity typeGarant;
 
-     @Override
-	 public Long getId() {
+	@Override
+	public Long getId() {
 		return idGarant;
-	} 
- 
-  
-   
+	}
+
 }

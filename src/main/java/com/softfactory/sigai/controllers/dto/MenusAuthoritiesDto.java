@@ -1,7 +1,6 @@
 package com.softfactory.sigai.controllers.dto;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;

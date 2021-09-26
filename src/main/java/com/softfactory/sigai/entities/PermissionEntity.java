@@ -19,8 +19,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -42,8 +40,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class PermissionEntity extends AbstractCommonEntity<Long> implements Cloneable {
-
-	private static Logger logger = LoggerFactory.getLogger(PermissionEntity.class);
 
 	private static final long serialVersionUID = 1L;
 

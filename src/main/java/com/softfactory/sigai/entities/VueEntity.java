@@ -4,7 +4,6 @@
 
 package com.softfactory.sigai.entities;
 
- 
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,9 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,37 +25,32 @@ import lombok.ToString;
  */
 
 @Entity
-@Table(name="vue")
+@Table(name = "vue")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class VueEntity extends AbstractCommonEntity<Long>  implements Cloneable  {
+public class VueEntity extends AbstractCommonEntity<Long> implements Cloneable {
 
-    private static Logger logger = LoggerFactory.getLogger(VueEntity.class);
- 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_vue", nullable = false)
-    private Long idVue ;
+	private Long idVue;
 
-    @Column(name="libelle", length=255)
-    private String libelle ;
-    @Column(name="description", length=255)
-    private String description ;
+	@Column(name = "libelle", length = 255)
+	private String libelle;
+	@Column(name = "description", length = 255)
+	private String description;
 
-    @OneToMany(mappedBy="vue", targetEntity=BienEntity.class)
-    private List<BienEntity> listOfBien;
+	@OneToMany(mappedBy = "vue", targetEntity = BienEntity.class)
+	private List<BienEntity> listOfBien;
 
-
-     @Override
-	 public Long getId() {
+	@Override
+	public Long getId() {
 		return idVue;
-	} 
- 
-  
-   
+	}
+
 }

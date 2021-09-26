@@ -1,6 +1,5 @@
 package com.softfactory.sigai.services.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -156,8 +155,8 @@ public class JwtService implements IJwtService {
 			/* loop through parent menus */
 			
 			for(MenuEntity menuParent : parents) {
-				MenuEntity menu = new MenuEntity(menuParent);
-				List<MenuEntity> childsList = new ArrayList<>();
+				//MenuEntity menu = new MenuEntity(menuParent);
+				//List<MenuEntity> childsList = new ArrayList<>();
 
 				for(MenuEntity menuChild : childs) {
 					if (menuChild.getParentMenu().getIdMenu().equals(menuParent.getIdMenu())) {
