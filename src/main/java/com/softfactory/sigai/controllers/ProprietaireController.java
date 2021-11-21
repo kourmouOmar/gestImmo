@@ -16,6 +16,7 @@ import com.softfactory.sigai.config.AuthoritiesConstants;
 import com.softfactory.sigai.config.SigaiResponse;
 import com.softfactory.sigai.controllers.dto.ProprietaireDto;
 import com.softfactory.sigai.services.impl.ProprietaireService;
+import com.softfactory.sigai.util.Constants;
 
 /**
  * Spring controller "Proprietaire"
@@ -25,40 +26,41 @@ import com.softfactory.sigai.services.impl.ProprietaireService;
  * @version : 1.0
  */
 @RestController
+@RequestMapping("/proprietaires")
 public class ProprietaireController {
 
 	@Autowired
 	private ProprietaireService proprietaireService;
 
-	@GetMapping("/proprietaires")
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.GET_ALL_PROPREETAIRE+"')")
+	@GetMapping(value = "/v0", headers = Constants.HEADERS)
+	//@PreAuthorize("hasRole('"+AuthoritiesConstants.GET_ALL_PROPREETAIRE+"')")
 	public SigaiResponse getAllProprietaires() {
 		/* get all Proprietaire */
 		return new SigaiResponse(ProprietaireDto.entitiesToDtos(proprietaireService.getAllProprietaires()), HttpStatus.OK);
 	}
 
-	@RequestMapping("/proprietaires/{id}")
+	@GetMapping(value ="/v0/{id}", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('"+AuthoritiesConstants.GET_PROPREETAIRE_BY_ID+"')")
 	public SigaiResponse getProprietaireById(@PathVariable Long id) {
 		/* return Proprietaire by id */
 		return new SigaiResponse(proprietaireService.getProprietaireById(id), HttpStatus.OK);
 	}
 
-	@PostMapping("/proprietaires")
+	@PostMapping(value = "/v0", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('"+AuthoritiesConstants.SAVE_PROPREETAIRE+"')")
 	public SigaiResponse addProprietaire(@RequestBody ProprietaireDto proprietaireDto) {
 		/* add Proprietaire */
 		return new SigaiResponse(proprietaireService.addProprietaire(proprietaireDto), HttpStatus.OK);
 	}
 
-	@PutMapping("/proprietaire")
+	@PutMapping(value = "/v0", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('"+AuthoritiesConstants.UPDATE_PROPREETAIRE+"')")
 	public SigaiResponse updateProprietaire(@RequestBody ProprietaireDto proprietaireDto) {
 		/* update Proprietaire */
 		return new SigaiResponse(proprietaireService.updateProprietaire(proprietaireDto), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/proprietaire/{id}")
+	@DeleteMapping(value = "/v0", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('"+AuthoritiesConstants.DELETE_PROPREETAIRE+"')")
 	public SigaiResponse deleteProprietaire(@PathVariable Long id) {
 		/* delete Proprietaire */

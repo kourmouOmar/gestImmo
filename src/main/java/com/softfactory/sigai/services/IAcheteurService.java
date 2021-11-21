@@ -18,7 +18,7 @@ import com.softfactory.sigai.entities.AcheteurEntity;
  */
 public interface IAcheteurService{
 
-/**
+	/**
 	 * Get Acheteur by Id
 	 * 
 	 * @param idAcheteur
