@@ -26,7 +26,7 @@ import com.softfactory.sigai.util.Constants;
  * @version : 1.0
  */
 @RestController
-@RequestMapping("/Biens")
+@RequestMapping("/biens")
 public class BienController {
 
 	@Autowired
