@@ -60,7 +60,7 @@ public class EtatController {
 		return new SigaiResponse(EtatService.updateEtat(EtatDto), HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/v0", headers = Constants.HEADERS)
+	@DeleteMapping(value = "/v0/{id}", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_ETAT + "')")
 	public SigaiResponse deleteEtat(@PathVariable Long id) {
 		/* delete Etat */

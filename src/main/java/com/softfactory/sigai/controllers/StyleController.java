@@ -2,7 +2,6 @@ package com.softfactory.sigai.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.softfactory.sigai.config.AuthoritiesConstants;
 import com.softfactory.sigai.config.SigaiResponse;
 import com.softfactory.sigai.controllers.dto.StyleDto;
 import com.softfactory.sigai.services.IStyleService;
@@ -60,7 +58,7 @@ public class StyleController {
 		return new SigaiResponse(StyleService.updateStyle(StyleDto), HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/v0", headers = Constants.HEADERS)
+	@DeleteMapping(value = "/v0/{id}", headers = Constants.HEADERS)
 	//@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_STYLE + "')")
 	public SigaiResponse deleteStyle(@PathVariable Long id) {
 		/* delete Style */

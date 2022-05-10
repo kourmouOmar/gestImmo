@@ -60,7 +60,7 @@ public class TypeGarantController {
 		return new SigaiResponse(TypeGarantService.updateTypeGarant(TypeGarantDto), HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/v0", headers = Constants.HEADERS)
+	@DeleteMapping(value = "/v0/{id}", headers = Constants.HEADERS)
 	//@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_TYPE_GARANT + "')")
 	public SigaiResponse deleteTypeGarant(@PathVariable Long id) {
 		/* delete TypeGarant */
