@@ -60,7 +60,7 @@ public class TypeBienController {
 		return new SigaiResponse(TypeBienService.updateTypeBien(TypeBienDto), HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/v0", headers = Constants.HEADERS)
+	@DeleteMapping(value = "/v0/{id}", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_TYPE_BIEN + "')")
 	public SigaiResponse deleteTypeBien(@PathVariable Long id) {
 		/* delete TypeBien */
