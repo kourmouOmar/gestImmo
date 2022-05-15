@@ -46,9 +46,9 @@ public class UtilisateurRolesDto implements Serializable {
 		UtilisateurRolesDto dto = null;
 		if (entity != null) {
 			dto = new UtilisateurRolesDto();
-			dto.setIdUtilisateurRoles(entity.getIdUtilisateurRoles());
+			//dto.setIdUtilisateurRoles(entity.getIdUtilisateurRoles());
 			dto.setRoleDto(RoleDto.entityToDto(entity.getRoleEntity()));
-			dto.setUtilisateurDto(UtilisateurDto.entityToDto(entity.getUtilisateurEntity()));
+			//dto.setUtilisateurDto(UtilisateurDto.entityToDto(entity.getUtilisateurEntity()));
 		}
 		return dto;
 	}
@@ -64,7 +64,7 @@ public class UtilisateurRolesDto implements Serializable {
 			entity = new UtilisateurRolesEntity();
 			entity.setIdUtilisateurRoles(dto.getIdUtilisateurRoles());
 			entity.setRoleEntity(RoleDto.dtoToEntity(dto.getRoleDto()));
-			entity.setUtilisateurEntity(UtilisateurDto.dtoToEntity(dto.getUtilisateurDto()));
+			//entity.setUtilisateurEntity(UtilisateurDto.dtoToEntity(dto.getUtilisateurDto()));
 		}
 
 		return entity;
