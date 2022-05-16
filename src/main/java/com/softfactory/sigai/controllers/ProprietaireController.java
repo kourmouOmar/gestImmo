@@ -40,28 +40,28 @@ public class ProprietaireController {
 	}
 
 	@GetMapping(value ="/v0/{id}", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.GET_PROPREETAIRE_BY_ID+"')")
+	//@PreAuthorize("hasRole('"+AuthoritiesConstants.GET_PROPREETAIRE_BY_ID+"')")
 	public SigaiResponse getProprietaireById(@PathVariable Long id) {
 		/* return Proprietaire by id */
 		return new SigaiResponse(proprietaireService.getProprietaireById(id), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.SAVE_PROPREETAIRE+"')")
+	//@PreAuthorize("hasRole('"+AuthoritiesConstants.SAVE_PROPREETAIRE+"')")
 	public SigaiResponse addProprietaire(@RequestBody ProprietaireDto proprietaireDto) {
 		/* add Proprietaire */
 		return new SigaiResponse(proprietaireService.addProprietaire(proprietaireDto), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.UPDATE_PROPREETAIRE+"')")
+	//@PreAuthorize("hasRole('"+AuthoritiesConstants.UPDATE_PROPREETAIRE+"')")
 	public SigaiResponse updateProprietaire(@RequestBody ProprietaireDto proprietaireDto) {
 		/* update Proprietaire */
 		return new SigaiResponse(proprietaireService.updateProprietaire(proprietaireDto), HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('"+AuthoritiesConstants.DELETE_PROPREETAIRE+"')")
+	@DeleteMapping(value = "/v0/{id}", headers = Constants.HEADERS)
+	//@PreAuthorize("hasRole('"+AuthoritiesConstants.DELETE_PROPREETAIRE+"')")
 	public SigaiResponse deleteProprietaire(@PathVariable Long id) {
 		/* delete Proprietaire */
 		proprietaireService.deleteProprietaire(id);
