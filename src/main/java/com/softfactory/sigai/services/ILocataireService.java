@@ -15,9 +15,9 @@ import com.softfactory.sigai.entities.LocataireEntity;
  * @creation : 08/11/20
  * @version : 1.0
  */
-public interface ILocataireService{
+public interface ILocataireService {
 
-/**
+	/**
 	 * Get Locataire by Id
 	 * 
 	 * @param idLocataire
