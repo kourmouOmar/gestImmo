@@ -4,17 +4,13 @@
 package com.softfactory.sigai.controllers.dto;
 
 import java.io.Serializable;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.softfactory.sigai.config.WebSecurityConfig;
 import com.softfactory.sigai.entities.UtilisateurEntity;
 import com.softfactory.sigai.util.Functions;
 

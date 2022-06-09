@@ -2,7 +2,6 @@ package com.softfactory.sigai.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.softfactory.sigai.config.AuthoritiesConstants;
 import com.softfactory.sigai.config.SigaiResponse;
-import com.softfactory.sigai.controllers.dto.VilleDto;
 import com.softfactory.sigai.controllers.dto.VueDto;
 import com.softfactory.sigai.services.IVueService;
 import com.softfactory.sigai.util.Constants;
