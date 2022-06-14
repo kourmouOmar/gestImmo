@@ -9,14 +9,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.softfactory.sigai.entities.EtatEntity;
+import com.softfactory.sigai.entities.TacheNoteEntity;
 
 @Repository
-public interface IEtatRepository extends JpaRepository<EtatEntity, Long> {
-	
+public interface ITacheNotesRepository extends JpaRepository<TacheNoteEntity, Long> {
+
 	/**
-	 * get Etat by id
-	 * */
-	@Query("SELECT a FROM VilleEntity a WHERE a.id = :id")
-	EtatEntity getEtatBydId(@Param("id") Long id);
+	 * get TacheNoteEntity by id
+	 */
+	@Query("SELECT a FROM TacheNoteEntity a WHERE a.id = :id")
+	TacheNoteEntity getTacheNoteBydId(@Param("id") Long id);
 }

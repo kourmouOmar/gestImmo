@@ -4,14 +4,11 @@ How does spring.jpa.hibernate.ddl-auto property exactly work in Spring? * Be car
 
 package com.softfactory.sigai.entities;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -21,36 +18,37 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Persistent class for entity stored in table "etat"
+ * Persistent class for entity stored in table "tache note"
  */
 
 @Entity
-@Table(name = "etat")
+@Table(name = "tache_note")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class EtatEntity extends AbstractCommonEntity<Long> implements Cloneable {
+public class TacheNoteEntity extends AbstractCommonEntity<Long> implements Cloneable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_etat", nullable = false)
-	private Long idEtat;
+	@Column(name = "id", nullable = false)
+	private Long id;
 
-	@Column(name = "libelle", length = 255)
-	private String libelle;
+	@Column(name = "sujet", length = 255)
+	private String sujet;
+
 	@Column(name = "description", length = 255)
 	private String description;
 
-	@OneToMany(mappedBy = "etat", targetEntity = BienEntity.class)
-	private List<BienEntity> listOfBien;
+	@Column(name = "utilisateur", length = 255)
+	private String utilisateur;
 
 	@Override
 	public Long getId() {
-		return idEtat;
+		return id;
 	}
 
 }

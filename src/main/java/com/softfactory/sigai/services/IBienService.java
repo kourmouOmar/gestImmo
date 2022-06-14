@@ -17,7 +17,7 @@ import com.softfactory.sigai.entities.BienEntity;
  */
 public interface IBienService{
 
-/**
+	/**
 	 * Get Bien by Id
 	 * 
 	 * @param idBien
