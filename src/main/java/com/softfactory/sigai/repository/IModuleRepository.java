@@ -16,6 +16,6 @@ public interface IModuleRepository extends JpaRepository<ModuleEntity, Long> {
 	/**
 	 * get Module by id
 	 * */
-	@Query("SELECT a FROM VilleEntity a WHERE a.id = :id")
+	@Query("SELECT a FROM ModuleEntity a WHERE a.id = :id")
 	ModuleEntity getModuleBydId(@Param("id") Long id);
 }

@@ -45,6 +45,7 @@ private static final long serialVersionUID = 1L;
     private String iconeNormale;
     @Size(max=255)
     private String libelle;
+    private String activeLib;
 	// Relations
     private List<RoleModulesDto> listOfRoleModulesDto;  
     private List<MenuDto> listOfMenuDto;  
@@ -62,9 +63,12 @@ private static final long serialVersionUID = 1L;
     public static ModuleDto entityToDto(ModuleEntity entity){
 		ModuleDto dto = null;
 		if(entity != null){
+			String oui ="Oui";
+			String non ="Non";
 			dto = new ModuleDto();
         	dto.setIdModule(entity.getIdModule());
-        	dto.setActive(entity.getActive());  
+        	
+        	dto.setActiveLib(entity.getActive()==true?oui:non);  
         	dto.setCode(entity.getCode());  
         	dto.setColorLibelle(entity.getColorLibelle());  
         	dto.setDescription(entity.getDescription());  

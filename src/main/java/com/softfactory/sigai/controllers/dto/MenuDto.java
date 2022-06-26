@@ -43,7 +43,7 @@ public class MenuDto implements Serializable {
 
 	private List<MenuChildDto> childMenu;
 
-
+	private boolean moduleActive;
 	public enum MenuRelationsEnum {
 		module, listOfRoleMenus, listOfMenuPermissions;
 	}
@@ -63,6 +63,7 @@ public class MenuDto implements Serializable {
 			dto.setIconClick(entity.getIconClick());
 			dto.setUrl(entity.getUrl());
 			dto.setChildMenu(MenuChildDto.entitiesToDtos(entity.getChildMenus()));
+			dto.setModuleActive(entity.getModule().getActive());
 		}
 		return dto;
 	}

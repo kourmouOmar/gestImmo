@@ -55,4 +55,12 @@ public class ModuleService implements IModuleService {
 		/* delete Module*/
 		moduleRespository.deleteById(idModule);
 	}
+
+	@Override
+	public ModuleEntity activeDesactiveModule(Boolean active,Long id) {
+		ModuleEntity module = moduleRespository.getModuleBydId(id);
+		module.setActive(active);
+		moduleRespository.save(module);
+		return module;
+	}
 }

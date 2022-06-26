@@ -47,7 +47,13 @@ public interface IModuleService{
 	 * @return ModuleEntity
 	 */
 	ModuleEntity updateModule(ModuleDto ModuleDto);
-
+	
+	/**
+	 * 
+	 * @param active
+	 * @return
+	 */
+	ModuleEntity activeDesactiveModule(Boolean active,Long id);
 	/**
 	 * delete Module
 	 *

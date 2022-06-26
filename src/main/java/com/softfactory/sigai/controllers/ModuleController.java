@@ -25,45 +25,52 @@ import com.softfactory.sigai.services.impl.ModuleService;
  * @version : 1.0
  */
 @RestController
+@RequestMapping("/modules")
 public class ModuleController {
 
 	@Autowired
-	private ModuleService ModuleService;
+	private ModuleService moduleService;
 
-	@GetMapping("/modules")
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_MODULE + "')")
+	@GetMapping("/v0")
+	//@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_MODULE + "')")
 	public SigaiResponse getAllModules() {
 		/* get all Module */
-		return new SigaiResponse(ModuleService.getAllModules(), HttpStatus.OK);
+		return new SigaiResponse(ModuleDto.entitiesToDtos(moduleService.getAllModules()), HttpStatus.OK);
 	}
 
-	@RequestMapping("/modules/{id}")
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_MODULE_BY_ID + "')")
+	@RequestMapping("/v0/{id}")
+	//@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_MODULE_BY_ID + "')")
 	public SigaiResponse getModuleById(@PathVariable Long id) {
 		/* return Module by id */
-		return new SigaiResponse(ModuleService.getModuleById(id), HttpStatus.OK);
+		return new SigaiResponse(moduleService.getModuleById(id), HttpStatus.OK);
 	}
 
-	@PostMapping("/modules/{id}")
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_MODULE + "')")
+	@PostMapping("/v0/{id}")
+	//@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_MODULE + "')")
 	public SigaiResponse addModule(@RequestBody ModuleDto ModuleDto) {
 		/* add Module */
-		return new SigaiResponse(ModuleService.addModule(ModuleDto), HttpStatus.OK);
+		return new SigaiResponse(moduleService.addModule(ModuleDto), HttpStatus.OK);
 	}
 
-	@PutMapping("/modules/{id}")
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_MODULE + "')")
+	@PutMapping("/v0/{id}")
+	//@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_MODULE + "')")
 	public SigaiResponse updateModule(@RequestBody ModuleDto ModuleDto) {
 		/* update Module */
-		return new SigaiResponse(ModuleService.updateModule(ModuleDto), HttpStatus.OK);
+		return new SigaiResponse(moduleService.updateModule(ModuleDto), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/module/{id}")
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_MODULE + "')")
+	@DeleteMapping("/v0/{id}")
+	//@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_MODULE + "')")
 	public SigaiResponse deleteModule(@PathVariable Long id) {
 		/* delete Module */
-		ModuleService.deleteModule(id);
+		moduleService.deleteModule(id);
 		return new SigaiResponse(HttpStatus.OK);
+	}
+	
+	@GetMapping("/v0/{active}/{id}")
+	//@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_MODULE + "')")
+	public SigaiResponse activeDesactiveModule(@PathVariable boolean active,@PathVariable Long id) {
+		return new SigaiResponse(ModuleDto.entityToDto(moduleService.activeDesactiveModule(active, id)), HttpStatus.OK);
 	}
 
 }

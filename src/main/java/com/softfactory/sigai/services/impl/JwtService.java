@@ -1,9 +1,11 @@
 package com.softfactory.sigai.services.impl;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +21,7 @@ import com.softfactory.sigai.controllers.dto.SigaiUtilisateurDto;
 import com.softfactory.sigai.entities.MenuEntity;
 import com.softfactory.sigai.entities.RolePermissionsEntity;
 import com.softfactory.sigai.entities.UtilisateurEntity;
+import com.softfactory.sigai.repository.IMenuRepository;
 import com.softfactory.sigai.repository.IRolePermissionsRepository;
 import com.softfactory.sigai.repository.IUtilisateurRepository;
 import com.softfactory.sigai.services.IJwtService;
@@ -41,6 +44,9 @@ public class JwtService implements IJwtService {
 
 	@Autowired
 	private IRolePermissionsRepository rolePermissionsRepository;
+
+	@Autowired
+	private IMenuRepository menuRepository;
 
 	@Autowired
 	private TokenProvider tokenProvider;
@@ -77,18 +83,33 @@ public class JwtService implements IJwtService {
 						.getRolePermissionByRole(r.getRoleEntity().getIdRole());
 				rolePermissions.forEach(rolePer -> authorities.add(rolePer.getPermission().getLibelle()));
 			});
-
-			user.getListOfUtilisateurRoles().forEach(r -> r.getRoleEntity().getListOfRolePermissions()
+			
+			
+			
+	        
+		/*	user.getListOfUtilisateurRoles().forEach(r -> r.getRoleEntity().getListOfRolePermissions()
 					.forEach(rp -> rp.getListOfRoleMenusPermissions().forEach(rmp -> {
-						if (rmp.getMenuPermissions().getMenu() != null && rmp.getMenuPermissions().getMenu().getParentMenu() == null) {
+						if (rmp.getMenuPermissions().getMenu() != null && rmp.getMenuPermissions().getMenu().getParentMenu() == null && rmp.getMenuPermissions().getMenu().getModule().getActive().equals(true)) {
 							
 							parents.add(rmp.getMenuPermissions().getMenu());
 							
-						} else if (rmp.getMenuPermissions().getMenu() != null && rmp.getMenuPermissions().getMenu().getParentMenu() != null) {
+						} else if (rmp.getMenuPermissions().getMenu() != null && rmp.getMenuPermissions().getMenu().getParentMenu() != null && rmp.getMenuPermissions().getMenu().getModule().getActive().equals(true)) {
 							childs.add(rmp.getMenuPermissions().getMenu());
 							parents.add(rmp.getMenuPermissions().getMenu().getParentMenu());
 						}
-					})));
+					})));*/
+			
+			List<MenuEntity> p =menuRepository.findAll();
+					p.forEach(rmp -> {
+						if (rmp != null && rmp.getParentMenu() == null && rmp.getModule().getActive().equals(true)) {
+							
+							parents.add(rmp);
+							
+						} else if (rmp != null && rmp.getParentMenu() != null && rmp.getModule().getActive().equals(true)) {
+							childs.add(rmp);
+							parents.add(rmp.getParentMenu());
+						}
+					});
 
 		} catch (Exception e) {
 			throw e;
@@ -153,19 +174,29 @@ public class JwtService implements IJwtService {
 		Set<MenuDto> menuEntities = new LinkedHashSet<>();
 		if (!CollectionUtils.isEmpty(parents) && !CollectionUtils.isEmpty(childs)) {
 			/* loop through parent menus */
-			
-			for(MenuEntity menuParent : parents) {
-				//MenuEntity menu = new MenuEntity(menuParent);
-				//List<MenuEntity> childsList = new ArrayList<>();
 
-				for(MenuEntity menuChild : childs) {
-					if (menuChild.getParentMenu().getIdMenu().equals(menuParent.getIdMenu())) {
-						menuParent.getChildMenus().add(menuChild);
+			for (MenuEntity menuParent : parents) {
+	
+				if (menuParent.getModule().getActive().equals(true)) {
+					for (MenuEntity menuChild : childs) {
+						if (menuChild.getParentMenu().getIdMenu().equals(menuParent.getIdMenu())
+								&& menuChild.getParentMenu().getModule().getActive().equals(true)) {
+							
+							/*List<MenuEntity> withDupes = Arrays.asList(menuChild);
+							List<MenuEntity> withoutDupes = withDupes.stream()
+                                    .distinct()
+                                    .collect(Collectors.toList());*/
+							
+							menuParent.getChildMenus().add(menuChild);
+							
+							
+						}
 					}
+
+					// menuParent.setChildMenus(childsList);
+					menuEntities.add(MenuDto.entityToDto(menuParent));
 				}
-				//menuParent.setChildMenus(childsList);
-				menuEntities.add(MenuDto.entityToDto(menuParent));
-		
+
 			}
 		}
 		return menuEntities;
