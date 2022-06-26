@@ -16,6 +16,7 @@ import com.softfactory.sigai.config.AuthoritiesConstants;
 import com.softfactory.sigai.config.SigaiResponse;
 import com.softfactory.sigai.controllers.dto.AcheteurDto;
 import com.softfactory.sigai.services.impl.AcheteurService;
+import com.softfactory.sigai.services.impl.StatistiqueService;
 import com.softfactory.sigai.util.Constants;
 
 /**
@@ -31,12 +32,15 @@ public class StatistiqueController {
 
 	@Autowired
 	private AcheteurService AcheteurService;
+	
+	@Autowired
+	private StatistiqueService statistiqueService;
 
 	@GetMapping(value = "/v0", headers = Constants.HEADERS)
-	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_ACHETEUR + "')")
-	public SigaiResponse getAllAcheteurs() {
+	//@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_ACHETEUR + "')")
+	public SigaiResponse getSatistique() {
 		/* get all Acheteur */
-		return new SigaiResponse(AcheteurService.getAllAcheteurs(), HttpStatus.OK);
+		return new SigaiResponse(statistiqueService.getSatitstique(), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/v0/{id}", headers = Constants.HEADERS)
