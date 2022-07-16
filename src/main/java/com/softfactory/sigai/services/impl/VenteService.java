@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.softfactory.sigai.controllers.dto.VenteDto;
+import com.softfactory.sigai.entities.AcheteurEntity;
 import com.softfactory.sigai.entities.VenteEntity;
 import com.softfactory.sigai.repository.IVenteRepository;
 import com.softfactory.sigai.services.IVenteService;
@@ -41,7 +42,12 @@ public class VenteService implements IVenteService {
 	@Override
 	public VenteEntity addVente(VenteDto venteDto) {
 		/* add Vente */
-		return venteRespository.save(VenteDto.dtoToEntity(venteDto));
+		AcheteurEntity acheteur = new AcheteurEntity();
+		acheteur.setNom(venteDto.getAcheteurDto().getNom());
+		acheteur.setPrenom(venteDto.getAcheteurDto().getNom());
+		VenteEntity vente = VenteDto.dtoToEntity(venteDto);
+		vente.setAcheteur(acheteur);
+		return venteRespository.save(vente);
 	}
 
 	@Override

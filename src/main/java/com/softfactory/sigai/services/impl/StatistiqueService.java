@@ -11,6 +11,7 @@ import com.softfactory.sigai.repository.IAcheteurRepository;
 import com.softfactory.sigai.repository.IBienRepository;
 import com.softfactory.sigai.repository.ILocationRepository;
 import com.softfactory.sigai.repository.IProprietaireRepository;
+import com.softfactory.sigai.repository.IVenteRepository;
 
 /**
  * 
@@ -31,13 +32,15 @@ public class StatistiqueService {
 
 	@Autowired
 	ILocationRepository locationRepository;
-	
-	
+
+	@Autowired
+	IVenteRepository venteRepository;
+
 	public StatiDto getSatitstique() {
 		StatiDto s = new StatiDto();
 		s.setNombreBien(bienRepository.count());
 		s.setNombreProprietaire(proprietaireRepository.count());
-		s.setNombreVente(acheteurRespository.count());
+		s.setNombreVente(venteRepository.count());
 		s.setNombreLocations(locationRepository.count());
 		return s;
 	}

@@ -69,7 +69,8 @@ private static final long serialVersionUID = 1L;
 			entity = new VenteEntity();
         	entity.setIdVente(dto.getIdVente()) ;
         	entity.setDateVente(dto.getDateVente());   
-        	entity.setPrix(dto.getPrix());   
+        	entity.setPrix(dto.getPrix());  
+        	//entity.setAcheteur(AcheteurDto.dtoToEntity(dto.getAcheteurDto()));
 		}
 		
 		return  entity;
