@@ -36,7 +36,7 @@ public class LocationController {
 	//@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_LOCATION + "')")
 	public SigaiResponse getAllLocations() {
 		/* get all Location */
-		return new SigaiResponse(LocationService.getAllLocations(), HttpStatus.OK);
+		return new SigaiResponse(LocationDto.entitiesToDtos(LocationService.getAllLocations()), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/v0/{id}", headers = Constants.HEADERS)

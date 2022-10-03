@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.softfactory.sigai.controllers.dto.VenteDto;
 import com.softfactory.sigai.entities.AcheteurEntity;
 import com.softfactory.sigai.entities.VenteEntity;
+import com.softfactory.sigai.repository.IAcheteurRepository;
 import com.softfactory.sigai.repository.IVenteRepository;
 import com.softfactory.sigai.services.IVenteService;
 
@@ -28,6 +29,9 @@ public class VenteService implements IVenteService {
 	@Autowired
 	IVenteRepository venteRespository;
 	
+	@Autowired
+	IAcheteurRepository  acheteurRepository;
+	
 	@Override
 	public VenteEntity getVenteById(Long idVente) {
 		return venteRespository.getVenteBydId(idVente);
@@ -43,10 +47,14 @@ public class VenteService implements IVenteService {
 	public VenteEntity addVente(VenteDto venteDto) {
 		/* add Vente */
 		AcheteurEntity acheteur = new AcheteurEntity();
+		acheteur.setEmail(venteDto.getAcheteurDto().getEmail());
 		acheteur.setNom(venteDto.getAcheteurDto().getNom());
-		acheteur.setPrenom(venteDto.getAcheteurDto().getNom());
+		acheteur.setPrenom(venteDto.getAcheteurDto().getPrenom());
+		acheteur.setTelephone(venteDto.getAcheteurDto().getTelephone());
+		AcheteurEntity acheteurSave  = acheteurRepository.save(acheteur);
+		
 		VenteEntity vente = VenteDto.dtoToEntity(venteDto);
-		vente.setAcheteur(acheteur);
+		vente.setAcheteur(acheteurSave);
 		return venteRespository.save(vente);
 	}
 

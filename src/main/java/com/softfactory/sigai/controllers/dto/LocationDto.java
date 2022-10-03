@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.softfactory.sigai.entities.LocationEntity;
 import com.softfactory.sigai.util.Functions;
@@ -30,12 +31,20 @@ private static final long serialVersionUID = 1L;
 
     private Long idLocation   ;
     private Double duree;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dateAcquisition;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dateLiberation;
+    
     private Double loyer;
     private Long idLocataire;
+    
+    private Long idLocataire2;
+    private Long idBien;
 	// Relations
     private BienDto bienDto;
+    
+    
 
 	// Relation Enum
 	public enum LocationRelationsEnum {
@@ -55,7 +64,11 @@ private static final long serialVersionUID = 1L;
         	dto.setDateAcquisition(entity.getDateAcquisition());  
         	dto.setDateLiberation(entity.getDateLiberation());  
         	dto.setLoyer(entity.getLoyer());  
-        	dto.setIdLocataire(entity.getIdLocataire());  
+        	dto.setIdLocataire(entity.getIdLocataire()); 
+        	if(entity.getBien() != null) {
+        		dto.setBienDto(BienDto.entityToDto(entity.getBien()));
+        	}
+        	
 		}
 		return  dto;
     }
@@ -72,7 +85,8 @@ private static final long serialVersionUID = 1L;
         	entity.setDateAcquisition(dto.getDateAcquisition());   
         	entity.setDateLiberation(dto.getDateLiberation());   
         	entity.setLoyer(dto.getLoyer());   
-        	entity.setIdLocataire(dto.getIdLocataire());   
+        	entity.setIdLocataire(dto.getIdLocataire());
+        	entity.setBien(BienDto.dtoToEntity(dto.getBienDto()));
 		}
 		
 		return  entity;

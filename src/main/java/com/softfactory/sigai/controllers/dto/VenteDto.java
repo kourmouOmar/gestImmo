@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.softfactory.sigai.entities.VenteEntity;
 import com.softfactory.sigai.util.Functions;
@@ -32,12 +33,19 @@ private static final long serialVersionUID = 1L;
 
     private Long idVente      ;
     @NotNull
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dateVente;
     @NotNull
     private Double prix;
 	// Relations
     private BienDto bienDto;
     private AcheteurDto acheteurDto;
+    
+    private String acheteurNom;
+    private String acheteurPrenom;
+    private String acheteurEmail;
+    
+    private String acheteurTel;
 
 	// Relation Enum
 	public enum VenteRelationsEnum {
@@ -55,8 +63,15 @@ private static final long serialVersionUID = 1L;
 			dto = new VenteDto();
         	dto.setIdVente(entity.getIdVente());
         	dto.setDateVente(entity.getDateVente());  
-        	dto.setPrix(entity.getPrix());  
-		}
+        	dto.setPrix(entity.getPrix());
+        	if(entity.getBien() != null) {
+        		dto.setBienDto(BienDto.entityToDto(entity.getBien()));
+        	}
+        	if(entity.getAcheteur() != null) {
+        		dto.setAcheteurDto(AcheteurDto.entityToDto(entity.getAcheteur()));
+        	}
+        	
+		}	
 		return  dto;
     }
 	/**
@@ -69,7 +84,8 @@ private static final long serialVersionUID = 1L;
 			entity = new VenteEntity();
         	entity.setIdVente(dto.getIdVente()) ;
         	entity.setDateVente(dto.getDateVente());   
-        	entity.setPrix(dto.getPrix());  
+        	entity.setPrix(dto.getPrix()); 
+        	entity.setBien(BienDto.dtoToEntity(dto.getBienDto()));
         	//entity.setAcheteur(AcheteurDto.dtoToEntity(dto.getAcheteurDto()));
 		}
 		
