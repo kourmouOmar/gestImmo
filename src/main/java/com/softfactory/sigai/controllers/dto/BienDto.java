@@ -64,7 +64,23 @@ private static final long serialVersionUID = 1L;
         	dto.setIdBien(entity.getIdBien());
         	dto.setAnneeConstruction(entity.getAnneeConstruction());  
         	dto.setSuperficie(entity.getSuperficie());  
-        	dto.setNombrePieces(entity.getNombrePieces());  
+        	dto.setNombrePieces(entity.getNombrePieces());
+        	if(entity.getEtat() != null) {
+        		dto.setEtatDto(EtatDto.entityToDto(entity.getEtat()));
+        	}
+        	if(entity.getVue() != null) {
+        		dto.setVueDto(VueDto.entityToDto(entity.getVue()));
+        	}
+        	if(entity.getTypeBien() != null) {
+        		dto.setTypeBienDto(TypeBienDto.entityToDto(entity.getTypeBien()));
+        	}
+        	if(entity.getStyle() != null) {
+        		dto.setStyleDto(StyleDto.entityToDto(entity.getStyle()));
+        	}
+        	
+        	
+        	
+        	
 		}
 		return  dto;
     }
@@ -79,7 +95,19 @@ private static final long serialVersionUID = 1L;
         	entity.setIdBien(dto.getIdBien()) ;
         	entity.setAnneeConstruction(dto.getAnneeConstruction());   
         	entity.setSuperficie(dto.getSuperficie());   
-        	entity.setNombrePieces(dto.getNombrePieces());   
+        	entity.setNombrePieces(dto.getNombrePieces());  
+        	if(dto.getEtatDto() != null) {
+        		entity.setEtat(EtatDto.dtoToEntity(dto.getEtatDto()));
+        	}
+        	if(dto.getTypeBienDto() != null) {
+        		entity.setTypeBien(TypeBienDto.dtoToEntity(dto.getTypeBienDto()));
+        	}
+        	if(dto.getStyleDto() != null) {
+        		entity.setStyle(StyleDto.dtoToEntity(dto.getStyleDto()));
+        	}
+        	if(dto.getVueDto() != null) {
+        		entity.setVue(VueDto.dtoToEntity(dto.getVueDto()));
+        	}
 		}
 		
 		return  entity;
