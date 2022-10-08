@@ -85,17 +85,25 @@ public class JwtService implements IJwtService {
 				rolePermissions.forEach(rolePer -> authorities.add(rolePer.getPermission().getLibelle()));
 			});
 			
-			
+			List<String> agentSaisirMenu = new ArrayList<>();
 			
 	        /* user consiel immobile */
-			List<String> namesMenu = new ArrayList<>();
-			namesMenu.add("Bien");
-			namesMenu.add("Locations");
-			namesMenu.add("Ventes");
-			namesMenu.add("Fiche taches/notes");
+			List<String> consiellerMenu = new ArrayList<>();
+			consiellerMenu.add("Bien");
+			consiellerMenu.add("Location");
+			consiellerMenu.add("Vente");
+			consiellerMenu.add("Fiche taches/notes");
+			consiellerMenu.add("Contact");
 			
-			if(user.getRole().contains("conseil")) {
-				List<MenuEntity> p1 = menuRepository.findByListName(namesMenu);
+			agentSaisirMenu.add("Bien");
+			agentSaisirMenu.add("Location");
+			agentSaisirMenu.add("Fiche taches/notes");
+			agentSaisirMenu.add("Contact");
+			agentSaisirMenu.add("Propriétaire");
+			agentSaisirMenu.add("Locataire");
+			
+			if(user.getRole().contains("Conseiller") || user.getRole().equals("conseiller")) {
+				List<MenuEntity> p1 = menuRepository.findByListName(consiellerMenu);
 				p1.forEach(rmp -> {
 					if (rmp != null && rmp.getParentMenu() == null && rmp.getModule().getActive().equals(true)) {
 						
@@ -120,8 +128,36 @@ public class JwtService implements IJwtService {
 						}
 					});
 				}
+				if(user.getRole().equals("gérant") 
+						|| user.getRole().equals("Gérant ")) {
+					List<MenuEntity> p =menuRepository.findAll();
+					p.forEach(rmp -> {
+						if (rmp != null && rmp.getParentMenu() == null && rmp.getModule().getActive().equals(true)) {
+							
+							parents.add(rmp);
+							
+						} else if (rmp != null && rmp.getParentMenu() != null && rmp.getModule().getActive().equals(true)) {
+							childs.add(rmp);
+							parents.add(rmp.getParentMenu());
+						}
+					});
+				}
+				if(user.getRole().equals("Agent de saisie")) {
+					List<MenuEntity> p2 = menuRepository.findByListName(agentSaisirMenu);
+					p2.forEach(rmp -> {
+						if (rmp != null && rmp.getParentMenu() == null && rmp.getModule().getActive().equals(true)) {
+							
+							parents.add(rmp);
+							
+						} else if (rmp != null && rmp.getParentMenu() != null && rmp.getModule().getActive().equals(true)) {
+							childs.add(rmp);
+							parents.add(rmp.getParentMenu());
+						}
+					});
+				}
 			}
-		/*	user.getListOfUtilisat  eurRoles().forEach(r -> r.getRoleEntity().getListOfRolePermissions()
+				/*	
+				 * user.getListOfUtilisat  eurRoles().forEach(r -> r.getRoleEntity().getListOfRolePermissions()
 					.forEach(rp -> rp.getListOfRoleMenusPermissions().forEach(rmp -> {
 						if (rmp.getMenuPermissions().getMenu() != null && rmp.getMenuPermissions().getMenu().getParentMenu() == null && rmp.getMenuPermissions().getMenu().getModule().getActive().equals(true)) {
 							
@@ -131,7 +167,8 @@ public class JwtService implements IJwtService {
 							childs.add(rmp.getMenuPermissions().getMenu());
 							parents.add(rmp.getMenuPermissions().getMenu().getParentMenu());
 						}
-					})));*/
+					})));
+				*/
 			
 			
 			
