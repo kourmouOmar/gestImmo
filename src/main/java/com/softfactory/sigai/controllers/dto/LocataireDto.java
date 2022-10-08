@@ -77,7 +77,8 @@ private static final long serialVersionUID = 1L;
         	dto.setEmail(entity.getEmail());  
         	dto.setCin(entity.getCin());  
         	dto.setRib(entity.getRib());  
-        	dto.setDateNaissance(entity.getDateNaissance());  
+        	dto.setDateNaissance(entity.getDateNaissance()); 
+        	
 		}
 		return  dto;
     }

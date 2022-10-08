@@ -1,5 +1,8 @@
 package com.softfactory.sigai.controllers;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.softfactory.sigai.config.AuthoritiesConstants;
 import com.softfactory.sigai.config.SigaiResponse;
 import com.softfactory.sigai.controllers.dto.LocationDto;
+import com.softfactory.sigai.entities.LocataireEntity;
+import com.softfactory.sigai.repository.ILocataireRepository;
 import com.softfactory.sigai.services.impl.LocationService;
 import com.softfactory.sigai.util.Constants;
 
@@ -31,12 +36,22 @@ public class LocationController {
 
 	@Autowired
 	private LocationService LocationService;
+	  
+    @Autowired
+    private ILocataireRepository locataireRepository;
 
 	@GetMapping(value = "/v0", headers = Constants.HEADERS)
 	//@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_LOCATION + "')")
 	public SigaiResponse getAllLocations() {
+		List<LocationDto>  listRes= LocationDto.entitiesToDtos(LocationService.getAllLocations());
+		for (LocationDto m : listRes) {
+			Optional<LocataireEntity> l = locataireRepository.findById(m.getIdLocataire());
+			if(l.isPresent()) {
+				m.setLocataireFullName(l.get().getNom()+"-"+l.get().getPrenom()+"-"+l.get().getCin());
+			}
+        }
 		/* get all Location */
-		return new SigaiResponse(LocationDto.entitiesToDtos(LocationService.getAllLocations()), HttpStatus.OK);
+		return new SigaiResponse(listRes, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/v0/{id}", headers = Constants.HEADERS)

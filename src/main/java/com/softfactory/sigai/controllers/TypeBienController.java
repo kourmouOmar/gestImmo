@@ -30,41 +30,41 @@ import com.softfactory.sigai.util.Constants;
 public class TypeBienController {
 
 	@Autowired
-	private ITypeBienService TypeBienService;
+	private ITypeBienService typeBienService;
 
 	@GetMapping(value = "/v0", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_ALL_TYPE_BIEN + "')")
 	public SigaiResponse getAllTypeBiens() {
 		/* get all TypeBien */
-		return new SigaiResponse(TypeBienService.getAllTypeBiens(), HttpStatus.OK);
+		return new SigaiResponse(TypeBienDto.entitiesToDtos(typeBienService.getAllTypeBiens()), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/v0/{id}", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('" + AuthoritiesConstants.GET_TYPE_BIEN_BY_ID + "')")
 	public SigaiResponse getTypeBienById(@PathVariable Long id) {
 		/* return TypeBien by id */
-		return new SigaiResponse(TypeBienService.getTypeBienById(id), HttpStatus.OK);
+		return new SigaiResponse(typeBienService.getTypeBienById(id), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/v0", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('" + AuthoritiesConstants.SAVE_TYPE_BIEN + "')")
 	public SigaiResponse addTypeBien(@RequestBody TypeBienDto TypeBienDto) {
 		/* add TypeBien */
-		return new SigaiResponse(TypeBienService.addTypeBien(TypeBienDto), HttpStatus.OK);
+		return new SigaiResponse(typeBienService.addTypeBien(TypeBienDto), HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/v0", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('" + AuthoritiesConstants.UPDATE_TYPE_BIEN + "')")
 	public SigaiResponse updateTypeBien(@RequestBody TypeBienDto TypeBienDto) {
 		/* update TypeBien */
-		return new SigaiResponse(TypeBienService.updateTypeBien(TypeBienDto), HttpStatus.OK);
+		return new SigaiResponse(typeBienService.updateTypeBien(TypeBienDto), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/v0/{id}", headers = Constants.HEADERS)
 	@PreAuthorize("hasRole('" + AuthoritiesConstants.DELETE_TYPE_BIEN + "')")
 	public SigaiResponse deleteTypeBien(@PathVariable Long id) {
 		/* delete TypeBien */
-		TypeBienService.deleteTypeBien(id);
+		typeBienService.deleteTypeBien(id);
 		return new SigaiResponse(HttpStatus.OK);
 	}
 

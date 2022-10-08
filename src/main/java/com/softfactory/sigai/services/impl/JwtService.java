@@ -1,5 +1,6 @@
 package com.softfactory.sigai.services.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedHashSet;
@@ -86,8 +87,41 @@ public class JwtService implements IJwtService {
 			
 			
 			
-	        
-		/*	user.getListOfUtilisateurRoles().forEach(r -> r.getRoleEntity().getListOfRolePermissions()
+	        /* user consiel immobile */
+			List<String> namesMenu = new ArrayList<>();
+			namesMenu.add("Bien");
+			namesMenu.add("Locations");
+			namesMenu.add("Ventes");
+			namesMenu.add("Fiche taches/notes");
+			
+			if(user.getRole().contains("conseil")) {
+				List<MenuEntity> p1 = menuRepository.findByListName(namesMenu);
+				p1.forEach(rmp -> {
+					if (rmp != null && rmp.getParentMenu() == null && rmp.getModule().getActive().equals(true)) {
+						
+						parents.add(rmp);
+						
+					} else if (rmp != null && rmp.getParentMenu() != null && rmp.getModule().getActive().equals(true)) {
+						childs.add(rmp);
+						parents.add(rmp.getParentMenu());
+					}
+				});
+			}else {
+				if(user.getRole().equals("superadmin")) {
+					List<MenuEntity> p =menuRepository.findAll();
+					p.forEach(rmp -> {
+						if (rmp != null && rmp.getParentMenu() == null && rmp.getModule().getActive().equals(true)) {
+							
+							parents.add(rmp);
+							
+						} else if (rmp != null && rmp.getParentMenu() != null && rmp.getModule().getActive().equals(true)) {
+							childs.add(rmp);
+							parents.add(rmp.getParentMenu());
+						}
+					});
+				}
+			}
+		/*	user.getListOfUtilisat  eurRoles().forEach(r -> r.getRoleEntity().getListOfRolePermissions()
 					.forEach(rp -> rp.getListOfRoleMenusPermissions().forEach(rmp -> {
 						if (rmp.getMenuPermissions().getMenu() != null && rmp.getMenuPermissions().getMenu().getParentMenu() == null && rmp.getMenuPermissions().getMenu().getModule().getActive().equals(true)) {
 							
@@ -99,20 +133,27 @@ public class JwtService implements IJwtService {
 						}
 					})));*/
 			
-			List<MenuEntity> p =menuRepository.findAll();
-					p.forEach(rmp -> {
-						if (rmp != null && rmp.getParentMenu() == null && rmp.getModule().getActive().equals(true)) {
-							
-							parents.add(rmp);
-							
-						} else if (rmp != null && rmp.getParentMenu() != null && rmp.getModule().getActive().equals(true)) {
-							childs.add(rmp);
-							parents.add(rmp.getParentMenu());
-						}
-					});
-
+			
+			
 		} catch (Exception e) {
-			throw e;
+			List<MenuEntity> p =menuRepository.findAll();
+			p.forEach(rmp -> {
+				if (rmp != null && rmp.getParentMenu() == null && rmp.getModule().getActive().equals(true)) {
+					
+					parents.add(rmp);
+					
+				} else if (rmp != null && rmp.getParentMenu() != null && rmp.getModule().getActive().equals(true)) {
+					childs.add(rmp);
+					parents.add(rmp.getParentMenu());
+				}
+			});
+			listMenuDtos = getUserMenus(parents, childs);
+			
+			menusAuthoritiesDto.setAuthorities(constructGrantedAuthorities(authorities));
+			menusAuthoritiesDto.setMenus(listMenuDtos);
+			
+
+			return menusAuthoritiesDto;
 		}
 
 		/* get menus and its parents */

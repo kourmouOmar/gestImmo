@@ -10,9 +10,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.softfactory.sigai.entities.LocataireEntity;
 import com.softfactory.sigai.entities.LocationEntity;
+import com.softfactory.sigai.repository.ILocataireRepository;
 import com.softfactory.sigai.util.Functions;
 
 import lombok.AllArgsConstructor;
@@ -44,7 +48,8 @@ private static final long serialVersionUID = 1L;
 	// Relations
     private BienDto bienDto;
     
-    
+    private String  locataireFullName;
+  
 
 	// Relation Enum
 	public enum LocationRelationsEnum {
@@ -68,6 +73,7 @@ private static final long serialVersionUID = 1L;
         	if(entity.getBien() != null) {
         		dto.setBienDto(BienDto.entityToDto(entity.getBien()));
         	}
+        	
         	
 		}
 		return  dto;

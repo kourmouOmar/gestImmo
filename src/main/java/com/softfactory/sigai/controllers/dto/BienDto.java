@@ -78,7 +78,9 @@ private static final long serialVersionUID = 1L;
         		dto.setStyleDto(StyleDto.entityToDto(entity.getStyle()));
         	}
         	
-        	
+        	if(entity.getProprietaire() != null) {
+        		dto.setProprietaireDto(ProprietaireDto.entityToDto(entity.getProprietaire()));
+        	}
         	
         	
 		}
@@ -107,6 +109,9 @@ private static final long serialVersionUID = 1L;
         	}
         	if(dto.getVueDto() != null) {
         		entity.setVue(VueDto.dtoToEntity(dto.getVueDto()));
+        	}
+        	if(dto.getProprietaireDto() != null) {
+        		entity.setProprietaire(ProprietaireDto.dtoToEntity(dto.getProprietaireDto()));
         	}
 		}
 		

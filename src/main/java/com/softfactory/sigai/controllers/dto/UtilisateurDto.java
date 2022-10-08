@@ -49,7 +49,8 @@ public class UtilisateurDto implements Serializable {
 	private String password;
 
 	private RoleDto roleDto;
-
+	
+	private String role;
 	// Relations
 	private List<UtilisateurRolesDto> listOfUtilisateurRolesDto;
 
@@ -75,6 +76,7 @@ public class UtilisateurDto implements Serializable {
 			dto.setCin(entity.getCin());
 			dto.setUsername(entity.getUsername());
 			dto.setPassword(entity.getPassword());
+			dto.setRole(entity.getRole());
 			//dto.setRoleDto(RoleDto.entityToDto(entity.getListOfUtilisateurRoles().get(0).getRoleEntity()));
 			dto.setListOfUtilisateurRolesDto(UtilisateurRolesDto.entitiesToDtos(entity.getListOfUtilisateurRoles()));
 		}
@@ -99,6 +101,7 @@ public class UtilisateurDto implements Serializable {
 			entity.setCin(dto.getCin());
 			entity.setUsername(dto.getUsername());
 			entity.setPassword(dto.getPassword());
+			entity.setRole(dto.getRole());
 			entity.setListOfUtilisateurRoles(UtilisateurRolesDto.dtosToEntities(dto.getListOfUtilisateurRolesDto()));
 		}
 

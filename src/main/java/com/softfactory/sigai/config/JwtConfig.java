@@ -28,7 +28,7 @@ public class JwtConfig {
 	@Value("${security.jwt.prefix:Bearer }")
 	private String prefix;
 	
-	@Value("${token.timeout:600}")
+	@Value("${token.timeout:240000}")
 	private int expiration;
 	
 	@Value("${security.jwt.secret:okoOKU5Sjh}")

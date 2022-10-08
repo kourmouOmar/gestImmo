@@ -60,7 +60,9 @@ public class UserService implements IUserService {
 
 	@Override
 	public UtilisateurEntity updateUser(UtilisateurDto userDto) {
-
+		
+		String pswd = bCryptPasswordEncoder.encode(userDto.getPassword());
+		userDto.setPassword(pswd);
 		return utilisateurRepository.save(UtilisateurDto.dtoToEntity(userDto));
 	}
 

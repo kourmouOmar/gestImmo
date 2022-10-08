@@ -3,6 +3,8 @@
  */
 package com.softfactory.sigai.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,6 +20,9 @@ public interface IMenuRepository extends JpaRepository<MenuEntity, Long> {
 	 * */
 	@Query("SELECT a FROM VilleEntity a WHERE a.id = :id")
 	MenuEntity getMenuBydId(@Param("id") Long id);
+	
+	@Query("SELECT a FROM MenuEntity a WHERE a.libelle IN :list")
+	List<MenuEntity> findByListName(@Param("list") List<String> list);
 	
 	
 } 
