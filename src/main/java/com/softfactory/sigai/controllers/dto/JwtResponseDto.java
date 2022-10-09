@@ -28,5 +28,7 @@ public class JwtResponseDto implements Serializable {
 	
 	private String token;
 	
+	private String role;
+	
 	private Set<MenuDto> menus;
 }

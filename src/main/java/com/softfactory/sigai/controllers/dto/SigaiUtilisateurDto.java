@@ -29,4 +29,6 @@ public class SigaiUtilisateurDto {
 	
 	@JsonProperty("token_dto")
 	private JwtResponseDto token;
+	
+
 }
